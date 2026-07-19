@@ -15,7 +15,12 @@
         (theme !== "light" &&
           window.matchMedia("(prefers-color-scheme: dark)").matches);
       btn.setAttribute("aria-pressed", isDark ? "true" : "false");
-      btn.textContent = isDark ? "☀️ Hell" : "🌙 Dunkel";
+      btn.setAttribute(
+        "aria-label",
+        isDark ? "Zu hellem Design wechseln" : "Zu dunklem Design wechseln"
+      );
+      btn.title = btn.getAttribute("aria-label");
+      btn.textContent = isDark ? "☀️" : "🌙";
     });
   }
 
@@ -36,10 +41,10 @@
   });
 
   var navToggle = document.querySelector(".nav-toggle");
-  var navList = document.getElementById("main-nav-list");
-  if (navToggle && navList) {
+  var mobileNav = document.querySelector(".mobile-nav");
+  if (navToggle && mobileNav) {
     navToggle.addEventListener("click", function () {
-      var isOpen = navList.classList.toggle("open");
+      var isOpen = mobileNav.classList.toggle("open");
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
   }

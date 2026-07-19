@@ -12,73 +12,76 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <span class="brand-emblem" aria-hidden="true">BS</span>
-        <span class="brand-text">
-          <strong>Bezirksschützenverband Zürich</strong>
-          <span>BSVZ</span>
-        </span>
+        <span class="brand-emblem" aria-hidden="true">B</span>
+        <span class="brand-text"><strong>BSVZ</strong></span>
       </a>
+
+      <nav class="desktop-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="#verband">Verband</a></li>
+          <li><a href="#ressorts">Ressorts</a></li>
+          <li><a href="#kalender">Kalender</a></li>
+          <li><a href="#resultate">Resultate</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+
       <div class="header-actions">
-        <button type="button" class="btn theme-toggle" data-theme-toggle aria-pressed="false">🌙 Dunkel</button>
-        <a class="btn" href="#login">Anmelden</a>
-        <a class="btn primary" href="#register">Registrieren</a>
+        <button type="button" class="btn ghost theme-toggle desktop-only" data-theme-toggle aria-pressed="false">🌙</button>
+        <a class="btn ghost desktop-only" href="#login">Anmelden</a>
+        <a class="btn primary desktop-only" href="#register">Mitglied werden</a>
+        <button type="button" class="btn ghost nav-toggle" aria-expanded="false" aria-controls="mobile-nav-list">
+          ☰
+        </button>
       </div>
     </div>
-    <nav class="main-nav" aria-label="Hauptnavigation">
-      <button type="button" class="btn nav-toggle" aria-expanded="false" aria-controls="main-nav-list">
-        ☰ Menü
-      </button>
-      <ul id="main-nav-list">
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+      <ul id="mobile-nav-list">
         <li><a href="#verband">Verband</a></li>
         <li><a href="#ressorts">Ressorts</a></li>
-        <li><a href="#dienste">Dienste</a></li>
-        <li><a href="#news">Info und News</a></li>
         <li><a href="#kalender">Kalender</a></li>
         <li><a href="#resultate">Resultate</a></li>
-        <li><a href="#archiv">Archiv</a></li>
-        <li><a href="#intranet">Intranet</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
       </ul>
+      <div class="mobile-nav-actions">
+        <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
+        <a class="btn ghost" href="#login">Anmelden</a>
+        <a class="btn primary" href="#register">Mitglied werden</a>
+      </div>
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="hero">
-      <h1>Willkommen beim Bezirksschützenverband Zürich</h1>
+  <section class="hero">
+    <svg class="hero-skyline" viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="#05070c" d="M0,260 L0,180 L40,180 L40,150 L60,150 L60,180 L100,180 L100,120 L120,120 L120,90 L140,120 L140,180 L180,180 L180,140 L200,140 L200,180 L240,180
+        L240,60 L255,60 L255,30 L265,10 L275,30 L275,60 L290,60 L290,180
+        L330,180 L330,150 L350,150 L350,180 L390,180 L390,100 L410,100 L410,70 L420,50 L430,70 L430,100 L450,100 L450,180
+        L500,180 L500,140 L520,140 L520,180 L560,180 L560,110 L580,110 L580,60 L590,40 L600,60 L600,110 L620,110 L620,180
+        L670,180 L670,150 L690,150 L690,180 L730,180 L730,90 L745,90 L745,20 L755,0 L765,20 L765,90 L780,90 L780,180
+        L820,180 L820,140 L840,140 L840,180 L880,180 L880,100 L900,100 L900,70 L910,50 L920,70 L920,100 L940,100 L940,180
+        L980,180 L980,150 L1000,150 L1000,180 L1040,180 L1040,120 L1060,120 L1060,90 L1070,70 L1080,90 L1080,120 L1100,120 L1100,180
+        L1140,180 L1140,150 L1160,150 L1160,180 L1200,180 L1200,260 Z" />
+    </svg>
+    <div class="hero-inner">
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Seit 1855 aktiv</span>
+      <h1>
+        Bezirksschützen
+        <span class="accent-line">verband Zürich</span>
+      </h1>
       <p>
-        Der BSVZ verbindet die Schützenvereine im Bezirk Zürich, organisiert
-        gemeinsame Wettkämpfe und unterstützt den Nachwuchs. Diese neue
-        Webseite macht Resultate, Termine und Formulare für alle einfach
-        auffindbar – am Computer wie auf dem Handy.
+        Der traditionsreiche Verband für Schützensport in der Region Zürich.
+        Vereint in Präzision, Kameradschaft und Schweizer Tradition.
       </p>
-      <a class="btn primary" href="#resultate">Aktuelle Resultate ansehen</a>
-    </section>
-
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-title">
-        <h2 id="news-heading">Aktuelles</h2>
+      <div class="hero-actions">
+        <a class="btn primary" href="#resultate">🏆 Aktuelle Resultate</a>
+        <a class="btn on-hero" href="#kalender">📅 Veranstaltungen</a>
       </div>
-      <div class="card-grid">
-        <article class="card">
-          <span class="tag">News</span>
-          <h2>Stadtfinal 2025: Ranglisten online</h2>
-          <p class="meta">Veröffentlicht im Bereich Jugend/Nachwuchs</p>
-          <p>Die Ergebnisse des diesjährigen Stadtfinals sind aufgeschaltet.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Kalender</span>
-          <h2>Nächste Anlässe</h2>
-          <p class="meta">Feldschiessen, Bezirksmatch, Jugendkurse</p>
-          <p>Alle Termine im Überblick im Bereich Kalender.</p>
-        </article>
-        <article class="card">
-          <span class="tag">Mitglieder</span>
-          <h2>Eigene Resultate eintragen</h2>
-          <p class="meta">Nach dem Anmelden verfügbar</p>
-          <p>Mitglieder können ihre Wettkampf-Resultate künftig selbst erfassen.</p>
-        </article>
-      </div>
-    </section>
+    </div>
+  </section>
 
+  <main id="main-content">
     <section aria-labelledby="resultate-heading" id="resultate">
       <div class="section-title">
         <h2 id="resultate-heading">Aktuelle Schiessresultate (Beispiel)</h2>
@@ -108,10 +111,26 @@
         <h2 id="ressorts-heading">Ressorts</h2>
       </div>
       <div class="card-grid">
-        <article class="card"><h2>Feldschiessen</h2><p>Formulare, Schiessdaten und Resultate.</p></article>
-        <article class="card"><h2>Bezirksmatch</h2><p>Formulare, Schiessdaten und Resultate.</p></article>
-        <article class="card"><h2>Bezirkskonkurrenz</h2><p>Formulare, Schiessdaten und Resultate.</p></article>
-        <article class="card"><h2>Jugend / Nachwuchs</h2><p>Ranglisten, Kurse, Fotos, De Goldig Züri-Träffer.</p></article>
+        <article class="card">
+          <span class="tag">Wettkampf</span>
+          <h3>Feldschiessen</h3>
+          <p class="meta">Formulare, Schiessdaten und Resultate.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Wettkampf</span>
+          <h3>Bezirksmatch</h3>
+          <p class="meta">Formulare, Schiessdaten und Resultate.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Wettkampf</span>
+          <h3>Bezirkskonkurrenz</h3>
+          <p class="meta">Formulare, Schiessdaten und Resultate.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Nachwuchs</span>
+          <h3>Jugend / Nachwuchs</h3>
+          <p class="meta">Ranglisten, Kurse, Fotos, De Goldig Züri-Träffer.</p>
+        </article>
       </div>
     </section>
 
@@ -120,42 +139,75 @@
         <h2 id="dienste-heading">Dienste</h2>
       </div>
       <div class="card-grid">
-        <article class="card"><h2>Links</h2><p>Bezirke, Verbände, Sportämter, Partnerfirmen.</p></article>
-        <article class="card"><h2>Reglemente &amp; Vorschriften</h2><p>Offizielle Dokumente zum Nachlesen.</p></article>
-        <article class="card"><h2>Waffengesetz &amp; Formulare</h2><p>Aktuelle Formulare zum Download.</p></article>
-        <article class="card"><h2>Wichtige Kontakte</h2><p>Ansprechpersonen im Verband.</p></article>
+        <article class="card"><h3>Links</h3><p class="meta">Bezirke, Verbände, Sportämter, Partnerfirmen.</p></article>
+        <article class="card"><h3>Reglemente &amp; Vorschriften</h3><p class="meta">Offizielle Dokumente zum Nachlesen.</p></article>
+        <article class="card"><h3>Waffengesetz &amp; Formulare</h3><p class="meta">Aktuelle Formulare zum Download.</p></article>
+        <article class="card"><h3>Wichtige Kontakte</h3><p class="meta">Ansprechpersonen im Verband.</p></article>
       </div>
     </section>
 
-    <section aria-labelledby="archiv-heading" id="archiv">
-      <div class="section-title">
-        <h2 id="archiv-heading">Archiv</h2>
+    <section aria-labelledby="cta-heading" id="verband">
+      <div class="cta">
+        <h2 id="cta-heading">Werden Sie Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
+        <p>
+          Ob Anfänger oder erfahrener Schütze – bei uns sind Sie herzlich
+          willkommen. Entdecken Sie die Faszination des Schiesssports im
+          Kreise Gleichgesinnter.
+        </p>
+        <div class="cta-actions">
+          <a class="btn primary" href="#register">Jetzt Mitglied werden →</a>
+          <a class="btn ghost" href="#kontakt">Kontakt aufnehmen</a>
+        </div>
       </div>
-      <p>
-        Jahresberichte, DV-Protokolle sowie Ranglisten und Schiesspläne
-        vergangener Jahre werden hier künftig vollständig abgelegt.
-      </p>
-    </section>
-
-    <section aria-labelledby="kalender-heading" id="kalender">
-      <div class="section-title">
-        <h2 id="kalender-heading">Kalender</h2>
-      </div>
-      <p>Ein übersichtlicher Terminkalender folgt an dieser Stelle.</p>
-    </section>
-
-    <section aria-labelledby="intranet-heading" id="intranet">
-      <div class="section-title">
-        <h2 id="intranet-heading">Intranet</h2>
-      </div>
-      <p>Interne Dokumente für Vorstand und Funktionäre nach Anmeldung.</p>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="site-footer" id="kontakt">
     <div class="footer-inner">
-      <p>&copy; 2026 Bezirksschützenverband Zürich</p>
-      <p><a href="#datenschutz">Datenschutzerklärung</a> · <a href="#impressum">Impressum</a></p>
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-emblem" aria-hidden="true">B</span>
+          <span class="brand-text"><strong>BSVZ</strong></span>
+        </a>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <div class="footer-contact">
+          <span>✉️ info@bsvz.ch</span>
+          <span>☎️ +41 44 123 45 67</span>
+          <span>📍 8000 Zürich, Schweiz</span>
+        </div>
+      </div>
+      <div>
+        <h4>Verband</h4>
+        <ul>
+          <li><a href="#">Portrait</a></li>
+          <li><a href="#">Vorstand</a></li>
+          <li><a href="#">Organisation</a></li>
+          <li><a href="#ressorts">Ressorts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dienste</h4>
+        <ul>
+          <li><a href="#kalender">Kalender</a></li>
+          <li><a href="#resultate">Resultate</a></li>
+          <li><a href="#">Archiv</a></li>
+          <li><a href="#">Downloads</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Info</h4>
+        <ul>
+          <li><a href="#news">News</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#login">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
+      <p>Mitglied des Zürcher Kantonalschützenverbands</p>
     </div>
   </footer>
 
