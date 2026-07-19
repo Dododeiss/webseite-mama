@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anmelden – Bezirksschützenverband Zürich (BSVZ)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-emblem" aria-hidden="true">B</span>
+        <span class="brand-text"><strong>BSVZ</strong></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li><a href="verband.html">Verband</a></li>
+          <li><a href="ressorts.html">Ressorts</a></li>
+          <li><a href="dienste.html">Dienste</a></li>
+          <li><a href="archiv.html">Archiv</a></li>
+          <li><a href="index.html#kalender">Kalender</a></li>
+          <li><a href="index.html#resultate">Resultate</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn ghost theme-toggle desktop-only" data-theme-toggle aria-pressed="false">🌙</button>
+        <a class="btn ghost desktop-only" href="login.html" data-auth="login">Anmelden</a>
+        <a class="btn primary desktop-only" href="register.html" data-auth="register">Mitglied werden</a>
+        <button type="button" class="btn ghost nav-toggle" aria-expanded="false" aria-controls="mobile-nav-list">
+          ☰
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+      <ul id="mobile-nav-list">
+        <li><a href="verband.html">Verband</a></li>
+        <li><a href="ressorts.html">Ressorts</a></li>
+        <li><a href="dienste.html">Dienste</a></li>
+        <li><a href="archiv.html">Archiv</a></li>
+        <li><a href="index.html#kalender">Kalender</a></li>
+        <li><a href="index.html#resultate">Resultate</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
+        <a class="btn ghost" href="login.html" data-auth="login">Anmelden</a>
+        <a class="btn primary" href="register.html" data-auth="register">Mitglied werden</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero page-hero">
+    <div class="hero-inner">
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Mitgliederbereich</span>
+      <h1>Anmelden</h1>
+      <p>Melden Sie sich an, um Ihre Resultate zu erfassen und zu verwalten.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <section aria-labelledby="login-heading">
+      <div class="form-card">
+        <div id="form-message" class="form-message" role="alert"></div>
+        <form id="login-form" novalidate>
+          <div class="form-field">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="form-field">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" name="password" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Anmelden</button>
+        </form>
+        <p class="form-footer-note">
+          Noch kein Konto? <a href="register.html">Jetzt registrieren</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="kontakt">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <span class="brand-emblem" aria-hidden="true">B</span>
+          <span class="brand-text"><strong>BSVZ</strong></span>
+        </a>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <div class="footer-contact">
+          <span>✉️ webmaster@bsvz.ch</span>
+          <span>☎️ 0041 79 927 33 27</span>
+          <span>📍 Alte Aescherstrasse 25, 8905 Arni AG</span>
+        </div>
+      </div>
+      <div>
+        <h4>Verband</h4>
+        <ul>
+          <li><a href="verband.html#portrait">Portrait</a></li>
+          <li><a href="verband.html#vorstand">Vorstand</a></li>
+          <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+          <li><a href="ressorts.html">Ressorts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dienste</h4>
+        <ul>
+          <li><a href="index.html#kalender">Kalender</a></li>
+          <li><a href="index.html#resultate">Resultate</a></li>
+          <li><a href="archiv.html">Archiv</a></li>
+          <li><a href="dienste.html">Downloads</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Info</h4>
+        <ul>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="login.html">Admin</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
+      <p>Mitglied des Zürcher Kantonalschützenverbands</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <script>
+    document.getElementById("login-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById("form-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const payload = {
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value,
+      };
+
+      try {
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          messageEl.className = "form-message error";
+          messageEl.textContent = data.error || "Anmeldung fehlgeschlagen.";
+          return;
+        }
+        window.location.href = "meine-resultate.html";
+      } catch (e) {
+        messageEl.className = "form-message error";
+        messageEl.textContent =
+          "Server nicht erreichbar. Läuft die Seite über 'npm start'?";
+      }
+    });
+  </script>
+</body>
+</html>
