@@ -405,6 +405,19 @@ section + section {
   box-shadow: var(--shadow);
 }
 
+a.card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+a.card:hover,
+a.card:focus {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
 .card h3 {
   margin-top: 0;
   font-size: 1.15rem;
