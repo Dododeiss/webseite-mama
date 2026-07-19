@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
+  <title>Resultate – Bezirksschützenverband Zürich (BSVZ)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,10 +22,10 @@
           <li><a href="ressorts.html">Ressorts</a></li>
           <li><a href="dienste.html">Dienste</a></li>
           <li><a href="archiv.html">Archiv</a></li>
-          <li><a href="#kalender">Kalender</a></li>
+          <li><a href="index.html#kalender">Kalender</a></li>
           <li><a href="resultate.html">Resultate</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
@@ -44,10 +44,10 @@
         <li><a href="ressorts.html">Ressorts</a></li>
         <li><a href="dienste.html">Dienste</a></li>
         <li><a href="archiv.html">Archiv</a></li>
-        <li><a href="#kalender">Kalender</a></li>
+        <li><a href="index.html#kalender">Kalender</a></li>
         <li><a href="resultate.html">Resultate</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
         <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
@@ -57,90 +57,42 @@
     </nav>
   </header>
 
-  <section class="hero home-hero">
+  <section class="hero page-hero">
     <div class="hero-inner">
-      <span class="badge"><span class="dot" aria-hidden="true"></span> Seit 1855 aktiv</span>
-      <h1>
-        Bezirksschützen
-        <span class="accent-line">verband Zürich</span>
-      </h1>
-      <p>
-        Der traditionsreiche Verband für Schützensport in der Region Zürich.
-        Vereint in Präzision, Kameradschaft und Schweizer Tradition.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="resultate.html">🏆 Aktuelle Resultate</a>
-        <a class="btn on-hero" href="#kalender">📅 Veranstaltungen</a>
-      </div>
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Live</span>
+      <h1>Aktuelle <span class="accent-line">Resultate</span></h1>
+      <p>Von Mitgliedern selbst erfasste Wettkampf-Resultate.</p>
     </div>
   </section>
 
   <main id="main-content">
-    <section aria-labelledby="hub-heading">
+    <section aria-labelledby="resultate-heading" id="resultate">
       <div class="section-title">
-        <h2 id="hub-heading">Was möchten Sie tun?</h2>
+        <h2 id="resultate-heading">Aktuelle Schiessresultate</h2>
+        <a class="btn primary" href="meine-resultate.html">Eigenes Resultat erfassen →</a>
       </div>
-      <div class="hub-grid">
-        <a class="card hub-tile" href="verband.html">
-          <span class="tile-icon" aria-hidden="true">🛡️</span>
-          <h3>Verband</h3>
-          <p class="meta">Portrait, Vorstand, Mitgliedervereine</p>
-        </a>
-        <a class="card hub-tile" href="ressorts.html">
-          <span class="tile-icon" aria-hidden="true">🎯</span>
-          <h3>Ressorts</h3>
-          <p class="meta">Feldschiessen, Bezirksmatch u.v.m.</p>
-        </a>
-        <a class="card hub-tile" href="dienste.html">
-          <span class="tile-icon" aria-hidden="true">🧾</span>
-          <h3>Dienste</h3>
-          <p class="meta">Reglemente, Formulare, Kontakte</p>
-        </a>
-        <a class="card hub-tile" href="archiv.html">
-          <span class="tile-icon" aria-hidden="true">🗄️</span>
-          <h3>Archiv</h3>
-          <p class="meta">Jahresberichte, DV-Protokolle, alte Ranglisten</p>
-        </a>
-        <a class="card hub-tile" href="resultate.html">
-          <span class="tile-icon" aria-hidden="true">🏆</span>
-          <h3>Resultate</h3>
-          <p class="meta">Aktuelle Resultate ansehen oder erfassen</p>
-        </a>
-        <a class="card hub-tile" href="#kalender">
-          <span class="tile-icon" aria-hidden="true">📅</span>
-          <h3>Kalender</h3>
-          <p class="meta">Anlässe und Termine</p>
-        </a>
+      <div class="table-wrap">
+        <table class="results-table">
+          <caption>Von Mitgliedern erfasste Resultate (neueste zuerst)</caption>
+          <thead>
+            <tr>
+              <th scope="col">Jahr</th>
+              <th scope="col">Disziplin</th>
+              <th scope="col">Wettkampf</th>
+              <th scope="col">Name</th>
+              <th scope="col">Verein</th>
+              <th scope="col">Punkte</th>
+            </tr>
+          </thead>
+          <tbody id="live-results-body">
+            <tr><td colspan="6">Lade Resultate…</td></tr>
+          </tbody>
+        </table>
       </div>
-    </section>
-
-    <section aria-labelledby="kalender-heading" id="kalender">
-      <div class="section-title">
-        <h2 id="kalender-heading">Kalender</h2>
-      </div>
-      <p>Ein übersichtlicher Terminkalender folgt an dieser Stelle.</p>
-    </section>
-
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-title">
-        <h2 id="news-heading">News</h2>
-      </div>
-      <p>Diese Seite ist noch im Aufbau.</p>
-    </section>
-
-    <section aria-labelledby="cta-heading" id="mitglied-werden">
-      <div class="cta">
-        <h2 id="cta-heading">Werden Sie Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
-        <p>
-          Ob Anfänger oder erfahrener Schütze – bei uns sind Sie herzlich
-          willkommen. Entdecken Sie die Faszination des Schiesssports im
-          Kreise Gleichgesinnter.
-        </p>
-        <div class="cta-actions">
-          <a class="btn primary" href="register.html">Jetzt Mitglied werden →</a>
-          <a class="btn ghost" href="#kontakt">Kontakt aufnehmen</a>
-        </div>
-      </div>
+      <p class="meta" style="margin-top:1.25rem;">
+        Historische Ranglisten (PDF, ab 2015) finden Sie bei den einzelnen
+        <a href="ressorts.html">Ressorts</a> und im <a href="archiv.html">Archiv</a>.
+      </p>
     </section>
   </main>
 
@@ -170,7 +122,7 @@
       <div>
         <h4>Dienste</h4>
         <ul>
-          <li><a href="#kalender">Kalender</a></li>
+          <li><a href="index.html#kalender">Kalender</a></li>
           <li><a href="resultate.html">Resultate</a></li>
           <li><a href="archiv.html">Archiv</a></li>
           <li><a href="dienste.html">Downloads</a></li>
@@ -179,8 +131,8 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
           <li><a href="#">Impressum</a></li>
           <li><a href="#">Datenschutz</a></li>
           <li><a href="login.html">Admin</a></li>
@@ -191,14 +143,46 @@
       <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
       <p>Mitglied des Zürcher Kantonalschützenverbands</p>
     </div>
-    <p class="image-credit">
-      Titelbild: „Zurich after sunset" von
-      <a href="https://commons.wikimedia.org/wiki/File:Zurich_after_sunset.jpg" target="_blank" rel="noopener">Kuhnmi</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
-    </p>
   </footer>
 
   <script src="js/theme.js"></script>
   <script src="js/auth-ui.js"></script>
+  <script>
+    (async function loadLiveResults() {
+      const body = document.getElementById("live-results-body");
+      function escapeHtml(str) {
+        const div = document.createElement("div");
+        div.textContent = str;
+        return div.innerHTML;
+      }
+      try {
+        const res = await fetch("/api/results");
+        if (!res.ok) throw new Error("request failed");
+        const data = await res.json();
+        const rows = data.results;
+        if (!rows.length) {
+          body.innerHTML =
+            '<tr><td colspan="6">Noch keine Resultate erfasst. Seien Sie die/der Erste!</td></tr>';
+          return;
+        }
+        body.innerHTML = rows
+          .map(
+            (r) => `
+          <tr>
+            <td>${r.jahr}</td>
+            <td>${escapeHtml(r.disziplin)}</td>
+            <td>${escapeHtml(r.wettkampf)}</td>
+            <td>${escapeHtml(r.name)}</td>
+            <td>${escapeHtml(r.verein)}</td>
+            <td>${r.punkte}</td>
+          </tr>`
+          )
+          .join("");
+      } catch (e) {
+        body.innerHTML =
+          '<tr><td colspan="6">Resultate konnten nicht geladen werden (Server nicht erreichbar).</td></tr>';
+      }
+    })();
+  </script>
 </body>
 </html>

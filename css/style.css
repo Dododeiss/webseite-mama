@@ -288,14 +288,12 @@ header.site-header {
   overflow: hidden;
 }
 
-.hero-skyline {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 45%;
-  opacity: 0.55;
-  pointer-events: none;
+.hero.home-hero {
+  background:
+    var(--hero-overlay),
+    url("../img/zuerich-limmat-sunset.jpg");
+  background-size: cover;
+  background-position: center 65%;
 }
 
 .hero-inner {
@@ -395,6 +393,28 @@ section + section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.25rem;
+}
+
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.hub-tile {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+.hub-tile .tile-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.hub-tile h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
 }
 
 .card {
@@ -576,6 +596,17 @@ footer.site-footer {
   gap: 1rem;
   flex-wrap: wrap;
   font-size: 0.9rem;
+}
+
+.image-credit {
+  max-width: var(--max-width);
+  margin: 0.75rem auto 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.image-credit a {
+  color: inherit;
 }
 
 /* Document / archive listings (Ressorts, Archiv, Pflichtenhefte) */
