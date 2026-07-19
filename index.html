@@ -2,10 +2,163 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Willkommen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Willkommen auf der Webseite von Mama</h1>
-  <p>Hier entsteht bald mehr Inhalt.</p>
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-emblem" aria-hidden="true">BS</span>
+        <span class="brand-text">
+          <strong>Bezirksschützenverband Zürich</strong>
+          <span>BSVZ</span>
+        </span>
+      </a>
+      <div class="header-actions">
+        <button type="button" class="btn theme-toggle" data-theme-toggle aria-pressed="false">🌙 Dunkel</button>
+        <a class="btn" href="#login">Anmelden</a>
+        <a class="btn primary" href="#register">Registrieren</a>
+      </div>
+    </div>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <button type="button" class="btn nav-toggle" aria-expanded="false" aria-controls="main-nav-list">
+        ☰ Menü
+      </button>
+      <ul id="main-nav-list">
+        <li><a href="#verband">Verband</a></li>
+        <li><a href="#ressorts">Ressorts</a></li>
+        <li><a href="#dienste">Dienste</a></li>
+        <li><a href="#news">Info und News</a></li>
+        <li><a href="#kalender">Kalender</a></li>
+        <li><a href="#resultate">Resultate</a></li>
+        <li><a href="#archiv">Archiv</a></li>
+        <li><a href="#intranet">Intranet</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero">
+      <h1>Willkommen beim Bezirksschützenverband Zürich</h1>
+      <p>
+        Der BSVZ verbindet die Schützenvereine im Bezirk Zürich, organisiert
+        gemeinsame Wettkämpfe und unterstützt den Nachwuchs. Diese neue
+        Webseite macht Resultate, Termine und Formulare für alle einfach
+        auffindbar – am Computer wie auf dem Handy.
+      </p>
+      <a class="btn primary" href="#resultate">Aktuelle Resultate ansehen</a>
+    </section>
+
+    <section aria-labelledby="news-heading" id="news">
+      <div class="section-title">
+        <h2 id="news-heading">Aktuelles</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <span class="tag">News</span>
+          <h2>Stadtfinal 2025: Ranglisten online</h2>
+          <p class="meta">Veröffentlicht im Bereich Jugend/Nachwuchs</p>
+          <p>Die Ergebnisse des diesjährigen Stadtfinals sind aufgeschaltet.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Kalender</span>
+          <h2>Nächste Anlässe</h2>
+          <p class="meta">Feldschiessen, Bezirksmatch, Jugendkurse</p>
+          <p>Alle Termine im Überblick im Bereich Kalender.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Mitglieder</span>
+          <h2>Eigene Resultate eintragen</h2>
+          <p class="meta">Nach dem Anmelden verfügbar</p>
+          <p>Mitglieder können ihre Wettkampf-Resultate künftig selbst erfassen.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="resultate-heading" id="resultate">
+      <div class="section-title">
+        <h2 id="resultate-heading">Aktuelle Schiessresultate (Beispiel)</h2>
+      </div>
+      <div class="table-wrap">
+        <table class="results-table">
+          <caption>Bezirksmatch 2026 – Rangliste (Platzhalter-Daten)</caption>
+          <thead>
+            <tr>
+              <th scope="col">Rang</th>
+              <th scope="col">Name</th>
+              <th scope="col">Verein</th>
+              <th scope="col">Punkte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Muster Anna</td><td>SV Beispieldorf</td><td>97</td></tr>
+            <tr><td>2</td><td>Muster Beat</td><td>SV Musterhausen</td><td>95</td></tr>
+            <tr><td>3</td><td>Muster Carla</td><td>SV Beispieldorf</td><td>94</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="ressorts-heading" id="ressorts">
+      <div class="section-title">
+        <h2 id="ressorts-heading">Ressorts</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card"><h2>Feldschiessen</h2><p>Formulare, Schiessdaten und Resultate.</p></article>
+        <article class="card"><h2>Bezirksmatch</h2><p>Formulare, Schiessdaten und Resultate.</p></article>
+        <article class="card"><h2>Bezirkskonkurrenz</h2><p>Formulare, Schiessdaten und Resultate.</p></article>
+        <article class="card"><h2>Jugend / Nachwuchs</h2><p>Ranglisten, Kurse, Fotos, De Goldig Züri-Träffer.</p></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="dienste-heading" id="dienste">
+      <div class="section-title">
+        <h2 id="dienste-heading">Dienste</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card"><h2>Links</h2><p>Bezirke, Verbände, Sportämter, Partnerfirmen.</p></article>
+        <article class="card"><h2>Reglemente &amp; Vorschriften</h2><p>Offizielle Dokumente zum Nachlesen.</p></article>
+        <article class="card"><h2>Waffengesetz &amp; Formulare</h2><p>Aktuelle Formulare zum Download.</p></article>
+        <article class="card"><h2>Wichtige Kontakte</h2><p>Ansprechpersonen im Verband.</p></article>
+      </div>
+    </section>
+
+    <section aria-labelledby="archiv-heading" id="archiv">
+      <div class="section-title">
+        <h2 id="archiv-heading">Archiv</h2>
+      </div>
+      <p>
+        Jahresberichte, DV-Protokolle sowie Ranglisten und Schiesspläne
+        vergangener Jahre werden hier künftig vollständig abgelegt.
+      </p>
+    </section>
+
+    <section aria-labelledby="kalender-heading" id="kalender">
+      <div class="section-title">
+        <h2 id="kalender-heading">Kalender</h2>
+      </div>
+      <p>Ein übersichtlicher Terminkalender folgt an dieser Stelle.</p>
+    </section>
+
+    <section aria-labelledby="intranet-heading" id="intranet">
+      <div class="section-title">
+        <h2 id="intranet-heading">Intranet</h2>
+      </div>
+      <p>Interne Dokumente für Vorstand und Funktionäre nach Anmeldung.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 Bezirksschützenverband Zürich</p>
+      <p><a href="#datenschutz">Datenschutzerklärung</a> · <a href="#impressum">Impressum</a></p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
 </body>
 </html>
