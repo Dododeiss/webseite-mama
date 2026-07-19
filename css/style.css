@@ -349,6 +349,22 @@ header.site-header {
   flex-wrap: wrap;
 }
 
+.hero.page-hero {
+  padding: 3rem 1.25rem;
+}
+
+.hero.page-hero h1 {
+  font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+}
+
+.hero.page-hero p {
+  margin-bottom: 0;
+}
+
+.card > p:last-child {
+  margin-bottom: 0;
+}
+
 /* Sections */
 
 main {
