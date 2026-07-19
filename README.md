@@ -1,11 +1,11 @@
 # Webseite Mama
 
-Eine einfache Webseite fuer Mama.
+Eine einfache Webseite für Mama.
 
 ## Inhalt
 
 - `index.html` - die Startseite
 
-## Loakl oeffnen
+## Lokal öffnen
 
-Einfach `index.html` im Browser oeffnen.
+Einfach `index.html` im Browser öffnen.
