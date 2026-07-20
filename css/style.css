@@ -527,9 +527,9 @@ a.card:focus {
 }
 
 .vorstand-photo {
-  width: 128px;
-  height: 128px;
-  border-radius: 999px;
+  width: 96px;
+  height: 122px;
+  border-radius: 12px;
   object-fit: cover;
   object-position: top center;
   margin: 0 auto 1rem;
