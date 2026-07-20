@@ -5,6 +5,7 @@ const session = require("express-session");
 
 const authRoutes = require("./routes/auth");
 const resultsRoutes = require("./routes/results");
+const eventsRoutes = require("./routes/events");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,6 +35,7 @@ app.use(
 
 app.use("/api/auth", authRoutes);
 app.use("/api/results", resultsRoutes);
+app.use("/api/events", eventsRoutes);
 
 // Static site (the existing plain HTML/CSS/JS prototype) lives at the repo root.
 app.use(express.static(path.join(__dirname, "..")));
