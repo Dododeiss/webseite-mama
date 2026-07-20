@@ -530,8 +530,8 @@ a.card:focus {
   width: 96px;
   height: 122px;
   border-radius: 12px;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  background: var(--surface-alt);
   margin: 0 auto 1rem;
   display: block;
   border: 3px solid var(--border);
