@@ -141,14 +141,7 @@ header.site-header {
 .brand-emblem {
   width: 42px;
   height: 42px;
-  border-radius: 11px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 1.15rem;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
@@ -690,6 +683,30 @@ footer.site-footer {
   gap: 1rem;
   flex-wrap: wrap;
   font-size: 0.9rem;
+}
+
+.partner-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: var(--max-width);
+  margin: 0 auto 1.5rem;
+}
+
+.partner-badges a {
+  display: block;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  box-shadow: var(--shadow);
+}
+
+.partner-badges img {
+  display: block;
+  height: 40px;
+  width: auto;
 }
 
 .image-credit {
