@@ -157,6 +157,16 @@
         <div class="form-card" style="max-width:640px;">
           <div id="form-message" class="form-message" role="alert"></div>
           <form id="result-form" novalidate>
+            <div class="form-row" id="admin-subject-fields" style="display:none;">
+              <div class="form-field">
+                <label for="subject_name">Für (Name)</label>
+                <input type="text" id="subject_name" name="subject_name" placeholder="Leer lassen für eigenes Resultat">
+              </div>
+              <div class="form-field">
+                <label for="subject_verein">Verein</label>
+                <input type="text" id="subject_verein" name="subject_verein" placeholder="z. B. SV Musterhausen">
+              </div>
+            </div>
             <div class="form-field">
               <label for="disziplin">Disziplin</label>
               <select id="disziplin" name="disziplin" required>
@@ -210,6 +220,7 @@
             <thead>
               <tr>
                 <th scope="col">Jahr</th>
+                <th scope="col">Name</th>
                 <th scope="col">Disziplin</th>
                 <th scope="col">Wettkampf</th>
                 <th scope="col">Kategorie</th>
@@ -219,7 +230,7 @@
               </tr>
             </thead>
             <tbody id="results-body">
-              <tr><td colspan="7">Noch keine Resultate erfasst.</td></tr>
+              <tr><td colspan="8">Noch keine Resultate erfasst.</td></tr>
             </tbody>
           </table>
         </div>
@@ -280,10 +291,11 @@
   <script src="js/auth-ui.js"></script>
   <script>
     const resultsBody = document.getElementById("results-body");
+    let isAdmin = false;
 
     function renderResults(results) {
       if (!results.length) {
-        resultsBody.innerHTML = '<tr><td colspan="7">Noch keine Resultate erfasst.</td></tr>';
+        resultsBody.innerHTML = '<tr><td colspan="8">Noch keine Resultate erfasst.</td></tr>';
         return;
       }
       resultsBody.innerHTML = results
@@ -291,6 +303,7 @@
           (r) => `
         <tr>
           <td>${r.jahr}</td>
+          <td>${escapeHtml(r.name)}</td>
           <td>${escapeHtml(r.disziplin)}</td>
           <td>${escapeHtml(r.wettkampf)}</td>
           <td>${r.kategorie ? escapeHtml(r.kategorie) : "–"}</td>
@@ -338,6 +351,10 @@
         punkte: document.getElementById("punkte").value,
         rang: document.getElementById("rang").value,
       };
+      if (isAdmin) {
+        payload.subject_name = document.getElementById("subject_name").value.trim();
+        payload.subject_verein = document.getElementById("subject_verein").value.trim();
+      }
 
       const res = await fetch("/api/results", {
         method: "POST",
@@ -366,6 +383,10 @@
       document.getElementById("member-area").style.display = "";
       document.getElementById("greeting").textContent =
         "Willkommen, " + data.user.name + " (" + data.user.verein + ")";
+      if (data.user.role === "admin") {
+        isAdmin = true;
+        document.getElementById("admin-subject-fields").style.display = "";
+      }
       loadMyResults();
     })();
   </script>

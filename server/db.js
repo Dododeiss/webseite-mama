@@ -24,7 +24,9 @@ db.exec(`
 
   CREATE TABLE IF NOT EXISTS results (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    entered_by_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    subject_name TEXT NOT NULL,
+    subject_verein TEXT NOT NULL,
     disziplin TEXT NOT NULL,
     wettkampf TEXT NOT NULL,
     jahr INTEGER NOT NULL,
@@ -46,5 +48,28 @@ db.exec(`
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 `);
+
+// One-off migration: earlier versions had results.user_id (self-entry only).
+// If that old column is still around, rebuild the table with the new
+// entered_by_user_id / subject_name / subject_verein columns instead.
+const resultsColumns = db.prepare("PRAGMA table_info(results)").all();
+if (resultsColumns.some((c) => c.name === "user_id")) {
+  db.exec("DROP TABLE results");
+  db.exec(`
+    CREATE TABLE results (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      entered_by_user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      subject_name TEXT NOT NULL,
+      subject_verein TEXT NOT NULL,
+      disziplin TEXT NOT NULL,
+      wettkampf TEXT NOT NULL,
+      jahr INTEGER NOT NULL,
+      kategorie TEXT,
+      punkte REAL NOT NULL,
+      rang INTEGER,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    )
+  `);
+}
 
 module.exports = db;

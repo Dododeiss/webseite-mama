@@ -18,26 +18,24 @@ const ALLOWED_DISZIPLINEN = [
 router.get("/", (req, res) => {
   const { disziplin, jahr } = req.query;
   let sql = `
-    SELECT results.id, results.disziplin, results.wettkampf, results.jahr,
-           results.kategorie, results.punkte, results.rang, results.created_at,
-           users.name AS name, users.verein AS verein
+    SELECT id, subject_name AS name, subject_verein AS verein, disziplin,
+           wettkampf, jahr, kategorie, punkte, rang, created_at
     FROM results
-    JOIN users ON users.id = results.user_id
   `;
   const clauses = [];
   const params = [];
   if (disziplin) {
-    clauses.push("results.disziplin = ?");
+    clauses.push("disziplin = ?");
     params.push(disziplin);
   }
   if (jahr) {
-    clauses.push("results.jahr = ?");
+    clauses.push("jahr = ?");
     params.push(Number(jahr));
   }
   if (clauses.length) {
     sql += " WHERE " + clauses.join(" AND ");
   }
-  sql += " ORDER BY results.jahr DESC, results.punkte DESC, results.created_at DESC LIMIT 200";
+  sql += " ORDER BY jahr DESC, punkte DESC, created_at DESC LIMIT 200";
 
   const rows = db.prepare(sql).all(...params);
   res.json({ results: rows });
@@ -46,7 +44,9 @@ router.get("/", (req, res) => {
 router.get("/mine", requireAuth, (req, res) => {
   const rows = db
     .prepare(
-      "SELECT * FROM results WHERE user_id = ? ORDER BY jahr DESC, created_at DESC"
+      `SELECT id, subject_name AS name, subject_verein AS verein, disziplin,
+              wettkampf, jahr, kategorie, punkte, rang, created_at
+       FROM results WHERE entered_by_user_id = ? ORDER BY jahr DESC, created_at DESC`
     )
     .all(req.session.userId);
   res.json({ results: rows });
@@ -54,6 +54,27 @@ router.get("/mine", requireAuth, (req, res) => {
 
 router.post("/", requireAuth, (req, res) => {
   const { disziplin, wettkampf, jahr, kategorie, punkte, rang } = req.body || {};
+  let { subject_name, subject_verein } = req.body || {};
+
+  const isAdmin = req.session.role === "admin";
+
+  if (isAdmin && subject_name && subject_verein) {
+    subject_name = String(subject_name).trim();
+    subject_verein = String(subject_verein).trim();
+    if (!subject_name || !subject_verein) {
+      return res
+        .status(400)
+        .json({ error: "Name und Verein dürfen nicht leer sein." });
+    }
+  } else {
+    // Everyone else (and admins who leave the fields blank) can only
+    // enter a result for themselves.
+    const self = db
+      .prepare("SELECT name, verein FROM users WHERE id = ?")
+      .get(req.session.userId);
+    subject_name = self.name;
+    subject_verein = self.verein;
+  }
 
   if (!disziplin || !ALLOWED_DISZIPLINEN.includes(disziplin)) {
     return res.status(400).json({ error: "Bitte eine gültige Disziplin wählen." });
@@ -79,11 +100,13 @@ router.post("/", requireAuth, (req, res) => {
 
   const info = db
     .prepare(
-      `INSERT INTO results (user_id, disziplin, wettkampf, jahr, kategorie, punkte, rang)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO results (entered_by_user_id, subject_name, subject_verein, disziplin, wettkampf, jahr, kategorie, punkte, rang)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
     .run(
       req.session.userId,
+      subject_name,
+      subject_verein,
       disziplin,
       String(wettkampf).trim(),
       jahrNum,
@@ -93,7 +116,11 @@ router.post("/", requireAuth, (req, res) => {
     );
 
   const created = db
-    .prepare("SELECT * FROM results WHERE id = ?")
+    .prepare(
+      `SELECT id, subject_name AS name, subject_verein AS verein, disziplin,
+              wettkampf, jahr, kategorie, punkte, rang, created_at
+       FROM results WHERE id = ?`
+    )
     .get(info.lastInsertRowid);
   res.status(201).json({ result: created });
 });
@@ -106,7 +133,10 @@ router.delete("/:id", requireAuth, (req, res) => {
   if (!result) {
     return res.status(404).json({ error: "Eintrag nicht gefunden." });
   }
-  if (result.user_id !== req.session.userId && req.session.role !== "admin") {
+  if (
+    result.entered_by_user_id !== req.session.userId &&
+    req.session.role !== "admin"
+  ) {
     return res.status(403).json({ error: "Sie können nur eigene Einträge löschen." });
   }
 
