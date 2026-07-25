@@ -1,6 +1,6 @@
 const express = require("express");
 const db = require("../db");
-const { requireAuth } = require("../auth");
+const { requireAuth, requireAdmin } = require("../auth");
 
 const router = express.Router();
 
@@ -123,6 +123,85 @@ router.post("/", requireAuth, (req, res) => {
     )
     .get(info.lastInsertRowid);
   res.status(201).json({ result: created });
+});
+
+function parseCsvLine(line) {
+  return line.split(",").map((s) => s.trim());
+}
+
+router.post("/import", requireAuth, requireAdmin, (req, res) => {
+  const { csv } = req.body || {};
+  if (!csv || !String(csv).trim()) {
+    return res.status(400).json({ error: "Bitte CSV-Daten einfügen." });
+  }
+
+  const lines = String(csv).split(/\r?\n/).filter((l) => l.trim().length);
+  if (lines.length < 2) {
+    return res
+      .status(400)
+      .json({ error: "CSV braucht eine Kopfzeile und mindestens eine Datenzeile." });
+  }
+
+  const header = parseCsvLine(lines[0]).map((h) => h.toLowerCase());
+  const required = ["name", "verein", "disziplin", "wettkampf", "jahr", "punkte"];
+  const missing = required.filter((r) => !header.includes(r));
+  if (missing.length) {
+    return res
+      .status(400)
+      .json({ error: "Kopfzeile fehlt: " + missing.join(", ") + ". Erwartet: name,verein,disziplin,wettkampf,jahr,kategorie,punkte,rang" });
+  }
+
+  const idx = {};
+  header.forEach((h, i) => {
+    idx[h] = i;
+  });
+
+  const insert = db.prepare(
+    `INSERT INTO results (entered_by_user_id, subject_name, subject_verein, disziplin, wettkampf, jahr, kategorie, punkte, rang)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+  );
+
+  let imported = 0;
+  const errors = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCsvLine(lines[i]);
+    const name = cols[idx.name];
+    const verein = cols[idx.verein];
+    const disziplin = cols[idx.disziplin];
+    const wettkampf = cols[idx.wettkampf];
+    const jahr = Number(cols[idx.jahr]);
+    const kategorie = idx.kategorie !== undefined ? cols[idx.kategorie] : "";
+    const punkte = Number(cols[idx.punkte]);
+    const rang = idx.rang !== undefined && cols[idx.rang] ? Number(cols[idx.rang]) : null;
+
+    if (
+      !name ||
+      !verein ||
+      !ALLOWED_DISZIPLINEN.includes(disziplin) ||
+      !wettkampf ||
+      !Number.isInteger(jahr) ||
+      Number.isNaN(punkte)
+    ) {
+      errors.push(`Zeile ${i + 1}: ungültig oder unbekannte Disziplin, übersprungen.`);
+      continue;
+    }
+
+    insert.run(
+      req.session.userId,
+      name,
+      verein,
+      disziplin,
+      wettkampf,
+      jahr,
+      kategorie || null,
+      punkte,
+      Number.isInteger(rang) ? rang : null
+    );
+    imported++;
+  }
+
+  res.status(201).json({ imported, skipped: errors.length, errors });
 });
 
 router.delete("/:id", requireAuth, (req, res) => {
