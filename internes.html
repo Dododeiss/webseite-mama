@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
+  <title>Internes – Bezirksschützenverband Zürich (BSVZ)</title>
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -61,8 +61,8 @@
           </li>
           <li><a href="kalender.html">Kalender</a></li>
           <li><a href="resultate.html">Resultate</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
@@ -119,8 +119,8 @@
           </li>
         <li><a href="kalender.html">Kalender</a></li>
         <li><a href="resultate.html">Resultate</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
         <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
@@ -130,84 +130,67 @@
     </nav>
   </header>
 
-  <section class="hero home-hero">
+  <section class="hero page-hero">
     <div class="hero-inner">
-      <span class="badge"><span class="dot" aria-hidden="true"></span> Seit 1855 aktiv</span>
-      <h1>
-        Bezirksschützen
-        <span class="accent-line">verband Zürich</span>
-      </h1>
-      <p>
-        Der traditionsreiche Verband für Schützensport in der Region Zürich.
-        Vereint in Präzision, Kameradschaft und Schweizer Tradition.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="resultate.html">🏆 Aktuelle Resultate</a>
-        <a class="btn on-hero" href="kalender.html">📅 Veranstaltungen</a>
-      </div>
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Vorstand</span>
+      <h1>Internes</h1>
+      <p>Interne Dokumente für Vorstand und Funktionäre.</p>
     </div>
   </section>
 
   <main id="main-content">
-    <section aria-labelledby="hub-heading">
-      <div class="section-title">
-        <h2 id="hub-heading">Was möchten Sie tun?</h2>
-      </div>
-      <div class="hub-grid">
-        <a class="card hub-tile" href="verband.html">
-          <span class="tile-icon" aria-hidden="true">🛡️</span>
-          <h3>Verband</h3>
-          <p class="meta">Portrait, Vorstand, Mitgliedervereine</p>
-        </a>
-        <a class="card hub-tile" href="ressorts.html">
-          <span class="tile-icon" aria-hidden="true">🎯</span>
-          <h3>Ressorts</h3>
-          <p class="meta">Feldschiessen, Bezirksmatch u.v.m.</p>
-        </a>
-        <a class="card hub-tile" href="dienste.html">
-          <span class="tile-icon" aria-hidden="true">🧾</span>
-          <h3>Dienste</h3>
-          <p class="meta">Reglemente, Formulare, Kontakte</p>
-        </a>
-        <a class="card hub-tile" href="archiv.html">
-          <span class="tile-icon" aria-hidden="true">🗄️</span>
-          <h3>Archiv</h3>
-          <p class="meta">Jahresberichte, DV-Protokolle, alte Ranglisten</p>
-        </a>
-        <a class="card hub-tile" href="resultate.html">
-          <span class="tile-icon" aria-hidden="true">🏆</span>
-          <h3>Resultate</h3>
-          <p class="meta">Aktuelle Resultate ansehen oder erfassen</p>
-        </a>
-        <a class="card hub-tile" href="kalender.html">
-          <span class="tile-icon" aria-hidden="true">📅</span>
-          <h3>Kalender</h3>
-          <p class="meta">Anlässe und Termine</p>
-        </a>
+    <section id="not-admin-notice" style="display:none;" aria-labelledby="not-admin-heading">
+      <div class="card">
+        <h2 id="not-admin-heading">Nur für den Vorstand</h2>
+        <p>Dieser Bereich ist nur für angemeldete Administratoren sichtbar.</p>
+        <p><a class="btn primary" href="login.html">Zur Anmeldung</a></p>
       </div>
     </section>
 
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-title">
-        <h2 id="news-heading">News</h2>
-      </div>
-      <p>Diese Seite ist noch im Aufbau.</p>
-    </section>
-
-    <section aria-labelledby="cta-heading" id="mitglied-werden">
-      <div class="cta">
-        <h2 id="cta-heading">Werden Sie Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
-        <p>
-          Ob Anfänger oder erfahrener Schütze – bei uns sind Sie herzlich
-          willkommen. Entdecken Sie die Faszination des Schiesssports im
-          Kreise Gleichgesinnter.
-        </p>
-        <div class="cta-actions">
-          <a class="btn primary" href="register.html">Jetzt Mitglied werden →</a>
-          <a class="btn ghost" href="#kontakt">Kontakt aufnehmen</a>
+    <div id="admin-area" style="display:none;">
+      <section aria-labelledby="upload-heading">
+        <div class="section-title">
+          <h2 id="upload-heading">Dokument hochladen</h2>
         </div>
-      </div>
-    </section>
+        <div class="form-card" style="max-width:640px;">
+          <div id="upload-message" class="form-message" role="alert"></div>
+          <form id="upload-form" novalidate>
+            <div class="form-field">
+              <label for="doc-title">Titel</label>
+              <input type="text" id="doc-title" name="title" placeholder="z. B. Protokoll Vorstandssitzung Mai 2027">
+            </div>
+            <div class="form-field">
+              <label for="doc-file">Datei</label>
+              <input type="file" id="doc-file" name="file" required>
+              <p class="hint">Maximal 20 MB pro Datei.</p>
+            </div>
+            <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Hochladen</button>
+          </form>
+        </div>
+      </section>
+
+      <section aria-labelledby="docs-heading">
+        <div class="section-title">
+          <h2 id="docs-heading">Dokumente</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="results-table">
+            <caption>Interne Dokumente</caption>
+            <thead>
+              <tr>
+                <th scope="col">Titel</th>
+                <th scope="col">Hochgeladen von</th>
+                <th scope="col">Datum</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody id="docs-body">
+              <tr><td colspan="4">Lade Dokumente…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer" id="kontakt">
@@ -245,40 +228,109 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
           <li><a href="#">Impressum</a></li>
           <li><a href="#">Datenschutz</a></li>
           <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
     </div>
-    <div class="partner-badges">
-      <a href="https://www.coolandclean.ch" target="_blank" rel="noopener">
-        <img src="img/badges/cool-and-clean.png" alt="Cool and Clean">
-      </a>
-      <a href="https://www.swissolympic.ch/" target="_blank" rel="noopener">
-        <img src="img/badges/swiss-olympic.png" alt="Swiss Olympic">
-      </a>
-      <a href="https://www.baspo.admin.ch/" target="_blank" rel="noopener">
-        <img src="img/badges/baspo.png" alt="Bundesamt für Sport BASPO">
-      </a>
-    </div>
     <div class="footer-bottom">
       <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
       <p>Mitglied des Zürcher Kantonalschützenverbands</p>
     </div>
-    <p class="image-credit">
-      Titelbild (hell): „Zürich view Quaibrücke" von
-      <a href="https://commons.wikimedia.org/wiki/File:Z%C3%BCrich_view_Quaibr%C3%BCcke_20200702.jpg" target="_blank" rel="noopener">Daniel Kraft</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
-      · Titelbild (dunkel): „Zurich after sunset" von
-      <a href="https://commons.wikimedia.org/wiki/File:Zurich_after_sunset.jpg" target="_blank" rel="noopener">Kuhnmi</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
-    </p>
   </footer>
 
   <script src="js/theme.js"></script>
   <script src="js/auth-ui.js"></script>
+  <script>
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    const docsBody = document.getElementById("docs-body");
+
+    function renderDocs(docs) {
+      if (!docs.length) {
+        docsBody.innerHTML = '<tr><td colspan="4">Noch keine Dokumente hochgeladen.</td></tr>';
+        return;
+      }
+      docsBody.innerHTML = docs
+        .map(
+          (d) => `
+        <tr>
+          <td><a href="/api/internal/documents/${d.id}/download">${escapeHtml(d.title)}</a></td>
+          <td>${escapeHtml(d.uploaded_by_name)}</td>
+          <td>${d.created_at.slice(0, 10)}</td>
+          <td><button type="button" class="icon-btn" data-delete="${d.id}">Löschen</button></td>
+        </tr>`
+        )
+        .join("");
+    }
+
+    async function loadDocs() {
+      const res = await fetch("/api/internal/documents");
+      if (!res.ok) return;
+      const data = await res.json();
+      renderDocs(data.documents);
+    }
+
+    docsBody.addEventListener("click", async (event) => {
+      const btn = event.target.closest("[data-delete]");
+      if (!btn) return;
+      if (!confirm("Dieses Dokument wirklich löschen?")) return;
+      await fetch("/api/internal/documents/" + btn.getAttribute("data-delete"), {
+        method: "DELETE",
+      });
+      loadDocs();
+    });
+
+    document.getElementById("upload-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById("upload-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const fileInput = document.getElementById("doc-file");
+      if (!fileInput.files.length) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = "Bitte eine Datei auswählen.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      formData.append("title", document.getElementById("doc-title").value.trim());
+
+      const res = await fetch("/api/internal/documents", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = data.error || "Hochladen fehlgeschlagen.";
+        return;
+      }
+      messageEl.className = "form-message success";
+      messageEl.textContent = "Dokument hochgeladen.";
+      event.target.reset();
+      loadDocs();
+    });
+
+    (async function init() {
+      const res = await fetch("/api/auth/me");
+      const data = await res.json();
+      if (!data.user || data.user.role !== "admin") {
+        document.getElementById("not-admin-notice").style.display = "";
+        return;
+      }
+      document.getElementById("admin-area").style.display = "";
+      loadDocs();
+    })();
+  </script>
 </body>
 </html>
