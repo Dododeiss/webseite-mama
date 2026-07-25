@@ -1,18 +1,18 @@
 /* BSVZ Prototyp v2 – modernes dunkles/helles Design nach Vorlage, barrierearm */
 
 :root {
-  --bg: #f5f7fa;
+  --bg: #eef1f6;
   --surface: #ffffff;
-  --surface-alt: #eef1f6;
+  --surface-alt: #e2e8f1;
   --text: #182233;
   --text-muted: #4b5768;
-  --accent: #2563eb;
-  --accent-strong: #1d4ed8;
+  --accent: #1d4ed8;
+  --accent-strong: #1739ab;
   --accent-contrast: #ffffff;
-  --border: #dde3ec;
+  --border: #d2d9e3;
   --focus: #d97706;
   --radius: 14px;
-  --shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+  --shadow: 0 10px 28px rgba(16, 24, 40, 0.12);
   --max-width: 1180px;
   --hero-overlay: linear-gradient(
     180deg,
@@ -363,9 +363,27 @@ header.site-header {
 .hero.home-hero {
   background:
     var(--hero-overlay),
+    url("../img/zuerich-day.jpg");
+  background-size: cover;
+  background-position: center 60%;
+}
+
+:root[data-theme="dark"] .hero.home-hero {
+  background:
+    var(--hero-overlay),
     url("../img/zuerich-limmat-sunset.jpg");
   background-size: cover;
   background-position: center 65%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero.home-hero {
+    background:
+      var(--hero-overlay),
+      url("../img/zuerich-limmat-sunset.jpg");
+    background-size: cover;
+    background-position: center 65%;
+  }
 }
 
 .hero-inner {
