@@ -321,6 +321,10 @@ header.site-header {
   z-index: 100;
 }
 
+.search-overlay[hidden] {
+  display: none;
+}
+
 .search-panel {
   background: var(--surface);
   border: 1px solid var(--border);
