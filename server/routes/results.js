@@ -56,7 +56,10 @@ router.post("/", requireAuth, (req, res) => {
   const { disziplin, wettkampf, jahr, kategorie, punkte, rang } = req.body || {};
   let { subject_name, subject_verein } = req.body || {};
 
-  const isAdmin = req.session.role === "admin";
+  const currentUser = db
+    .prepare("SELECT role FROM users WHERE id = ?")
+    .get(req.session.userId);
+  const isAdmin = currentUser && currentUser.role === "admin";
 
   if (isAdmin && subject_name && subject_verein) {
     subject_name = String(subject_name).trim();
@@ -212,9 +215,12 @@ router.delete("/:id", requireAuth, (req, res) => {
   if (!result) {
     return res.status(404).json({ error: "Eintrag nicht gefunden." });
   }
+  const currentUser = db
+    .prepare("SELECT role FROM users WHERE id = ?")
+    .get(req.session.userId);
   if (
     result.entered_by_user_id !== req.session.userId &&
-    req.session.role !== "admin"
+    (!currentUser || currentUser.role !== "admin")
   ) {
     return res.status(403).json({ error: "Sie können nur eigene Einträge löschen." });
   }
