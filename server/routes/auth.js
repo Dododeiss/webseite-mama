@@ -137,6 +137,34 @@ router.get("/me", (req, res) => {
   res.json({ user: user || null });
 });
 
+router.post("/change-password", requireAuth, (req, res) => {
+  const { currentPassword, newPassword } = req.body || {};
+  if (!currentPassword || !newPassword) {
+    return res
+      .status(400)
+      .json({ error: "Bitte aktuelles und neues Passwort eingeben." });
+  }
+  if (String(newPassword).length < 8) {
+    return res
+      .status(400)
+      .json({ error: "Das neue Passwort muss mindestens 8 Zeichen haben." });
+  }
+
+  const user = db
+    .prepare("SELECT password_hash FROM users WHERE id = ?")
+    .get(req.session.userId);
+  if (!user || !bcrypt.compareSync(currentPassword, user.password_hash)) {
+    return res.status(401).json({ error: "Aktuelles Passwort ist falsch." });
+  }
+
+  const passwordHash = bcrypt.hashSync(newPassword, 10);
+  db.prepare("UPDATE users SET password_hash = ? WHERE id = ?").run(
+    passwordHash,
+    req.session.userId
+  );
+  res.json({ ok: true });
+});
+
 router.post("/avatar", requireAuth, (req, res) => {
   uploadAvatar.single("avatar")(req, res, (err) => {
     if (err) {
