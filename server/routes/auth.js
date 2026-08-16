@@ -1,12 +1,29 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const rateLimit = require("express-rate-limit");
 const db = require("../db");
 
 const router = express.Router();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-router.post("/register", (req, res) => {
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Zu viele Anmeldeversuche. Bitte in 15 Minuten erneut versuchen." },
+});
+
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Zu viele Registrierungen von dieser Adresse. Bitte später erneut versuchen." },
+});
+
+router.post("/register", registerLimiter, (req, res) => {
   const { name, email, verein, password } = req.body || {};
 
   if (!name || !email || !verein || !password) {
@@ -48,7 +65,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", loginLimiter, (req, res) => {
   const { email, password } = req.body || {};
   if (!email || !password) {
     return res.status(400).json({ error: "Bitte E-Mail und Passwort eingeben." });

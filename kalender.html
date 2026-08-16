@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kalender – Bezirksschützenverband Zürich (BSVZ)</title>
+  <meta name="description" content="Veranstaltungskalender des Bezirksschützenverbands Zürich (BSVZ) mit Anmeldung zu Anlässen und iCal-Export.">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -268,6 +269,7 @@
   </footer>
 
   <script src="js/theme.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/auth-ui.js"></script>
   <script>
     function escapeHtml(str) {
@@ -356,7 +358,12 @@
       renderCalendar();
     });
 
-function renderEvents(events) {
+function isRecent(createdAt) {
+      const ageMs = Date.now() - new Date(createdAt).getTime();
+      return ageMs >= 0 && ageMs < 7 * 24 * 60 * 60 * 1000;
+    }
+
+    function renderEvents(events) {
       if (!events.length) {
         eventsBody.innerHTML = '<tr><td colspan="6">Noch keine Termine erfasst.</td></tr>';
         return;
@@ -387,7 +394,7 @@ function renderEvents(events) {
           return `
           <tr>
             <td>${dateLabel}</td>
-            <td>${escapeHtml(e.title)}</td>
+            <td>${escapeHtml(e.title)}${isRecent(e.created_at) ? '<span class="badge-new">Neu</span>' : ""}</td>
             <td>${e.category ? escapeHtml(e.category) : "–"}</td>
             <td>${e.location ? escapeHtml(e.location) : "–"}</td>
             <td>${participantsCell}</td>
