@@ -87,19 +87,17 @@
 
   function applySession(user) {
     const loginLinks = document.querySelectorAll('[data-auth="login"]');
-    const registerLinks = document.querySelectorAll('[data-auth="register"]');
 
     if (!user) return;
 
     loginLinks.forEach((el) => {
       el.style.display = "none";
     });
-    registerLinks.forEach((el) => {
-      el.style.display = "none";
-      const container = el.closest(".header-actions");
-      if (container && !container.querySelector(".profile-widget")) {
-        container.insertBefore(buildProfileWidget(user), el);
-      }
+
+    document.querySelectorAll(".header-actions").forEach((container) => {
+      if (container.querySelector(".profile-widget")) return;
+      const navToggle = container.querySelector(".nav-toggle");
+      container.insertBefore(buildProfileWidget(user), navToggle);
     });
   }
 
