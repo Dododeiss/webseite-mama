@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anmelden – Bezirksschützenverband Zürich (BSVZ)</title>
-  <meta name="description" content="Anmelden für Mitglieder des Bezirksschützenverbands Zürich (BSVZ), um eigene Resultate zu erfassen.">
+  <meta name="description" content="Anmelden für Vorstandsmitglieder des Bezirksschützenverbands Zürich (BSVZ).">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -234,7 +234,7 @@
           messageEl.textContent = data.error || "Anmeldung fehlgeschlagen.";
           return;
         }
-        window.location.href = "meine-resultate.html";
+        window.location.href = "profil.html";
       } catch (e) {
         messageEl.className = "form-message error";
         messageEl.textContent =

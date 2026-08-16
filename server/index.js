@@ -43,6 +43,10 @@ app.use(
   "/avatars",
   express.static(path.join(__dirname, "..", "data", "avatars"))
 );
+app.use(
+  "/result-documents",
+  express.static(path.join(__dirname, "..", "data", "result-documents"))
+);
 
 // Static site (the existing plain HTML/CSS/JS prototype) lives at the repo root.
 app.use(express.static(path.join(__dirname, "..")));

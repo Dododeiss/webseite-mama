@@ -1,231 +1,104 @@
+const path = require("path");
+const fs = require("fs");
 const express = require("express");
+const multer = require("multer");
 const db = require("../db");
 const { requireAuth, requireAdmin } = require("../auth");
 
 const router = express.Router();
 
-const ALLOWED_DISZIPLINEN = [
-  "Feldschiessen",
-  "Feldstich",
-  "Lupi Bezirks-Einzelmatch",
-  "Bezirksverbandsschiessen",
-  "Bezirkskonkurrenz",
-  "Bezirksmatch",
-  "Jugend / Nachwuchs",
-  "Sonstiges",
-];
-
-router.get("/", (req, res) => {
-  const { disziplin, jahr } = req.query;
-  let sql = `
-    SELECT id, subject_name AS name, subject_verein AS verein, disziplin,
-           wettkampf, jahr, kategorie, punkte, rang, created_at
-    FROM results
-  `;
-  const clauses = [];
-  const params = [];
-  if (disziplin) {
-    clauses.push("disziplin = ?");
-    params.push(disziplin);
-  }
-  if (jahr) {
-    clauses.push("jahr = ?");
-    params.push(Number(jahr));
-  }
-  if (clauses.length) {
-    sql += " WHERE " + clauses.join(" AND ");
-  }
-  sql += " ORDER BY jahr DESC, punkte DESC, created_at DESC LIMIT 200";
-
-  const rows = db.prepare(sql).all(...params);
-  res.json({ results: rows });
-});
-
-router.get("/mine", requireAuth, (req, res) => {
-  const rows = db
-    .prepare(
-      `SELECT id, subject_name AS name, subject_verein AS verein, disziplin,
-              wettkampf, jahr, kategorie, punkte, rang, created_at
-       FROM results WHERE entered_by_user_id = ? ORDER BY jahr DESC, created_at DESC`
-    )
-    .all(req.session.userId);
-  res.json({ results: rows });
-});
-
-router.post("/", requireAuth, (req, res) => {
-  const { disziplin, wettkampf, jahr, kategorie, punkte, rang } = req.body || {};
-  let { subject_name, subject_verein } = req.body || {};
-
-  const currentUser = db
-    .prepare("SELECT role FROM users WHERE id = ?")
-    .get(req.session.userId);
-  const isAdmin = currentUser && currentUser.role === "admin";
-
-  if (isAdmin && subject_name && subject_verein) {
-    subject_name = String(subject_name).trim();
-    subject_verein = String(subject_verein).trim();
-    if (!subject_name || !subject_verein) {
-      return res
-        .status(400)
-        .json({ error: "Name und Verein dürfen nicht leer sein." });
-    }
-  } else {
-    // Everyone else (and admins who leave the fields blank) can only
-    // enter a result for themselves.
-    const self = db
-      .prepare("SELECT name, verein FROM users WHERE id = ?")
-      .get(req.session.userId);
-    subject_name = self.name;
-    subject_verein = self.verein;
-  }
-
-  if (!disziplin || !ALLOWED_DISZIPLINEN.includes(disziplin)) {
-    return res.status(400).json({ error: "Bitte eine gültige Disziplin wählen." });
-  }
-  if (!wettkampf || !String(wettkampf).trim()) {
-    return res.status(400).json({ error: "Bitte den Wettkampf angeben." });
-  }
-  const jahrNum = Number(jahr);
-  if (!Number.isInteger(jahrNum) || jahrNum < 1900 || jahrNum > 2100) {
-    return res.status(400).json({ error: "Bitte ein gültiges Jahr angeben." });
-  }
-  const punkteNum = Number(punkte);
-  if (Number.isNaN(punkteNum)) {
-    return res.status(400).json({ error: "Bitte eine gültige Punktzahl angeben." });
-  }
-  let rangNum = null;
-  if (rang !== undefined && rang !== null && rang !== "") {
-    rangNum = Number(rang);
-    if (!Number.isInteger(rangNum) || rangNum < 1) {
-      return res.status(400).json({ error: "Der Rang muss eine positive Zahl sein." });
-    }
-  }
-
-  const info = db
-    .prepare(
-      `INSERT INTO results (entered_by_user_id, subject_name, subject_verein, disziplin, wettkampf, jahr, kategorie, punkte, rang)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-    )
-    .run(
-      req.session.userId,
-      subject_name,
-      subject_verein,
-      disziplin,
-      String(wettkampf).trim(),
-      jahrNum,
-      kategorie ? String(kategorie).trim() : null,
-      punkteNum,
-      rangNum
-    );
-
-  const created = db
-    .prepare(
-      `SELECT id, subject_name AS name, subject_verein AS verein, disziplin,
-              wettkampf, jahr, kategorie, punkte, rang, created_at
-       FROM results WHERE id = ?`
-    )
-    .get(info.lastInsertRowid);
-  res.status(201).json({ result: created });
-});
-
-function parseCsvLine(line) {
-  return line.split(",").map((s) => s.trim());
+const uploadDir = path.join(__dirname, "..", "..", "data", "result-documents");
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-router.post("/import", requireAuth, requireAdmin, (req, res) => {
-  const { csv } = req.body || {};
-  if (!csv || !String(csv).trim()) {
-    return res.status(400).json({ error: "Bitte CSV-Daten einfügen." });
-  }
-
-  const lines = String(csv).split(/\r?\n/).filter((l) => l.trim().length);
-  if (lines.length < 2) {
-    return res
-      .status(400)
-      .json({ error: "CSV braucht eine Kopfzeile und mindestens eine Datenzeile." });
-  }
-
-  const header = parseCsvLine(lines[0]).map((h) => h.toLowerCase());
-  const required = ["name", "verein", "disziplin", "wettkampf", "jahr", "punkte"];
-  const missing = required.filter((r) => !header.includes(r));
-  if (missing.length) {
-    return res
-      .status(400)
-      .json({ error: "Kopfzeile fehlt: " + missing.join(", ") + ". Erwartet: name,verein,disziplin,wettkampf,jahr,kategorie,punkte,rang" });
-  }
-
-  const idx = {};
-  header.forEach((h, i) => {
-    idx[h] = i;
-  });
-
-  const insert = db.prepare(
-    `INSERT INTO results (entered_by_user_id, subject_name, subject_verein, disziplin, wettkampf, jahr, kategorie, punkte, rang)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
-  );
-
-  let imported = 0;
-  const errors = [];
-
-  for (let i = 1; i < lines.length; i++) {
-    const cols = parseCsvLine(lines[i]);
-    const name = cols[idx.name];
-    const verein = cols[idx.verein];
-    const disziplin = cols[idx.disziplin];
-    const wettkampf = cols[idx.wettkampf];
-    const jahr = Number(cols[idx.jahr]);
-    const kategorie = idx.kategorie !== undefined ? cols[idx.kategorie] : "";
-    const punkte = Number(cols[idx.punkte]);
-    const rang = idx.rang !== undefined && cols[idx.rang] ? Number(cols[idx.rang]) : null;
-
-    if (
-      !name ||
-      !verein ||
-      !ALLOWED_DISZIPLINEN.includes(disziplin) ||
-      !wettkampf ||
-      !Number.isInteger(jahr) ||
-      Number.isNaN(punkte)
-    ) {
-      errors.push(`Zeile ${i + 1}: ungültig oder unbekannte Disziplin, übersprungen.`);
-      continue;
-    }
-
-    insert.run(
-      req.session.userId,
-      name,
-      verein,
-      disziplin,
-      wettkampf,
-      jahr,
-      kategorie || null,
-      punkte,
-      Number.isInteger(rang) ? rang : null
-    );
-    imported++;
-  }
-
-  res.status(201).json({ imported, skipped: errors.length, errors });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadDir),
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + ".pdf");
+  },
 });
 
-router.delete("/:id", requireAuth, (req, res) => {
-  const result = db
-    .prepare("SELECT * FROM results WHERE id = ?")
+const upload = multer({
+  storage,
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20 MB
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype !== "application/pdf") {
+      return cb(new Error("invalid_type"));
+    }
+    cb(null, true);
+  },
+});
+
+router.get("/", (req, res) => {
+  const rows = db
+    .prepare(
+      `SELECT result_documents.id, result_documents.title, result_documents.original_name,
+              result_documents.filename, result_documents.jahr, result_documents.disziplin,
+              result_documents.created_at, users.name AS uploaded_by_name
+       FROM result_documents
+       JOIN users ON users.id = result_documents.uploaded_by
+       ORDER BY result_documents.jahr DESC, result_documents.created_at DESC`
+    )
+    .all();
+  res.json({ documents: rows });
+});
+
+router.post("/", requireAuth, requireAdmin, (req, res) => {
+  upload.single("file")(req, res, (err) => {
+    if (err) {
+      const message =
+        err.message === "invalid_type"
+          ? "Bitte eine PDF-Datei auswählen."
+          : "Datei zu gross (max. 20 MB) oder ungültig.";
+      return res.status(400).json({ error: message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "Bitte eine PDF-Datei auswählen." });
+    }
+
+    const title = (req.body.title || req.file.originalname).trim();
+    const jahr = req.body.jahr ? Number(req.body.jahr) : null;
+    const disziplin = req.body.disziplin ? String(req.body.disziplin).trim() : null;
+
+    const info = db
+      .prepare(
+        `INSERT INTO result_documents (title, filename, original_name, jahr, disziplin, uploaded_by)
+         VALUES (?, ?, ?, ?, ?, ?)`
+      )
+      .run(
+        title,
+        req.file.filename,
+        req.file.originalname,
+        Number.isInteger(jahr) ? jahr : null,
+        disziplin || null,
+        req.session.userId
+      );
+
+    const created = db
+      .prepare(
+        `SELECT result_documents.id, result_documents.title, result_documents.original_name,
+                result_documents.filename, result_documents.jahr, result_documents.disziplin,
+                result_documents.created_at, users.name AS uploaded_by_name
+         FROM result_documents
+         JOIN users ON users.id = result_documents.uploaded_by
+         WHERE result_documents.id = ?`
+      )
+      .get(info.lastInsertRowid);
+
+    res.status(201).json({ document: created });
+  });
+});
+
+router.delete("/:id", requireAuth, requireAdmin, (req, res) => {
+  const doc = db
+    .prepare("SELECT * FROM result_documents WHERE id = ?")
     .get(req.params.id);
-
-  if (!result) {
-    return res.status(404).json({ error: "Eintrag nicht gefunden." });
+  if (!doc) {
+    return res.status(404).json({ error: "Dokument nicht gefunden." });
   }
-  const currentUser = db
-    .prepare("SELECT role FROM users WHERE id = ?")
-    .get(req.session.userId);
-  if (
-    result.entered_by_user_id !== req.session.userId &&
-    (!currentUser || currentUser.role !== "admin")
-  ) {
-    return res.status(403).json({ error: "Sie können nur eigene Einträge löschen." });
-  }
-
-  db.prepare("DELETE FROM results WHERE id = ?").run(req.params.id);
+  fs.unlink(path.join(uploadDir, doc.filename), () => {});
+  db.prepare("DELETE FROM result_documents WHERE id = ?").run(req.params.id);
   res.json({ ok: true });
 });
 

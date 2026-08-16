@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mein Profil – Bezirksschützenverband Zürich (BSVZ)</title>
-  <meta name="description" content="Eigenes Profilbild verwalten und die eigenen Wettkampf-Resultate auf einen Blick sehen.">
+  <meta name="description" content="Eigenes Profilbild und Passwort verwalten.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
@@ -132,7 +132,7 @@
     <div class="hero-inner">
       <span class="badge"><span class="dot" aria-hidden="true"></span> Mitgliederbereich</span>
       <h1>Mein <span class="accent-line">Profil</span></h1>
-      <p id="greeting">Profilbild und eigene Resultate auf einen Blick.</p>
+      <p id="greeting">Profilbild und Konto verwalten.</p>
     </div>
   </section>
 
@@ -201,29 +201,6 @@
             </div>
             <button type="submit" class="btn primary">Passwort ändern</button>
           </form>
-        </div>
-      </section>
-
-      <section aria-labelledby="profile-results-heading">
-        <div class="section-title">
-          <h2 id="profile-results-heading">Meine letzten Resultate</h2>
-          <a class="btn primary" href="meine-resultate.html">Resultate verwalten →</a>
-        </div>
-        <div class="table-wrap">
-          <table class="results-table">
-            <thead>
-              <tr>
-                <th scope="col">Jahr</th>
-                <th scope="col">Disziplin</th>
-                <th scope="col">Wettkampf</th>
-                <th scope="col">Punkte</th>
-                <th scope="col">Rang</th>
-              </tr>
-            </thead>
-            <tbody id="profile-results-body">
-              <tr><td colspan="5">Lade Resultate…</td></tr>
-            </tbody>
-          </table>
         </div>
       </section>
     </div>
@@ -303,27 +280,6 @@
       }
     }
 
-    function renderResults(results) {
-      const body = document.getElementById("profile-results-body");
-      if (!results.length) {
-        body.innerHTML = '<tr><td colspan="5">Noch keine Resultate erfasst.</td></tr>';
-        return;
-      }
-      body.innerHTML = results
-        .slice(0, 10)
-        .map(
-          (r) => `
-        <tr>
-          <td>${r.jahr}</td>
-          <td>${escapeHtml(r.disziplin)}</td>
-          <td>${escapeHtml(r.wettkampf)}</td>
-          <td>${r.punkte}</td>
-          <td>${r.rang || "–"}</td>
-        </tr>`
-        )
-        .join("");
-    }
-
     document.getElementById("avatar-input").addEventListener("change", async (event) => {
       const file = event.target.files[0];
       if (!file) return;
@@ -401,12 +357,6 @@
       document.getElementById("profile-verein").textContent = data.user.verein;
       document.getElementById("profile-email").textContent = data.user.email;
       renderAvatar(data.user);
-
-      const resultsRes = await fetch("/api/results/mine");
-      if (resultsRes.ok) {
-        const resultsData = await resultsRes.json();
-        renderResults(resultsData.results);
-      }
     })();
   </script>
 </body>

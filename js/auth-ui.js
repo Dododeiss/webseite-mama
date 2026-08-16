@@ -54,7 +54,6 @@
     menu.hidden = true;
     menu.innerHTML = `
       <a href="profil.html">👤 Profil</a>
-      <a href="meine-resultate.html">🏆 Meine Resultate</a>
       <button type="button" class="profile-logout">↪ Abmelden</button>
     `;
 

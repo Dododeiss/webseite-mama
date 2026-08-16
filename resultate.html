@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resultate – Bezirksschützenverband Zürich (BSVZ)</title>
-  <meta name="description" content="Aktuelle Wettkampf-Resultate der Mitglieder des Bezirksschützenverbands Zürich (BSVZ).">
+  <meta name="description" content="Ranglisten und Wettkampf-Resultate des Bezirksschützenverbands Zürich (BSVZ) als PDF.">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -129,38 +129,76 @@
 
   <section class="hero page-hero">
     <div class="hero-inner">
-      <span class="badge"><span class="dot" aria-hidden="true"></span> Live</span>
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Ranglisten</span>
       <h1>Aktuelle <span class="accent-line">Resultate</span></h1>
-      <p>Von Mitgliedern selbst erfasste Wettkampf-Resultate.</p>
+      <p>Vom Vorstand publizierte Ranglisten und Wettkampf-Resultate.</p>
     </div>
   </section>
 
   <main id="main-content">
+    <section aria-labelledby="upload-heading" id="upload-area" style="display:none;">
+      <div class="section-title">
+        <h2 id="upload-heading">Resultat hochladen</h2>
+      </div>
+      <div class="form-card" style="max-width:640px;">
+        <div id="upload-message" class="form-message" role="alert"></div>
+        <form id="upload-form" novalidate>
+          <div class="form-field">
+            <label for="doc-title">Titel</label>
+            <input type="text" id="doc-title" name="title" placeholder="z. B. Einzelrangliste Feldschiessen 2026" required>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="doc-jahr">Jahr (optional)</label>
+              <input type="number" id="doc-jahr" name="jahr" min="1900" max="2100">
+            </div>
+            <div class="form-field">
+              <label for="doc-disziplin">Disziplin (optional)</label>
+              <select id="doc-disziplin" name="disziplin">
+                <option value="">–</option>
+                <option value="Feldschiessen">Feldschiessen</option>
+                <option value="Feldstich">Feldstich</option>
+                <option value="Lupi Bezirks-Einzelmatch">Lupi Bezirks-Einzelmatch</option>
+                <option value="Bezirksverbandsschiessen">Bezirksverbandsschiessen</option>
+                <option value="Bezirkskonkurrenz">Bezirkskonkurrenz</option>
+                <option value="Bezirksmatch">Bezirksmatch</option>
+                <option value="Jugend / Nachwuchs">Jugend / Nachwuchs</option>
+                <option value="Sonstiges">Sonstiges</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="doc-file">PDF-Datei</label>
+            <input type="file" id="doc-file" name="file" accept="application/pdf" required>
+            <p class="hint">Nur PDF, maximal 20 MB.</p>
+          </div>
+          <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Hochladen</button>
+        </form>
+      </div>
+    </section>
+
     <section aria-labelledby="resultate-heading" id="resultate">
       <div class="section-title">
-        <h2 id="resultate-heading">Aktuelle Schiessresultate</h2>
-        <a class="btn primary" href="meine-resultate.html">Eigenes Resultat erfassen →</a>
+        <h2 id="resultate-heading">Ranglisten &amp; Resultate</h2>
       </div>
       <div class="table-wrap">
         <table class="results-table">
-          <caption>Von Mitgliedern erfasste Resultate (neueste zuerst)</caption>
+          <caption>Vom Vorstand publizierte Resultate (neueste zuerst)</caption>
           <thead>
             <tr>
               <th scope="col">Jahr</th>
               <th scope="col">Disziplin</th>
-              <th scope="col">Wettkampf</th>
-              <th scope="col">Name</th>
-              <th scope="col">Verein</th>
-              <th scope="col">Punkte</th>
+              <th scope="col">Titel</th>
+              <th scope="col" id="delete-col-header" style="display:none;"></th>
             </tr>
           </thead>
-          <tbody id="live-results-body">
-            <tr><td colspan="6">Lade Resultate…</td></tr>
+          <tbody id="results-body">
+            <tr><td colspan="4">Lade Resultate…</td></tr>
           </tbody>
         </table>
       </div>
       <p class="meta" style="margin-top:1.25rem;">
-        Historische Ranglisten (PDF, ab 2015) finden Sie bei den einzelnen
+        Weitere historische Ranglisten (ab 2015) finden Sie bei den einzelnen
         <a href="ressorts.html">Ressorts</a> und im <a href="archiv.html">Archiv</a>.
       </p>
     </section>
@@ -218,45 +256,105 @@
   <script src="js/theme.js"></script>
   <script src="js/search.js"></script>
   <script src="js/auth-ui.js"></script>
+  <script src="js/form-validate.js"></script>
   <script>
-    (async function loadLiveResults() {
-      const body = document.getElementById("live-results-body");
-      function escapeHtml(str) {
-        const div = document.createElement("div");
-        div.textContent = str;
-        return div.innerHTML;
+    let isAdmin = false;
+    const resultsBody = document.getElementById("results-body");
+
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function isRecent(createdAt) {
+      const ageMs = Date.now() - new Date(createdAt).getTime();
+      return ageMs >= 0 && ageMs < 7 * 24 * 60 * 60 * 1000;
+    }
+
+    function renderResults(documents) {
+      if (!documents.length) {
+        resultsBody.innerHTML =
+          '<tr><td colspan="4">Noch keine Resultate hochgeladen.</td></tr>';
+        return;
       }
-      function isRecent(createdAt) {
-        const ageMs = Date.now() - new Date(createdAt).getTime();
-        return ageMs >= 0 && ageMs < 7 * 24 * 60 * 60 * 1000;
-      }
+      resultsBody.innerHTML = documents
+        .map(
+          (d) => `
+        <tr>
+          <td>${d.jahr || "–"}</td>
+          <td>${d.disziplin ? escapeHtml(d.disziplin) : "–"}</td>
+          <td>
+            <a href="/result-documents/${escapeHtml(d.filename)}" target="_blank" rel="noopener">${escapeHtml(d.title)}</a>
+            ${isRecent(d.created_at) ? '<span class="badge-new">Neu</span>' : ""}
+          </td>
+          ${isAdmin ? `<td><button type="button" class="icon-btn" data-delete="${d.id}">Löschen</button></td>` : ""}
+        </tr>`
+        )
+        .join("");
+    }
+
+    async function loadResults() {
       try {
         const res = await fetch("/api/results");
         if (!res.ok) throw new Error("request failed");
         const data = await res.json();
-        const rows = data.results;
-        if (!rows.length) {
-          body.innerHTML =
-            '<tr><td colspan="6">Noch keine Resultate erfasst. Seien Sie die/der Erste!</td></tr>';
-          return;
-        }
-        body.innerHTML = rows
-          .map(
-            (r) => `
-          <tr>
-            <td>${r.jahr}</td>
-            <td>${escapeHtml(r.disziplin)}</td>
-            <td>${escapeHtml(r.wettkampf)}${isRecent(r.created_at) ? '<span class="badge-new">Neu</span>' : ""}</td>
-            <td>${escapeHtml(r.name)}</td>
-            <td>${escapeHtml(r.verein)}</td>
-            <td>${r.punkte}</td>
-          </tr>`
-          )
-          .join("");
+        renderResults(data.documents);
       } catch (e) {
-        body.innerHTML =
-          '<tr><td colspan="6">Resultate konnten nicht geladen werden (Server nicht erreichbar).</td></tr>';
+        resultsBody.innerHTML =
+          '<tr><td colspan="4">Resultate konnten nicht geladen werden (Server nicht erreichbar).</td></tr>';
       }
+    }
+
+    resultsBody.addEventListener("click", async (event) => {
+      const btn = event.target.closest("[data-delete]");
+      if (!btn) return;
+      if (!confirm("Dieses Resultat wirklich löschen?")) return;
+      await fetch("/api/results/" + btn.getAttribute("data-delete"), { method: "DELETE" });
+      loadResults();
+    });
+
+    document.getElementById("upload-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById("upload-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const fileInput = document.getElementById("doc-file");
+      if (!fileInput.files.length) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = "Bitte eine PDF-Datei auswählen.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+      formData.append("title", document.getElementById("doc-title").value.trim());
+      formData.append("jahr", document.getElementById("doc-jahr").value);
+      formData.append("disziplin", document.getElementById("doc-disziplin").value);
+
+      const res = await fetch("/api/results", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = data.error || "Hochladen fehlgeschlagen.";
+        return;
+      }
+      messageEl.className = "form-message success";
+      messageEl.textContent = "Resultat hochgeladen.";
+      event.target.reset();
+      loadResults();
+    });
+
+    (async function init() {
+      const res = await fetch("/api/auth/me");
+      const data = await res.json();
+      if (data.user && data.user.role === "admin") {
+        isAdmin = true;
+        document.getElementById("upload-area").style.display = "";
+        document.getElementById("delete-col-header").style.display = "";
+      }
+      loadResults();
     })();
   </script>
 </body>
