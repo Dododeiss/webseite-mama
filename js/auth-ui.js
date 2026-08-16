@@ -10,25 +10,97 @@
     }
   }
 
+  function initials(name) {
+    const parts = String(name).trim().split(/\s+/).filter(Boolean);
+    return parts
+      .slice(0, 2)
+      .map((p) => p[0])
+      .join("")
+      .toUpperCase();
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  function buildProfileWidget(user) {
+    const wrap = document.createElement("div");
+    wrap.className = "profile-widget";
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "profile-widget-btn";
+    btn.setAttribute("aria-haspopup", "true");
+    btn.setAttribute("aria-expanded", "false");
+
+    const avatar = document.createElement("span");
+    avatar.className = "profile-avatar";
+    if (user.avatar_filename) {
+      avatar.innerHTML = `<img src="/avatars/${escapeHtml(user.avatar_filename)}" alt="">`;
+    } else {
+      avatar.textContent = initials(user.name);
+    }
+    btn.appendChild(avatar);
+
+    const nameSpan = document.createElement("span");
+    nameSpan.className = "profile-widget-name";
+    nameSpan.textContent = user.name;
+    btn.appendChild(nameSpan);
+
+    const menu = document.createElement("div");
+    menu.className = "profile-dropdown-menu";
+    menu.hidden = true;
+    menu.innerHTML = `
+      <a href="profil.html">👤 Profil</a>
+      <a href="meine-resultate.html">🏆 Meine Resultate</a>
+      <button type="button" class="profile-logout">↪ Abmelden</button>
+    `;
+
+    function closeMenu() {
+      menu.hidden = true;
+      btn.setAttribute("aria-expanded", "false");
+    }
+
+    btn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const willOpen = menu.hidden;
+      menu.hidden = !willOpen;
+      btn.setAttribute("aria-expanded", String(willOpen));
+    });
+    document.addEventListener("click", (event) => {
+      if (!wrap.contains(event.target)) closeMenu();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
+    });
+    menu.querySelector(".profile-logout").addEventListener("click", async () => {
+      await fetch("/api/auth/logout", { method: "POST" });
+      window.location.href = "index.html";
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    return wrap;
+  }
+
   function applySession(user) {
     const loginLinks = document.querySelectorAll('[data-auth="login"]');
     const registerLinks = document.querySelectorAll('[data-auth="register"]');
 
-    if (user) {
-      loginLinks.forEach((el) => {
-        el.textContent = "Meine Resultate";
-        el.href = "meine-resultate.html";
-      });
-      registerLinks.forEach((el) => {
-        el.textContent = "Abmelden";
-        el.href = "#";
-        el.addEventListener("click", async (event) => {
-          event.preventDefault();
-          await fetch("/api/auth/logout", { method: "POST" });
-          window.location.href = "index.html";
-        });
-      });
-    }
+    if (!user) return;
+
+    loginLinks.forEach((el) => {
+      el.style.display = "none";
+    });
+    registerLinks.forEach((el) => {
+      el.style.display = "none";
+      const container = el.closest(".header-actions");
+      if (container && !container.querySelector(".profile-widget")) {
+        container.insertBefore(buildProfileWidget(user), el);
+      }
+    });
   }
 
   document.addEventListener("DOMContentLoaded", loadSession);

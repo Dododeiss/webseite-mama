@@ -404,6 +404,134 @@ header.site-header {
   color: var(--text-muted);
 }
 
+.profile-widget {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profile-widget-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem 0.25rem 0.25rem;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+}
+
+.profile-widget-btn:hover,
+.profile-widget-btn:focus,
+.profile-widget-btn[aria-expanded="true"] {
+  border-color: var(--border);
+  background: var(--surface-alt);
+}
+
+.profile-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-avatar-lg {
+  width: 96px;
+  height: 96px;
+  font-size: 1.6rem;
+}
+
+.profile-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  min-width: 200px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  z-index: 60;
+}
+
+.profile-dropdown-menu[hidden] {
+  display: none;
+}
+
+.profile-dropdown-menu a,
+.profile-dropdown-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  color: var(--text);
+  text-decoration: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-dropdown-menu a:hover,
+.profile-dropdown-menu a:focus,
+.profile-dropdown-menu button:hover,
+.profile-dropdown-menu button:focus {
+  background: var(--surface-alt);
+}
+
+.profile-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.profile-card-avatar {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 0;
+  flex: 1;
+  min-width: 240px;
+}
+
+.profile-info dt {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.profile-info dd {
+  margin: 0;
+  font-weight: 600;
+}
+
 .nav-toggle {
   display: none;
 }
@@ -1204,6 +1332,18 @@ footer.site-footer {
 
   .nav-toggle {
     display: inline-flex;
+  }
+
+  .profile-widget-name {
+    display: none;
+  }
+
+  .profile-dropdown-menu {
+    min-width: 180px;
+  }
+
+  .profile-card {
+    flex-direction: column;
   }
 
   .hero {

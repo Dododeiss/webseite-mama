@@ -66,6 +66,12 @@ db.exec(`
   );
 `);
 
+// One-off migration: add users.avatar_filename if it doesn't exist yet.
+const userColumns = db.prepare("PRAGMA table_info(users)").all();
+if (!userColumns.some((c) => c.name === "avatar_filename")) {
+  db.exec("ALTER TABLE users ADD COLUMN avatar_filename TEXT");
+}
+
 // One-off migration: earlier versions had results.user_id (self-entry only).
 // If that old column is still around, rebuild the table with the new
 // entered_by_user_id / subject_name / subject_verein columns instead.

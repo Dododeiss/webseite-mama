@@ -39,6 +39,11 @@ app.use("/api/results", resultsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/internal", internalRoutes);
 
+app.use(
+  "/avatars",
+  express.static(path.join(__dirname, "..", "data", "avatars"))
+);
+
 // Static site (the existing plain HTML/CSS/JS prototype) lives at the repo root.
 app.use(express.static(path.join(__dirname, "..")));
 

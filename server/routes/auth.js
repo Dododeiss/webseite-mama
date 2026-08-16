@@ -1,11 +1,39 @@
+const path = require("path");
+const fs = require("fs");
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
 const rateLimit = require("express-rate-limit");
 const db = require("../db");
+const { requireAuth } = require("../auth");
 
 const router = express.Router();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const avatarDir = path.join(__dirname, "..", "..", "data", "avatars");
+if (!fs.existsSync(avatarDir)) {
+  fs.mkdirSync(avatarDir, { recursive: true });
+}
+
+const ALLOWED_AVATAR_TYPES = ["image/jpeg", "image/png", "image/webp"];
+const avatarStorage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, avatarDir),
+  filename: (req, file, cb) => {
+    const ext = { "image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp" }[file.mimetype] || "";
+    cb(null, `user-${req.session.userId}-${Date.now()}${ext}`);
+  },
+});
+const uploadAvatar = multer({
+  storage: avatarStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!ALLOWED_AVATAR_TYPES.includes(file.mimetype)) {
+      return cb(new Error("invalid_type"));
+    }
+    cb(null, true);
+  },
+});
 
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -102,9 +130,41 @@ router.get("/me", (req, res) => {
     return res.json({ user: null });
   }
   const user = db
-    .prepare("SELECT id, name, email, verein, role FROM users WHERE id = ?")
+    .prepare(
+      "SELECT id, name, email, verein, role, avatar_filename FROM users WHERE id = ?"
+    )
     .get(req.session.userId);
   res.json({ user: user || null });
+});
+
+router.post("/avatar", requireAuth, (req, res) => {
+  uploadAvatar.single("avatar")(req, res, (err) => {
+    if (err) {
+      const message =
+        err.message === "invalid_type"
+          ? "Bitte ein JPG-, PNG- oder WebP-Bild wählen."
+          : "Datei zu gross (max. 5 MB) oder ungültig.";
+      return res.status(400).json({ error: message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "Bitte ein Bild auswählen." });
+    }
+
+    const previous = db
+      .prepare("SELECT avatar_filename FROM users WHERE id = ?")
+      .get(req.session.userId);
+
+    db.prepare("UPDATE users SET avatar_filename = ? WHERE id = ?").run(
+      req.file.filename,
+      req.session.userId
+    );
+
+    if (previous && previous.avatar_filename) {
+      fs.unlink(path.join(avatarDir, previous.avatar_filename), () => {});
+    }
+
+    res.json({ avatar_filename: req.file.filename });
+  });
 });
 
 module.exports = router;
