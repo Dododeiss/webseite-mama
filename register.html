@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
-  <meta name="description" content="Der Bezirksschützenverband Zürich (BSVZ) vereint Schützenvereine aus Stadt Zürich, Dietikon, Schlieren und dem Limmattal. Kalender, Resultate, Vorstand und mehr.">
+  <title>Registrieren – Bezirksschützenverband Zürich (BSVZ)</title>
+  <meta name="description" content="Konto-Registrierung für Vorstandsmitglieder des Bezirksschützenverbands Zürich (BSVZ).">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -61,8 +61,8 @@
             </ul>
           </li>
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
@@ -117,8 +117,8 @@
             </ul>
           </li>
         <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
         <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
@@ -127,82 +127,42 @@
     </nav>
   </header>
 
-  <section class="hero home-hero">
+  <section class="hero page-hero">
     <div class="hero-inner">
-      <span class="badge"><span class="dot" aria-hidden="true"></span> Seit 1855 aktiv</span>
-      <h1>
-        Bezirksschützen
-        <span class="accent-line">verband Zürich</span>
-      </h1>
-      <p>
-        Der traditionsreiche Verband für Schützensport in der Region Zürich.
-        Vereint in Präzision, Kameradschaft und Schweizer Tradition.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="resultate.html">🏆 Aktuelle Resultate</a>
-        <a class="btn on-hero" href="kalender.html">📅 Veranstaltungen</a>
-      </div>
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Nur für den Vorstand</span>
+      <h1>Konto <span class="accent-line">erstellen</span></h1>
+      <p>Registrierung für Vorstandsmitglieder des BSVZ mit offizieller Vereins-E-Mail-Adresse.</p>
     </div>
   </section>
 
   <main id="main-content">
-    <section aria-labelledby="hub-heading">
-      <div class="section-title">
-        <h2 id="hub-heading">Was möchten Sie tun?</h2>
-      </div>
-      <div class="hub-grid">
-        <a class="card hub-tile" href="verband.html">
-          <span class="tile-icon" aria-hidden="true">🛡️</span>
-          <h3>Verband</h3>
-          <p class="meta">Portrait, Vorstand, Mitgliedervereine</p>
-        </a>
-        <a class="card hub-tile" href="ressorts.html">
-          <span class="tile-icon" aria-hidden="true">🎯</span>
-          <h3>Ressorts</h3>
-          <p class="meta">Feldschiessen, Bezirksmatch u.v.m.</p>
-        </a>
-        <a class="card hub-tile" href="dienste.html">
-          <span class="tile-icon" aria-hidden="true">🧾</span>
-          <h3>Dienste</h3>
-          <p class="meta">Reglemente, Formulare, Kontakte</p>
-        </a>
-        <a class="card hub-tile" href="archiv.html">
-          <span class="tile-icon" aria-hidden="true">🗄️</span>
-          <h3>Archiv</h3>
-          <p class="meta">Jahresberichte, DV-Protokolle, alte Ranglisten</p>
-        </a>
-        <a class="card hub-tile" href="resultate.html">
-          <span class="tile-icon" aria-hidden="true">🏆</span>
-          <h3>Resultate</h3>
-          <p class="meta">Ranglisten und Resultate als PDF ansehen</p>
-        </a>
-        <a class="card hub-tile" href="kalender.html">
-          <span class="tile-icon" aria-hidden="true">📅</span>
-          <h3>Kalender</h3>
-          <p class="meta">Anlässe und Termine</p>
-        </a>
-      </div>
-    </section>
-
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-title">
-        <h2 id="news-heading">News</h2>
-      </div>
-      <p>Diese Seite ist noch im Aufbau.</p>
-    </section>
-
-    <section aria-labelledby="cta-heading" id="ueber-uns">
-      <div class="cta">
-        <h2 id="cta-heading">Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
-        <p>
-          Der BSVZ vereint die Schützenvereine der Region Zürich. Ob Anfänger
-          oder erfahrener Schütze – interessierte Vereine und Einzelpersonen
-          sind herzlich willkommen, sich bei uns zu melden.
+    <section aria-labelledby="register-heading">
+      <div class="form-card">
+        <div id="form-message" class="form-message" role="alert"></div>
+        <form id="register-form" novalidate>
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="form-field">
+            <label for="verein">Verein</label>
+            <input type="text" id="verein" name="verein" placeholder="z. B. Schützenverein Zürich-Leimbach" required>
+          </div>
+          <div class="form-field">
+            <label for="email">E-Mail</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <p class="hint">Nur mit @bsvzuerich.ch-Adresse möglich.</p>
+          </div>
+          <div class="form-field">
+            <label for="password">Passwort</label>
+            <input type="password" id="password" name="password" autocomplete="new-password" minlength="8" required>
+            <p class="hint">Mindestens 8 Zeichen.</p>
+          </div>
+          <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Konto erstellen</button>
+        </form>
+        <p class="form-footer-note">
+          Bereits Mitglied? <a href="login.html">Jetzt anmelden</a>
         </p>
-        <div class="cta-actions">
-          <a class="btn primary" href="verband.html#mitgliedervereine">Mitgliedervereine ansehen</a>
-          <a class="btn ghost" href="#kontakt">Kontakt aufnehmen</a>
-        </div>
       </div>
     </section>
   </main>
@@ -242,41 +202,57 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
           <li><a href="#">Impressum</a></li>
           <li><a href="#">Datenschutz</a></li>
           <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
     </div>
-    <div class="partner-badges">
-      <a href="https://www.coolandclean.ch" target="_blank" rel="noopener">
-        <img src="img/badges/cool-and-clean.png" alt="Cool and Clean">
-      </a>
-      <a href="https://www.swissolympic.ch/" target="_blank" rel="noopener">
-        <img src="img/badges/swiss-olympic.png" alt="Swiss Olympic">
-      </a>
-      <a href="https://www.baspo.admin.ch/" target="_blank" rel="noopener">
-        <img src="img/badges/baspo.png" alt="Bundesamt für Sport BASPO">
-      </a>
-    </div>
     <div class="footer-bottom">
       <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
       <p>Mitglied des Zürcher Kantonalschützenverbands</p>
     </div>
-    <p class="image-credit">
-      Titelbild (hell): „Zürich view Quaibrücke" von
-      <a href="https://commons.wikimedia.org/wiki/File:Z%C3%BCrich_view_Quaibr%C3%BCcke_20200702.jpg" target="_blank" rel="noopener">Daniel Kraft</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
-      · Titelbild (dunkel): „Zurich after sunset" von
-      <a href="https://commons.wikimedia.org/wiki/File:Zurich_after_sunset.jpg" target="_blank" rel="noopener">Kuhnmi</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
-    </p>
   </footer>
 
   <script src="js/theme.js"></script>
   <script src="js/search.js"></script>
   <script src="js/auth-ui.js"></script>
+  <script src="js/form-validate.js"></script>
+  <script>
+    document.getElementById("register-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById("form-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const payload = {
+        name: document.getElementById("name").value.trim(),
+        verein: document.getElementById("verein").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        password: document.getElementById("password").value,
+      };
+
+      try {
+        const res = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          messageEl.className = "form-message error";
+          messageEl.textContent = data.error || "Registrierung fehlgeschlagen.";
+          return;
+        }
+        window.location.href = "profil.html";
+      } catch (e) {
+        messageEl.className = "form-message error";
+        messageEl.textContent =
+          "Server nicht erreichbar. Läuft die Seite über 'npm start'?";
+      }
+    });
+  </script>
 </body>
 </html>

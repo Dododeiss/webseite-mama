@@ -1,0 +1,21 @@
+{
+  "name": "bsvz-webseite",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BSVZ Webseite – Prototyp mit Mitglieder-Login und Resultate-Erfassung",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.6.2",
+    "express-session": "^1.18.0",
+    "multer": "^2.2.0"
+  }
+}

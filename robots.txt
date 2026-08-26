@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /profil.html
+Disallow: /internes.html
+Disallow: /register.html
+
+Sitemap: https://testdominic1.bsvzuerich.ch/sitemap.xml

@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalender – Bezirksschützenverband Zürich (BSVZ)</title>
+  <meta name="description" content="Veranstaltungskalender des Bezirksschützenverbands Zürich (BSVZ) mit Anmeldung zu Anlässen und iCal-Export.">
+  <link rel="icon" href="img/bsvz-logo.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
+        <span class="brand-text"><strong>BSVZ</strong></span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Hauptnavigation">
+        <ul>
+          <li class="nav-dropdown">
+            <a href="verband.html">Verband</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="verband.html#portrait">Portrait</a></li>
+              <li><a href="verband.html#vorstand">Vorstand</a></li>
+              <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+              <li><a href="verband.html#pflichtenhefte">Pflichtenhefte</a></li>
+              <li><a href="verband.html#jobs">Offene Stellen</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="ressorts.html">Ressorts</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="ressorts.html#feldschiessen">Feldschiessen</a></li>
+              <li><a href="ressorts.html#feldstich">Feldstich</a></li>
+              <li><a href="ressorts.html#lupi">Lupi Bezirks-Einzelmatch</a></li>
+              <li><a href="ressorts.html#bezirksverbandsschiessen">Bezirksverbandsschiessen</a></li>
+              <li><a href="ressorts.html#bezirkskonkurrenz">Bezirkskonkurrenz</a></li>
+              <li><a href="ressorts.html#bezirksmatch">Bezirksmatch</a></li>
+              <li><a href="ressorts.html#jugend">Jugend / Nachwuchs</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="dienste.html">Dienste</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="dienste.html#reglemente">Reglemente &amp; Vorschriften</a></li>
+              <li><a href="dienste.html#medien">Medien</a></li>
+              <li><a href="dienste.html#waffengesetz">Waffengesetz &amp; Formulare</a></li>
+              <li><a href="dienste.html#kontakte">Wichtige Kontakte</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="archiv.html">Archiv</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
+              <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
+              <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
+              <li><a href="archiv.html#foto-video">Foto-/Videogalerien</a></li>
+            </ul>
+          </li>
+          <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="btn ghost theme-toggle desktop-only" data-theme-toggle aria-pressed="false">🌙</button>
+        <a class="btn ghost desktop-only" href="login.html" data-auth="login">Anmelden</a>
+        <button type="button" class="btn ghost nav-toggle" aria-expanded="false" aria-controls="mobile-nav-list">
+          ☰
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+      <ul id="mobile-nav-list">
+        <li class="nav-dropdown">
+            <a href="verband.html">Verband</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="verband.html#portrait">Portrait</a></li>
+              <li><a href="verband.html#vorstand">Vorstand</a></li>
+              <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+              <li><a href="verband.html#pflichtenhefte">Pflichtenhefte</a></li>
+              <li><a href="verband.html#jobs">Offene Stellen</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="ressorts.html">Ressorts</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="ressorts.html#feldschiessen">Feldschiessen</a></li>
+              <li><a href="ressorts.html#feldstich">Feldstich</a></li>
+              <li><a href="ressorts.html#lupi">Lupi Bezirks-Einzelmatch</a></li>
+              <li><a href="ressorts.html#bezirksverbandsschiessen">Bezirksverbandsschiessen</a></li>
+              <li><a href="ressorts.html#bezirkskonkurrenz">Bezirkskonkurrenz</a></li>
+              <li><a href="ressorts.html#bezirksmatch">Bezirksmatch</a></li>
+              <li><a href="ressorts.html#jugend">Jugend / Nachwuchs</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="dienste.html">Dienste</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="dienste.html#reglemente">Reglemente &amp; Vorschriften</a></li>
+              <li><a href="dienste.html#medien">Medien</a></li>
+              <li><a href="dienste.html#waffengesetz">Waffengesetz &amp; Formulare</a></li>
+              <li><a href="dienste.html#kontakte">Wichtige Kontakte</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="archiv.html">Archiv</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
+              <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
+              <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
+              <li><a href="archiv.html#foto-video">Foto-/Videogalerien</a></li>
+            </ul>
+          </li>
+        <li><a href="kalender.html">Kalender</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
+        <a class="btn ghost" href="login.html" data-auth="login">Anmelden</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero page-hero">
+    <div class="hero-inner">
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Termine</span>
+      <h1>Kalender</h1>
+      <p>Anlässe und Termine des BSVZ.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <section aria-labelledby="admin-add-heading" id="admin-add" style="display:none;">
+      <div class="section-title">
+        <h2 id="admin-add-heading">Termin erfassen</h2>
+      </div>
+      <div class="form-card" style="max-width:640px;">
+        <div id="form-message" class="form-message" role="alert"></div>
+        <form id="event-form" novalidate>
+          <div class="form-field">
+            <label for="title">Titel</label>
+            <input type="text" id="title" name="title" placeholder="z. B. Feldschiessen 2027" required>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="category">Kategorie (optional)</label>
+              <input type="text" id="category" name="category" placeholder="z. B. Bezirksmatch">
+            </div>
+            <div class="form-field">
+              <label for="location">Ort (optional)</label>
+              <input type="text" id="location" name="location" placeholder="z. B. Schiessstand Zürich Höngg">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="start_date">Datum</label>
+              <input type="date" id="start_date" name="start_date" required>
+            </div>
+            <div class="form-field">
+              <label for="end_date">Enddatum (optional)</label>
+              <input type="date" id="end_date" name="end_date">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="description">Beschreibung (optional)</label>
+            <input type="text" id="description" name="description">
+          </div>
+          <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Termin speichern</button>
+        </form>
+      </div>
+    </section>
+
+    <section aria-labelledby="calendar-heading">
+      <div class="section-title">
+        <h2 id="calendar-heading">Monatsübersicht</h2>
+      </div>
+      <div class="calendar-nav">
+        <button type="button" class="btn ghost" id="cal-prev" aria-label="Vorheriger Monat">←</button>
+        <h3 id="cal-month-label">—</h3>
+        <div style="display:flex; gap:0.5rem;">
+          <button type="button" class="btn ghost" id="cal-today">Heute</button>
+          <button type="button" class="btn ghost" id="cal-next" aria-label="Nächster Monat">→</button>
+        </div>
+      </div>
+      <div class="calendar-grid" id="calendar-grid" aria-labelledby="cal-month-label"></div>
+    </section>
+
+    <section aria-labelledby="events-heading">
+      <div class="section-title">
+        <h2 id="events-heading">Anlässe und Termine</h2>
+        <a class="btn ghost" href="/api/events/calendar.ics" download>📥 Kalender abonnieren (iCal)</a>
+      </div>
+      <div class="table-wrap">
+        <table class="results-table">
+          <caption>Kommende und vergangene Termine</caption>
+          <thead>
+            <tr>
+              <th scope="col">Datum</th>
+              <th scope="col">Titel</th>
+              <th scope="col">Kategorie</th>
+              <th scope="col">Ort</th>
+              <th scope="col">Teilnehmer</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="events-body">
+            <tr><td colspan="6">Lade Termine…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="kontakt">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
+          <span class="brand-text"><strong>BSVZ</strong></span>
+        </a>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <div class="footer-contact">
+          <span>✉️ webmaster@bsvz.ch</span>
+          <span>☎️ 0041 79 927 33 27</span>
+          <span>📍 Alte Aescherstrasse 25, 8905 Arni AG</span>
+        </div>
+      </div>
+      <div>
+        <h4>Verband</h4>
+        <ul>
+          <li><a href="verband.html#portrait">Portrait</a></li>
+          <li><a href="verband.html#vorstand">Vorstand</a></li>
+          <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+          <li><a href="ressorts.html">Ressorts</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dienste</h4>
+        <ul>
+          <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="resultate.html">Resultate</a></li>
+          <li><a href="archiv.html">Archiv</a></li>
+          <li><a href="dienste.html">Downloads</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Info</h4>
+        <ul>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="internes.html">Internes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
+      <p>Mitglied des Zürcher Kantonalschützenverbands</p>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <script>
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function formatDate(iso) {
+      const [y, m, d] = iso.split("-");
+      return `${d}.${m}.${y}`;
+    }
+
+    const eventsBody = document.getElementById("events-body");
+    let isAdmin = false;
+    let isLoggedIn = false;
+    let allEvents = [];
+    const today = new Date();
+    let calYear = today.getFullYear();
+    let calMonth = today.getMonth();
+
+    const MONTH_NAMES = [
+      "Januar", "Februar", "März", "April", "Mai", "Juni",
+      "Juli", "August", "September", "Oktober", "November", "Dezember",
+    ];
+    const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
+    function toIsoDate(d) {
+      return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    }
+
+    function eventsOnDate(isoDate) {
+      return allEvents.filter((e) => {
+        if (e.start_date === isoDate) return true;
+        if (e.end_date && isoDate >= e.start_date && isoDate <= e.end_date) return true;
+        return false;
+      });
+    }
+
+    function renderCalendar() {
+      const grid = document.getElementById("calendar-grid");
+      document.getElementById("cal-month-label").textContent =
+        MONTH_NAMES[calMonth] + " " + calYear;
+
+      const firstOfMonth = new Date(calYear, calMonth, 1);
+      const startWeekday = (firstOfMonth.getDay() + 6) % 7; // 0 = Monday
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+      const totalCells = Math.ceil((startWeekday + daysInMonth) / 7) * 7;
+      const todayIso = toIsoDate(today);
+
+      let html = WEEKDAYS.map((w) => `<div class="calendar-weekday">${w}</div>`).join("");
+
+      for (let i = 0; i < totalCells; i++) {
+        const dayNum = i - startWeekday + 1;
+        const cellDate = new Date(calYear, calMonth, dayNum);
+        const isoDate = toIsoDate(cellDate);
+        const inMonth = dayNum >= 1 && dayNum <= daysInMonth;
+        const dayEvents = inMonth ? eventsOnDate(isoDate) : [];
+        const classes = ["calendar-cell"];
+        if (!inMonth) classes.push("other-month");
+        if (isoDate === todayIso) classes.push("today");
+
+        const pills = dayEvents
+          .map((e) => `<span class="calendar-event-pill" title="${escapeHtml(e.title)}${e.location ? " – " + escapeHtml(e.location) : ""}">${escapeHtml(e.title)}</span>`)
+          .join("");
+
+        html += `<div class="${classes.join(" ")}"><span class="calendar-daynum">${cellDate.getDate()}</span>${pills}</div>`;
+      }
+
+      grid.innerHTML = html;
+    }
+
+    document.getElementById("cal-prev").addEventListener("click", () => {
+      calMonth -= 1;
+      if (calMonth < 0) { calMonth = 11; calYear -= 1; }
+      renderCalendar();
+    });
+    document.getElementById("cal-next").addEventListener("click", () => {
+      calMonth += 1;
+      if (calMonth > 11) { calMonth = 0; calYear += 1; }
+      renderCalendar();
+    });
+    document.getElementById("cal-today").addEventListener("click", () => {
+      calYear = today.getFullYear();
+      calMonth = today.getMonth();
+      renderCalendar();
+    });
+
+function isRecent(createdAt) {
+      const ageMs = Date.now() - new Date(createdAt).getTime();
+      return ageMs >= 0 && ageMs < 7 * 24 * 60 * 60 * 1000;
+    }
+
+    function renderEvents(events) {
+      if (!events.length) {
+        eventsBody.innerHTML = '<tr><td colspan="6">Noch keine Termine erfasst.</td></tr>';
+        return;
+      }
+      eventsBody.innerHTML = events
+        .map((e) => {
+          const dateLabel = e.end_date
+            ? `${formatDate(e.start_date)}–${formatDate(e.end_date)}`
+            : formatDate(e.start_date);
+          const deleteCell = isAdmin
+            ? `<button type="button" class="icon-btn" data-delete="${e.id}">Löschen</button>`
+            : "";
+
+          let participantsCell;
+          if (isLoggedIn) {
+            const label = e.is_registered ? "Abmelden" : "Ich nehme teil";
+            const cls = e.is_registered ? "btn ghost" : "btn primary";
+            participantsCell = `
+              <span class="meta">${e.registration_count}&nbsp;angemeldet</span>
+              <button type="button" class="${cls}" style="margin-top:0.35rem;" data-toggle-register="${e.id}" data-registered="${e.is_registered ? 1 : 0}">${label}</button>`;
+          } else {
+            participantsCell = `<span class="meta">${e.registration_count} angemeldet</span>`;
+          }
+          if (isAdmin) {
+            participantsCell += `<br><button type="button" class="icon-btn" data-show-participants="${e.id}" style="color:var(--accent);">Liste anzeigen</button>`;
+          }
+
+          return `
+          <tr>
+            <td>${dateLabel}</td>
+            <td>${escapeHtml(e.title)}${isRecent(e.created_at) ? '<span class="badge-new">Neu</span>' : ""}</td>
+            <td>${e.category ? escapeHtml(e.category) : "–"}</td>
+            <td>${e.location ? escapeHtml(e.location) : "–"}</td>
+            <td>${participantsCell}</td>
+            <td>${deleteCell}</td>
+          </tr>`;
+        })
+        .join("");
+    }
+
+    async function loadEvents() {
+      const res = await fetch("/api/events");
+      const data = await res.json();
+      allEvents = data.events;
+      renderEvents(data.events);
+      renderCalendar();
+    }
+
+    eventsBody.addEventListener("click", async (event) => {
+      const deleteBtn = event.target.closest("[data-delete]");
+      if (deleteBtn) {
+        if (!confirm("Diesen Termin wirklich löschen?")) return;
+        await fetch("/api/events/" + deleteBtn.getAttribute("data-delete"), { method: "DELETE" });
+        loadEvents();
+        return;
+      }
+
+      const regBtn = event.target.closest("[data-toggle-register]");
+      if (regBtn) {
+        const id = regBtn.getAttribute("data-toggle-register");
+        const alreadyRegistered = regBtn.getAttribute("data-registered") === "1";
+        await fetch("/api/events/" + id + "/register", {
+          method: alreadyRegistered ? "DELETE" : "POST",
+        });
+        loadEvents();
+        return;
+      }
+
+      const listBtn = event.target.closest("[data-show-participants]");
+      if (listBtn) {
+        const id = listBtn.getAttribute("data-show-participants");
+        const res = await fetch("/api/events/" + id + "/registrations");
+        const data = await res.json();
+        if (!data.registrations.length) {
+          alert("Noch keine Anmeldungen für diesen Termin.");
+        } else {
+          alert(
+            "Angemeldet:\n" +
+              data.registrations.map((r) => "- " + r.name + " (" + r.verein + ")").join("\n")
+          );
+        }
+      }
+    });
+
+    const eventForm = document.getElementById("event-form");
+    eventForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById("form-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const payload = {
+        title: document.getElementById("title").value.trim(),
+        category: document.getElementById("category").value.trim(),
+        location: document.getElementById("location").value.trim(),
+        start_date: document.getElementById("start_date").value,
+        end_date: document.getElementById("end_date").value,
+        description: document.getElementById("description").value.trim(),
+      };
+
+      const res = await fetch("/api/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = data.error || "Speichern fehlgeschlagen.";
+        return;
+      }
+      messageEl.className = "form-message success";
+      messageEl.textContent = "Termin gespeichert.";
+      event.target.reset();
+      loadEvents();
+    });
+
+    (async function init() {
+      const res = await fetch("/api/auth/me");
+      const data = await res.json();
+      if (data.user) {
+        isLoggedIn = true;
+        if (data.user.role === "admin") {
+          isAdmin = true;
+          document.getElementById("admin-add").style.display = "";
+        }
+      }
+      loadEvents();
+    })();
+  </script>
+</body>
+</html>

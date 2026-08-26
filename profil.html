@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
-  <meta name="description" content="Der Bezirksschützenverband Zürich (BSVZ) vereint Schützenvereine aus Stadt Zürich, Dietikon, Schlieren und dem Limmattal. Kalender, Resultate, Vorstand und mehr.">
+  <title>Mein Profil – Bezirksschützenverband Zürich (BSVZ)</title>
+  <meta name="description" content="Eigenes Profilbild und Passwort verwalten.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -61,8 +62,8 @@
             </ul>
           </li>
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
@@ -117,8 +118,8 @@
             </ul>
           </li>
         <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="#news">News</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
         <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
@@ -127,84 +128,82 @@
     </nav>
   </header>
 
-  <section class="hero home-hero">
+  <section class="hero page-hero">
     <div class="hero-inner">
-      <span class="badge"><span class="dot" aria-hidden="true"></span> Seit 1855 aktiv</span>
-      <h1>
-        Bezirksschützen
-        <span class="accent-line">verband Zürich</span>
-      </h1>
-      <p>
-        Der traditionsreiche Verband für Schützensport in der Region Zürich.
-        Vereint in Präzision, Kameradschaft und Schweizer Tradition.
-      </p>
-      <div class="hero-actions">
-        <a class="btn primary" href="resultate.html">🏆 Aktuelle Resultate</a>
-        <a class="btn on-hero" href="kalender.html">📅 Veranstaltungen</a>
-      </div>
+      <span class="badge"><span class="dot" aria-hidden="true"></span> Mitgliederbereich</span>
+      <h1>Mein <span class="accent-line">Profil</span></h1>
+      <p id="greeting">Profilbild und Konto verwalten.</p>
     </div>
   </section>
 
   <main id="main-content">
-    <section aria-labelledby="hub-heading">
-      <div class="section-title">
-        <h2 id="hub-heading">Was möchten Sie tun?</h2>
-      </div>
-      <div class="hub-grid">
-        <a class="card hub-tile" href="verband.html">
-          <span class="tile-icon" aria-hidden="true">🛡️</span>
-          <h3>Verband</h3>
-          <p class="meta">Portrait, Vorstand, Mitgliedervereine</p>
-        </a>
-        <a class="card hub-tile" href="ressorts.html">
-          <span class="tile-icon" aria-hidden="true">🎯</span>
-          <h3>Ressorts</h3>
-          <p class="meta">Feldschiessen, Bezirksmatch u.v.m.</p>
-        </a>
-        <a class="card hub-tile" href="dienste.html">
-          <span class="tile-icon" aria-hidden="true">🧾</span>
-          <h3>Dienste</h3>
-          <p class="meta">Reglemente, Formulare, Kontakte</p>
-        </a>
-        <a class="card hub-tile" href="archiv.html">
-          <span class="tile-icon" aria-hidden="true">🗄️</span>
-          <h3>Archiv</h3>
-          <p class="meta">Jahresberichte, DV-Protokolle, alte Ranglisten</p>
-        </a>
-        <a class="card hub-tile" href="resultate.html">
-          <span class="tile-icon" aria-hidden="true">🏆</span>
-          <h3>Resultate</h3>
-          <p class="meta">Ranglisten und Resultate als PDF ansehen</p>
-        </a>
-        <a class="card hub-tile" href="kalender.html">
-          <span class="tile-icon" aria-hidden="true">📅</span>
-          <h3>Kalender</h3>
-          <p class="meta">Anlässe und Termine</p>
-        </a>
-      </div>
-    </section>
-
-    <section aria-labelledby="news-heading" id="news">
-      <div class="section-title">
-        <h2 id="news-heading">News</h2>
-      </div>
-      <p>Diese Seite ist noch im Aufbau.</p>
-    </section>
-
-    <section aria-labelledby="cta-heading" id="ueber-uns">
-      <div class="cta">
-        <h2 id="cta-heading">Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
+    <section id="logged-out-notice" style="display:none;" aria-labelledby="logged-out-heading">
+      <div class="card">
+        <h2 id="logged-out-heading">Bitte zuerst anmelden</h2>
+        <p>Um Ihr Profil zu sehen, müssen Sie angemeldet sein.</p>
         <p>
-          Der BSVZ vereint die Schützenvereine der Region Zürich. Ob Anfänger
-          oder erfahrener Schütze – interessierte Vereine und Einzelpersonen
-          sind herzlich willkommen, sich bei uns zu melden.
+          <a class="btn primary" href="login.html">Zur Anmeldung</a>
         </p>
-        <div class="cta-actions">
-          <a class="btn primary" href="verband.html#mitgliedervereine">Mitgliedervereine ansehen</a>
-          <a class="btn ghost" href="#kontakt">Kontakt aufnehmen</a>
-        </div>
       </div>
     </section>
+
+    <div id="member-area" style="display:none;">
+      <section aria-labelledby="profile-heading">
+        <div class="section-title">
+          <h2 id="profile-heading">Profilbild &amp; Angaben</h2>
+        </div>
+        <div class="card profile-card">
+          <div class="profile-card-avatar">
+            <span class="profile-avatar profile-avatar-lg" id="profile-avatar-preview"></span>
+            <div>
+              <label class="btn ghost" for="avatar-input" style="cursor:pointer;">Foto ändern</label>
+              <input type="file" id="avatar-input" accept="image/png,image/jpeg,image/webp" style="display:none;">
+              <p class="hint">JPG, PNG oder WebP, max. 5 MB.</p>
+              <p id="avatar-message" class="form-message" role="alert"></p>
+            </div>
+          </div>
+          <dl class="profile-info">
+            <div>
+              <dt>Name</dt>
+              <dd id="profile-name">–</dd>
+            </div>
+            <div>
+              <dt>Verein</dt>
+              <dd id="profile-verein">–</dd>
+            </div>
+            <div>
+              <dt>E-Mail</dt>
+              <dd id="profile-email">–</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section aria-labelledby="password-heading">
+        <div class="section-title">
+          <h2 id="password-heading">Passwort ändern</h2>
+        </div>
+        <div class="form-card" style="max-width:480px;">
+          <div id="password-message" class="form-message" role="alert"></div>
+          <form id="password-form" novalidate>
+            <div class="form-field">
+              <label for="current-password">Aktuelles Passwort</label>
+              <input type="password" id="current-password" name="currentPassword" autocomplete="current-password" required>
+            </div>
+            <div class="form-field">
+              <label for="new-password">Neues Passwort</label>
+              <input type="password" id="new-password" name="newPassword" autocomplete="new-password" minlength="8" required>
+              <p class="hint">Mindestens 8 Zeichen.</p>
+            </div>
+            <div class="form-field">
+              <label for="new-password-repeat">Neues Passwort wiederholen</label>
+              <input type="password" id="new-password-repeat" autocomplete="new-password" minlength="8" required>
+            </div>
+            <button type="submit" class="btn primary">Passwort ändern</button>
+          </form>
+        </div>
+      </section>
+    </div>
   </main>
 
   <footer class="site-footer" id="kontakt">
@@ -242,41 +241,123 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="#news">News</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
+          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#kontakt">Kontakt</a></li>
           <li><a href="#">Impressum</a></li>
           <li><a href="#">Datenschutz</a></li>
           <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
     </div>
-    <div class="partner-badges">
-      <a href="https://www.coolandclean.ch" target="_blank" rel="noopener">
-        <img src="img/badges/cool-and-clean.png" alt="Cool and Clean">
-      </a>
-      <a href="https://www.swissolympic.ch/" target="_blank" rel="noopener">
-        <img src="img/badges/swiss-olympic.png" alt="Swiss Olympic">
-      </a>
-      <a href="https://www.baspo.admin.ch/" target="_blank" rel="noopener">
-        <img src="img/badges/baspo.png" alt="Bundesamt für Sport BASPO">
-      </a>
-    </div>
     <div class="footer-bottom">
       <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
       <p>Mitglied des Zürcher Kantonalschützenverbands</p>
     </div>
-    <p class="image-credit">
-      Titelbild (hell): „Zürich view Quaibrücke" von
-      <a href="https://commons.wikimedia.org/wiki/File:Z%C3%BCrich_view_Quaibr%C3%BCcke_20200702.jpg" target="_blank" rel="noopener">Daniel Kraft</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
-      · Titelbild (dunkel): „Zurich after sunset" von
-      <a href="https://commons.wikimedia.org/wiki/File:Zurich_after_sunset.jpg" target="_blank" rel="noopener">Kuhnmi</a>,
-      Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
-    </p>
   </footer>
 
   <script src="js/theme.js"></script>
   <script src="js/search.js"></script>
   <script src="js/auth-ui.js"></script>
+  <script src="js/form-validate.js"></script>
+  <script>
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function initials(name) {
+      return String(name).trim().split(/\s+/).filter(Boolean).slice(0, 2)
+        .map((p) => p[0]).join("").toUpperCase();
+    }
+
+    function renderAvatar(user) {
+      const el = document.getElementById("profile-avatar-preview");
+      if (user.avatar_filename) {
+        el.innerHTML = `<img src="/avatars/${escapeHtml(user.avatar_filename)}?t=${Date.now()}" alt="">`;
+      } else {
+        el.textContent = initials(user.name);
+      }
+    }
+
+    document.getElementById("avatar-input").addEventListener("change", async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+      const messageEl = document.getElementById("avatar-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const formData = new FormData();
+      formData.append("avatar", file);
+      try {
+        const res = await fetch("/api/auth/avatar", { method: "POST", body: formData });
+        const data = await res.json();
+        if (!res.ok) {
+          messageEl.className = "form-message error";
+          messageEl.textContent = data.error || "Foto konnte nicht hochgeladen werden.";
+          return;
+        }
+        renderAvatar({ avatar_filename: data.avatar_filename });
+        messageEl.className = "form-message success";
+        messageEl.textContent = "Profilbild aktualisiert.";
+      } catch (e) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = "Server nicht erreichbar.";
+      }
+    });
+
+    document.getElementById("password-form").addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const messageEl = document.getElementById("password-message");
+      messageEl.className = "form-message";
+      messageEl.textContent = "";
+
+      const currentPassword = document.getElementById("current-password").value;
+      const newPassword = document.getElementById("new-password").value;
+      const newPasswordRepeat = document.getElementById("new-password-repeat").value;
+
+      if (newPassword !== newPasswordRepeat) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = "Die neuen Passwörter stimmen nicht überein.";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/auth/change-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ currentPassword, newPassword }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          messageEl.className = "form-message error";
+          messageEl.textContent = data.error || "Passwort konnte nicht geändert werden.";
+          return;
+        }
+        messageEl.className = "form-message success";
+        messageEl.textContent = "Passwort erfolgreich geändert.";
+        document.getElementById("password-form").reset();
+      } catch (e) {
+        messageEl.className = "form-message error";
+        messageEl.textContent = "Server nicht erreichbar.";
+      }
+    });
+
+    (async function init() {
+      const res = await fetch("/api/auth/me");
+      const data = await res.json();
+      if (!data.user) {
+        document.getElementById("logged-out-notice").style.display = "";
+        return;
+      }
+      document.getElementById("member-area").style.display = "";
+      document.getElementById("greeting").textContent =
+        "Willkommen, " + data.user.name + " (" + data.user.verein + ")";
+      document.getElementById("profile-name").textContent = data.user.name;
+      document.getElementById("profile-verein").textContent = data.user.verein;
+      document.getElementById("profile-email").textContent = data.user.email;
+      renderAvatar(data.user);
+    })();
+  </script>
 </body>
 </html>
