@@ -10,6 +10,7 @@ const { requireAuth } = require("../auth");
 const router = express.Router();
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ALLOWED_REGISTER_DOMAINS = ["bsvzuerich.ch", "bsvz.ch"];
 
 const avatarDir = path.join(__dirname, "..", "..", "data", "avatars");
 if (!fs.existsSync(avatarDir)) {
@@ -59,6 +60,13 @@ router.post("/register", registerLimiter, (req, res) => {
   }
   if (!EMAIL_RE.test(email)) {
     return res.status(400).json({ error: "Ungültige E-Mail-Adresse." });
+  }
+  const emailDomain = email.toLowerCase().trim().split("@")[1];
+  if (!ALLOWED_REGISTER_DOMAINS.includes(emailDomain)) {
+    return res.status(403).json({
+      error:
+        "Die Registrierung ist nur mit einer offiziellen BSVZ-E-Mail-Adresse (@bsvzuerich.ch) möglich.",
+    });
   }
   if (String(password).length < 8) {
     return res
