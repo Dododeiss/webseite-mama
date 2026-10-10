@@ -83,6 +83,12 @@ if (!userColumns.some((c) => c.name === "avatar_filename")) {
   db.exec("ALTER TABLE users ADD COLUMN avatar_filename TEXT");
 }
 
+// One-off migration: optional sign-up link per calendar event.
+const eventColumns = db.prepare("PRAGMA table_info(events)").all();
+if (!eventColumns.some((c) => c.name === "link")) {
+  db.exec("ALTER TABLE events ADD COLUMN link TEXT");
+}
+
 // One-off migration: earlier versions had results.user_id (self-entry only).
 // If that old column is still around, rebuild the table with the new
 // entered_by_user_id / subject_name / subject_verein columns instead.

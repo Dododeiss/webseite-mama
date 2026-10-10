@@ -57,7 +57,6 @@
               <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
               <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
               <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
-              <li><a href="archiv.html#foto-video">Foto-/Videogalerien</a></li>
             </ul>
           </li>
           <li><a href="kalender.html">Kalender</a></li>
@@ -113,7 +112,6 @@
               <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
               <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
               <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
-              <li><a href="archiv.html#foto-video">Foto-/Videogalerien</a></li>
             </ul>
           </li>
         <li><a href="kalender.html">Kalender</a></li>
@@ -138,42 +136,11 @@
   <main id="main-content">
     <section aria-labelledby="upload-heading" id="upload-area" style="display:none;">
       <div class="section-title">
-        <h2 id="upload-heading">Resultat hochladen</h2>
+        <h2 id="upload-heading">Resultate hochladen</h2>
       </div>
-      <div class="form-card" style="max-width:640px;">
-        <div id="upload-message" class="form-message" role="alert"></div>
-        <form id="upload-form" novalidate>
-          <div class="form-field">
-            <label for="doc-title">Titel</label>
-            <input type="text" id="doc-title" name="title" placeholder="z. B. Einzelrangliste Feldschiessen 2026" required>
-          </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="doc-jahr">Jahr (optional)</label>
-              <input type="number" id="doc-jahr" name="jahr" min="1900" max="2100">
-            </div>
-            <div class="form-field">
-              <label for="doc-disziplin">Disziplin (optional)</label>
-              <select id="doc-disziplin" name="disziplin">
-                <option value="">–</option>
-                <option value="Feldschiessen">Feldschiessen</option>
-                <option value="Feldstich">Feldstich</option>
-                <option value="Lupi Bezirks-Einzelmatch">Lupi Bezirks-Einzelmatch</option>
-                <option value="Bezirksverbandsschiessen">Bezirksverbandsschiessen</option>
-                <option value="Bezirkskonkurrenz">Bezirkskonkurrenz</option>
-                <option value="Bezirksmatch">Bezirksmatch</option>
-                <option value="Jugend / Nachwuchs">Jugend / Nachwuchs</option>
-                <option value="Sonstiges">Sonstiges</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="doc-file">PDF-Datei</label>
-            <input type="file" id="doc-file" name="file" accept="application/pdf" required>
-            <p class="hint">Nur PDF, maximal 20 MB.</p>
-          </div>
-          <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Hochladen</button>
-        </form>
+      <div class="form-card" style="max-width:720px;">
+        <p class="hint" style="margin-top:0;">Disziplin wählen, PDFs hineinziehen, Titel und Jahr bei Bedarf anpassen. Die Resultate erscheinen automatisch im passenden Ressort (aktuelles und letztes Jahr) bzw. im Archiv (ältere Jahre).</p>
+        <div id="uploader-mount"></div>
       </div>
     </section>
 
@@ -214,8 +181,6 @@
         <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
         <div class="footer-contact">
           <span>✉️ webmaster@bsvz.ch</span>
-          <span>☎️ 0041 79 927 33 27</span>
-          <span>📍 Alte Aescherstrasse 25, 8905 Arni AG</span>
         </div>
       </div>
       <div>
@@ -256,7 +221,7 @@
   <script src="js/theme.js"></script>
   <script src="js/search.js"></script>
   <script src="js/auth-ui.js"></script>
-  <script src="js/form-validate.js"></script>
+  <script src="js/results-ui.js"></script>
   <script>
     let isAdmin = false;
     const resultsBody = document.getElementById("results-body");
@@ -314,38 +279,6 @@
       loadResults();
     });
 
-    document.getElementById("upload-form").addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const messageEl = document.getElementById("upload-message");
-      messageEl.className = "form-message";
-      messageEl.textContent = "";
-
-      const fileInput = document.getElementById("doc-file");
-      if (!fileInput.files.length) {
-        messageEl.className = "form-message error";
-        messageEl.textContent = "Bitte eine PDF-Datei auswählen.";
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append("file", fileInput.files[0]);
-      formData.append("title", document.getElementById("doc-title").value.trim());
-      formData.append("jahr", document.getElementById("doc-jahr").value);
-      formData.append("disziplin", document.getElementById("doc-disziplin").value);
-
-      const res = await fetch("/api/results", { method: "POST", body: formData });
-      const data = await res.json();
-      if (!res.ok) {
-        messageEl.className = "form-message error";
-        messageEl.textContent = data.error || "Hochladen fehlgeschlagen.";
-        return;
-      }
-      messageEl.className = "form-message success";
-      messageEl.textContent = "Resultat hochgeladen.";
-      event.target.reset();
-      loadResults();
-    });
-
     (async function init() {
       const res = await fetch("/api/auth/me");
       const data = await res.json();
@@ -353,6 +286,7 @@
         isAdmin = true;
         document.getElementById("upload-area").style.display = "";
         document.getElementById("delete-col-header").style.display = "";
+        document.getElementById("uploader-mount").appendChild(ResultsUI.buildUploader({ onUploaded: loadResults }));
       }
       loadResults();
     })();

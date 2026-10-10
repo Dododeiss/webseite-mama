@@ -4,6 +4,8 @@
     if (v.valueMissing) return "Dieses Feld ist erforderlich.";
     if (v.typeMismatch && field.type === "email")
       return "Bitte eine gültige E-Mail-Adresse eingeben.";
+    if (v.typeMismatch && field.type === "url")
+      return "Bitte einen gültigen Link mit https:// eingeben.";
     if (v.tooShort)
       return `Mindestens ${field.minLength} Zeichen erforderlich.`;
     if (v.tooLong) return `Höchstens ${field.maxLength} Zeichen erlaubt.`;

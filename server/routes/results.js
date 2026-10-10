@@ -7,6 +7,17 @@ const { requireAuth, requireAdmin } = require("../auth");
 
 const router = express.Router();
 
+const ALLOWED_DISZIPLINEN = [
+  "Feldschiessen",
+  "Feldstich",
+  "Lupi Bezirks-Einzelmatch",
+  "Bezirksverbandsschiessen",
+  "Bezirkskonkurrenz",
+  "Bezirksmatch",
+  "Jugend / Nachwuchs",
+  "Sonstiges",
+];
+
 const uploadDir = path.join(__dirname, "..", "..", "data", "result-documents");
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
@@ -60,6 +71,10 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
     const title = (req.body.title || req.file.originalname).trim();
     const jahr = req.body.jahr ? Number(req.body.jahr) : null;
     const disziplin = req.body.disziplin ? String(req.body.disziplin).trim() : null;
+    if (disziplin && !ALLOWED_DISZIPLINEN.includes(disziplin)) {
+      fs.unlink(req.file.path, () => {});
+      return res.status(400).json({ error: "Unbekannte Disziplin." });
+    }
 
     const info = db
       .prepare(

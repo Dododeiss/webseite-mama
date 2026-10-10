@@ -43,9 +43,19 @@
   var navToggle = document.querySelector(".nav-toggle");
   var mobileNav = document.querySelector(".mobile-nav");
   if (navToggle && mobileNav) {
-    navToggle.addEventListener("click", function () {
-      var isOpen = mobileNav.classList.toggle("open");
+    function setNavOpen(isOpen) {
+      mobileNav.classList.toggle("open", isOpen);
+      document.body.classList.toggle("nav-open", isOpen);
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+    navToggle.addEventListener("click", function () {
+      setNavOpen(!mobileNav.classList.contains("open"));
+    });
+    mobileNav.addEventListener("click", function (event) {
+      if (event.target.closest("a")) setNavOpen(false);
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 720) setNavOpen(false);
     });
   }
 })();

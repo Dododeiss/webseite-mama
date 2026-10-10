@@ -78,7 +78,9 @@ router.get("/calendar.ics", (req, res) => {
     const descParts = [];
     if (e.category) descParts.push(e.category);
     if (e.description) descParts.push(e.description);
+    if (e.link) descParts.push("Anmeldung: " + e.link);
     if (descParts.length) lines.push("DESCRIPTION:" + icsEscape(descParts.join(" – ")));
+    if (e.link) lines.push("URL:" + e.link);
     lines.push("END:VEVENT");
   }
 
@@ -90,11 +92,17 @@ router.get("/calendar.ics", (req, res) => {
 });
 
 router.post("/", requireAuth, requireAdmin, (req, res) => {
-  const { title, category, location, start_date, end_date, description } =
+  const { title, category, location, start_date, end_date, description, link } =
     req.body || {};
 
   if (!title || !String(title).trim()) {
     return res.status(400).json({ error: "Bitte einen Titel angeben." });
+  }
+  const linkValue = link ? String(link).trim() : "";
+  if (linkValue && !/^https?:\/\/[^\s"'<>]+$/i.test(linkValue)) {
+    return res.status(400).json({
+      error: "Der Anmelde-Link muss mit http:// oder https:// beginnen.",
+    });
   }
   if (!start_date || !DATE_RE.test(start_date)) {
     return res
@@ -109,8 +117,8 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
 
   const info = db
     .prepare(
-      `INSERT INTO events (title, category, location, start_date, end_date, description, created_by)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO events (title, category, location, start_date, end_date, description, link, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
     )
     .run(
       String(title).trim(),
@@ -119,6 +127,7 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
       start_date,
       end_date || null,
       description ? String(description).trim() : null,
+      linkValue || null,
       req.session.userId
     );
 
