@@ -410,6 +410,7 @@
         <h4>Dienste</h4>
         <ul>
           <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="anmeldung.html">Anmeldung</a></li>
           <li><a href="resultate.html">Resultate</a></li>
           <li><a href="archiv.html">Archiv</a></li>
           <li><a href="dienste.html">Downloads</a></li>
@@ -447,6 +448,29 @@
       bezirksmatch: "Bezirksmatch",
       jugend: "Jugend / Nachwuchs"
     });
+  </script>
+  <script>
+    (async function showOpenRegistrations() {
+      const target = { pistole: "bezirksmatch", "bk-a": "bezirkskonkurrenz", "bk-b": "bezirkskonkurrenz", "bk-c": "bezirkskonkurrenz" };
+      let items = [];
+      try {
+        items = (await (await fetch("/api/anmeldungen")).json()).anmeldungen || [];
+      } catch (e) {
+        return;
+      }
+      const esc = (s) => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+      items.slice().reverse().forEach((a) => {
+        const section = document.getElementById(target[a.typ]);
+        const title = section && section.querySelector(".section-title");
+        if (!title) return;
+        const date = a.deadline.split("-").reverse().join(".");
+        const box = document.createElement("div");
+        box.className = "card anmeldung-hinweis";
+        box.innerHTML = '<span><strong>Anmeldung offen:</strong> ' + esc(a.title) + ' – bis ' + date + '</span>' +
+          '<a class="btn primary" href="anmeldung.html#a-' + a.id + '">Jetzt online anmelden</a>';
+        title.insertAdjacentElement("afterend", box);
+      });
+    })();
   </script>
 </body>
 </html>

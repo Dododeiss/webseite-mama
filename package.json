@@ -16,6 +16,7 @@
     "express": "^4.19.2",
     "express-rate-limit": "^8.6.2",
     "express-session": "^1.18.0",
+    "jszip": "^3.10.2",
     "multer": "^2.2.0"
   }
 }

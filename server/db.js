@@ -65,6 +65,37 @@ db.exec(`
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
   );
 
+  CREATE TABLE IF NOT EXISTS anmeldungen (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    typ TEXT NOT NULL,
+    title TEXT NOT NULL,
+    deadline TEXT NOT NULL,
+    info TEXT,
+    contact_name TEXT,
+    contact_email TEXT,
+    slots TEXT,
+    created_by INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+
+  CREATE TABLE IF NOT EXISTS anmeldung_teilnehmer (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    anmeldung_id INTEGER NOT NULL REFERENCES anmeldungen(id) ON DELETE CASCADE,
+    name TEXT NOT NULL,
+    vorname TEXT NOT NULL,
+    verein TEXT NOT NULL,
+    jahrgang INTEGER,
+    geb_datum TEXT,
+    tel TEXT,
+    lizenz TEXT,
+    email TEXT,
+    op REAL,
+    fs REAL,
+    bs REAL,
+    slots TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
+  );
+
   CREATE TABLE IF NOT EXISTS result_documents (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,

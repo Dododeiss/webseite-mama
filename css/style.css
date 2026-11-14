@@ -1535,3 +1535,201 @@ main [id] {
   min-width: 0;
   overflow-wrap: anywhere;
 }
+
+/* Anmeldung zu Wettkämpfen */
+
+.anmeldungen-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.anmeldung-card h3,
+.admin-anmeldung h3 {
+  margin: 0 0 0.4rem;
+}
+
+.anmelde-details > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  margin-top: 0.5rem;
+}
+
+.anmelde-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.anmelde-details[open] > summary {
+  margin-bottom: 1.25rem;
+}
+
+.anmelde-body {
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+}
+
+.anmelde-form .form-row-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.form-field-narrow {
+  max-width: 14rem;
+}
+
+.form-field textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+.check-fieldset {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem 1rem;
+  margin: 0 0 1.25rem;
+}
+
+.check-fieldset legend {
+  font-weight: 600;
+  padding: 0 0.4rem;
+}
+
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.55rem 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.check-item:hover {
+  background: var(--surface-alt);
+}
+
+.check-item input {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+}
+
+.punkte-details {
+  margin-bottom: 1.25rem;
+}
+
+.punkte-details > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.anmelde-success {
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.anmelde-success h4 {
+  margin: 0 0 0.4rem;
+}
+
+.anmelde-success p {
+  margin: 0 0 1rem;
+}
+
+.admin-anmeldung-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.75rem;
+}
+
+.admin-teilnehmer {
+  margin-top: 1rem;
+}
+
+.admin-teilnehmer[hidden] {
+  display: none;
+}
+
+.teilnehmer-table td {
+  vertical-align: top;
+  font-size: 0.92rem;
+}
+
+.status-chip {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.status-chip.is-open {
+  background: rgba(22, 163, 74, 0.15);
+  color: #16a34a;
+}
+
+.status-chip.is-closed {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+}
+
+.anmeldung-hinweis {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+#admin-area[hidden] {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .anmelde-form .form-row-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .admin-actions .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}

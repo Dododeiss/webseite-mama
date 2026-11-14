@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth");
 const resultsRoutes = require("./routes/results");
 const eventsRoutes = require("./routes/events");
 const internalRoutes = require("./routes/internal");
+const anmeldungenRoutes = require("./routes/anmeldungen");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -38,6 +39,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/results", resultsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/internal", internalRoutes);
+app.use("/api/anmeldungen", anmeldungenRoutes);
 
 app.use(
   "/avatars",
