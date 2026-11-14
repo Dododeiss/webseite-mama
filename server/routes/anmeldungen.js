@@ -110,6 +110,24 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
     }
   }
 
+  // Optional: gleichzeitig einen Kalendertermin anlegen
+  const kal = body.kalender && body.kalender.start_date ? body.kalender : null;
+  let kalEnd = null;
+  let kalLocation = null;
+  if (kal) {
+    if (!isRealDate(String(kal.start_date))) {
+      return res.status(400).json({ error: "Bitte ein gültiges Wettkampfdatum für den Kalender angeben." });
+    }
+    kalEnd = kal.end_date ? String(kal.end_date) : null;
+    if (kalEnd && (!isRealDate(kalEnd) || kalEnd < kal.start_date)) {
+      return res.status(400).json({ error: "Das Enddatum im Kalender muss nach dem Startdatum liegen." });
+    }
+    kalLocation = text(kal.location, 150);
+    if (kalLocation === null) {
+      return res.status(400).json({ error: "Der Ort ist zu lang." });
+    }
+  }
+
   const info_ = db
     .prepare(
       `INSERT INTO anmeldungen (typ, title, deadline, info, contact_name, contact_email, slots, created_by)
@@ -125,8 +143,22 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
       JSON.stringify(slots),
       req.session.userId
     );
+  if (kal) {
+    db.prepare(
+      `INSERT INTO events (title, category, location, start_date, end_date, anmeldung_id, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?)`
+    ).run(
+      title,
+      typ === "pistole" ? "Bezirksmatch" : "Bezirkskonkurrenz",
+      kalLocation || null,
+      kal.start_date,
+      kalEnd,
+      info_.lastInsertRowid,
+      req.session.userId
+    );
+  }
   const row = db.prepare(LIST_SQL + " WHERE a.id = ?").get(info_.lastInsertRowid);
-  res.status(201).json({ anmeldung: publicEvent(row) });
+  res.status(201).json({ anmeldung: publicEvent(row), kalender: !!kal });
 });
 
 router.delete("/:id", requireAuth, requireAdmin, (req, res) => {

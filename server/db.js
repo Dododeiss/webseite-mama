@@ -120,6 +120,11 @@ if (!eventColumns.some((c) => c.name === "link")) {
   db.exec("ALTER TABLE events ADD COLUMN link TEXT");
 }
 
+// One-off migration: calendar event can point to an online registration.
+if (!db.prepare("PRAGMA table_info(events)").all().some((c) => c.name === "anmeldung_id")) {
+  db.exec("ALTER TABLE events ADD COLUMN anmeldung_id INTEGER REFERENCES anmeldungen(id) ON DELETE SET NULL");
+}
+
 // One-off migration: earlier versions had results.user_id (self-entry only).
 // If that old column is still around, rebuild the table with the new
 // entered_by_user_id / subject_name / subject_verein columns instead.

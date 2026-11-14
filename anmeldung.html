@@ -188,6 +188,26 @@
               <textarea id="c-slots" name="slots" rows="5" placeholder="Do 12. Juni, Schiessanlage Reppischtal: Gebrauchspistole 25 m, 17:00 – 17:55 Uhr&#10;Sa 14. Juni, Schiessanlage Höngg: C-Match 25 m, 08:15 – 10:00 Uhr"></textarea>
               <p class="hint">Diese Einträge erscheinen als Kästchen im Anmeldeformular und im Word-Formular.</p>
             </div>
+            <fieldset class="check-fieldset">
+              <legend>Kalender</legend>
+              <label class="check-item"><input type="checkbox" id="c-cal"><span>Wettkampf auch im Kalender eintragen (mit Knopf «Online anmelden»)</span></label>
+              <div id="cal-fields" hidden>
+                <div class="form-row">
+                  <div class="form-field">
+                    <label for="c-cal-start">Datum des Wettkampfs</label>
+                    <input type="date" id="c-cal-start">
+                  </div>
+                  <div class="form-field">
+                    <label for="c-cal-end">Enddatum (optional)</label>
+                    <input type="date" id="c-cal-end">
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="c-cal-loc">Ort (optional)</label>
+                  <input type="text" id="c-cal-loc" maxlength="150" placeholder="z. B. Schiessanlage Höngg">
+                </div>
+              </div>
+            </fieldset>
             <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Anmeldung erstellen</button>
           </form>
         </div>

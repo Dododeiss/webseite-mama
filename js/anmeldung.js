@@ -333,6 +333,10 @@
     const typSel = form.elements.typ;
     const slotsField = document.getElementById("slots-field");
     let lastSuggestion = "";
+    const calBox = document.getElementById("c-cal");
+    calBox.addEventListener("change", () => {
+      document.getElementById("cal-fields").hidden = !calBox.checked;
+    });
 
     function applyTyp() {
       const t = TYPEN[typSel.value];
@@ -364,6 +368,18 @@
       ["typ", "title", "deadline", "info", "contact_name", "contact_email", "slots"].forEach((n) => {
         body[n] = form.elements[n].value;
       });
+      if (calBox.checked) {
+        if (!document.getElementById("c-cal-start").value) {
+          msg.className = "form-message error";
+          msg.textContent = "Bitte das Datum des Wettkampfs für den Kalender angeben.";
+          return;
+        }
+        body.kalender = {
+          start_date: document.getElementById("c-cal-start").value,
+          end_date: document.getElementById("c-cal-end").value,
+          location: document.getElementById("c-cal-loc").value,
+        };
+      }
       const res = await api("POST", "/api/anmeldungen", body);
       if (!res.ok) {
         msg.className = "form-message error";
@@ -371,7 +387,12 @@
         return;
       }
       msg.className = "form-message success";
-      msg.textContent = "Anmeldung erstellt. Sie ist jetzt öffentlich sichtbar.";
+      msg.textContent =
+        "Anmeldung erstellt. Sie ist jetzt öffentlich sichtbar" +
+        (res.data.kalender ? " und im Kalender eingetragen." : ".");
+      calBox.checked = false;
+      document.getElementById("cal-fields").hidden = true;
+      ["c-cal-start", "c-cal-end", "c-cal-loc"].forEach((id) => (document.getElementById(id).value = ""));
       form.elements.title.value = "";
       form.elements.deadline.value = "";
       form.elements.info.value = "";

@@ -6,13 +6,18 @@ const router = express.Router();
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
+function todayZurich() {
+  return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Zurich" });
+}
+
 router.get("/", (req, res) => {
   const { upcoming } = req.query;
   let sql = `
-    SELECT events.*, users.name AS created_by_name,
+    SELECT events.*, users.name AS created_by_name, a.deadline AS anmeldung_deadline,
            (SELECT COUNT(*) FROM event_registrations er WHERE er.event_id = events.id) AS registration_count
     FROM events
     JOIN users ON users.id = events.created_by
+    LEFT JOIN anmeldungen a ON a.id = events.anmeldung_id
   `;
   const params = [];
   if (upcoming) {
@@ -21,6 +26,10 @@ router.get("/", (req, res) => {
   sql += " ORDER BY events.start_date ASC";
 
   const rows = db.prepare(sql).all(...params);
+  const today = todayZurich();
+  rows.forEach((r) => {
+    r.anmeldung_open = !!r.anmeldung_id && !!r.anmeldung_deadline && r.anmeldung_deadline >= today;
+  });
 
   if (req.session.userId) {
     const mine = new Set(
@@ -94,6 +103,16 @@ router.get("/calendar.ics", (req, res) => {
 router.post("/", requireAuth, requireAdmin, (req, res) => {
   const { title, category, location, start_date, end_date, description, link } =
     req.body || {};
+  let anmeldungId = null;
+  if (req.body && req.body.anmeldung_id) {
+    anmeldungId = Number(req.body.anmeldung_id);
+    const exists = Number.isInteger(anmeldungId)
+      ? db.prepare("SELECT id FROM anmeldungen WHERE id = ?").get(anmeldungId)
+      : null;
+    if (!exists) {
+      return res.status(400).json({ error: "Die gewählte Online-Anmeldung gibt es nicht." });
+    }
+  }
 
   if (!title || !String(title).trim()) {
     return res.status(400).json({ error: "Bitte einen Titel angeben." });
@@ -117,8 +136,8 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
 
   const info = db
     .prepare(
-      `INSERT INTO events (title, category, location, start_date, end_date, description, link, created_by)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+      `INSERT INTO events (title, category, location, start_date, end_date, description, link, anmeldung_id, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
     )
     .run(
       String(title).trim(),
@@ -128,6 +147,7 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
       end_date || null,
       description ? String(description).trim() : null,
       linkValue || null,
+      anmeldungId,
       req.session.userId
     );
 

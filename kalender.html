@@ -174,6 +174,13 @@
             <input type="url" id="link" name="link" placeholder="https://…">
             <p class="hint">Wer sich anmelden möchte, gelangt über diesen Link zur Tabelle.</p>
           </div>
+          <div class="form-field">
+            <label for="anmeldung_id">Online-Anmeldung verknüpfen (optional)</label>
+            <select id="anmeldung_id" name="anmeldung_id">
+              <option value="">– keine –</option>
+            </select>
+            <p class="hint">Beim Termin erscheint dann der Knopf «Online anmelden». Neue Anmeldungen erstellst du auf der Seite <a href="anmeldung.html">Anmeldung</a> (dort kann der Kalendertermin gleich mit angelegt werden).</p>
+          </div>
           <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Termin speichern</button>
         </form>
       </div>
@@ -394,7 +401,7 @@ function isRecent(createdAt) {
           return `
           <tr>
             <td>${dateLabel}</td>
-            <td>${escapeHtml(e.title)}${isRecent(e.created_at) ? '<span class="badge-new">Neu</span>' : ""}${e.link ? `<br><a class="event-link" href="${escapeHtml(e.link).replace(/"/g, "&quot;")}" target="_blank" rel="noopener">Zur Anmeldung ↗</a>` : ""}</td>
+            <td>${escapeHtml(e.title)}${isRecent(e.created_at) ? '<span class="badge-new">Neu</span>' : ""}${e.anmeldung_open ? `<br><a class="event-link" href="anmeldung.html#a-${e.anmeldung_id}">Online anmelden →</a>` : e.anmeldung_id ? '<br><span class="meta">Anmeldeschluss abgelaufen</span>' : ""}${e.link ? `<br><a class="event-link" href="${escapeHtml(e.link).replace(/"/g, "&quot;")}" target="_blank" rel="noopener">Zur Anmeldung ↗</a>` : ""}</td>
             <td>${e.category ? escapeHtml(e.category) : "–"}</td>
             <td>${e.location ? escapeHtml(e.location) : "–"}</td>
             <td>${participantsCell}</td>
@@ -403,6 +410,20 @@ function isRecent(createdAt) {
         })
         .join("");
     }
+
+    async function loadAnmeldungOptions() {
+      const select = document.getElementById("anmeldung_id");
+      try {
+        const data = await (await fetch("/api/anmeldungen")).json();
+        (data.anmeldungen || []).forEach((a) => {
+          const opt = document.createElement("option");
+          opt.value = a.id;
+          opt.textContent = `${a.title} (bis ${a.deadline.split("-").reverse().join(".")})`;
+          select.appendChild(opt);
+        });
+      } catch (e) {}
+    }
+    loadAnmeldungOptions();
 
     async function loadEvents() {
       const res = await fetch("/api/events");
@@ -463,6 +484,7 @@ function isRecent(createdAt) {
         end_date: document.getElementById("end_date").value,
         description: document.getElementById("description").value.trim(),
         link: document.getElementById("link").value.trim(),
+        anmeldung_id: document.getElementById("anmeldung_id").value,
       };
 
       const res = await fetch("/api/events", {
