@@ -51,7 +51,23 @@ app.use(
 );
 
 // Static site (the existing plain HTML/CSS/JS prototype) lives at the repo root.
-app.use(express.static(path.join(__dirname, "..")));
+// Nur die öffentliche Webseite ausliefern – niemals data/, server/, .git, node_modules oder package.json.
+// Jeder öffentliche Ordner hat eine eigene Auslieferung, aus der man nicht herausnavigieren kann.
+const siteRoot = path.join(__dirname, "..");
+["css", "js", "img", "assets"].forEach((dir) =>
+  app.use(
+    "/" + dir,
+    express.static(path.join(siteRoot, dir), { dotfiles: "deny", index: false })
+  )
+);
+const ROOT_FILE_RE = /^(?:[A-Za-z0-9-]+\.html|robots\.txt|sitemap\.xml|search-index\.json)$/;
+app.get("/:file?", (req, res, next) => {
+  const file = req.params.file || "index.html";
+  if (!ROOT_FILE_RE.test(file)) return next();
+  res.sendFile(file, { root: siteRoot, dotfiles: "deny" }, (err) => {
+    if (err && !res.headersSent) next();
+  });
+});
 
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "..", "index.html"));
