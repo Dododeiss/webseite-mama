@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
+  <title>Bezirksschützenverband Zürich (BSVZ)</title>
+  <meta name="description" content="Der Bezirksschützenverband Zürich (BSVZ) vereint Schützenvereine aus Stadt Zürich, Dietikon, Schlieren und dem Limmattal. Kalender, Resultate, Vorstand und mehr.">
+  <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,27 +14,60 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <span class="brand-emblem" aria-hidden="true">B</span>
+        <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
         <span class="brand-text"><strong>BSVZ</strong></span>
       </a>
 
       <nav class="desktop-nav" aria-label="Hauptnavigation">
         <ul>
-          <li><a href="verband.html">Verband</a></li>
-          <li><a href="ressorts.html">Ressorts</a></li>
-          <li><a href="dienste.html">Dienste</a></li>
-          <li><a href="archiv.html">Archiv</a></li>
-          <li><a href="#kalender">Kalender</a></li>
-          <li><a href="#resultate">Resultate</a></li>
-          <li><a href="#news">News</a></li>
+          <li class="nav-dropdown">
+            <a href="verband.html">Verband</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="verband.html#portrait">Portrait</a></li>
+              <li><a href="verband.html#vorstand">Vorstand</a></li>
+              <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+              <li><a href="verband.html#pflichtenhefte">Pflichtenhefte</a></li>
+              <li><a href="verband.html#jobs">Offene Stellen</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="ressorts.html">Ressorts</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="ressorts.html#feldschiessen">Feldschiessen</a></li>
+              <li><a href="ressorts.html#feldstich">Feldstich</a></li>
+              <li><a href="ressorts.html#lupi">Lupi Bezirks-Einzelmatch</a></li>
+              <li><a href="ressorts.html#bezirksverbandsschiessen">Bezirksverbandsschiessen</a></li>
+              <li><a href="ressorts.html#bezirkskonkurrenz">Bezirkskonkurrenz</a></li>
+              <li><a href="ressorts.html#bezirksmatch">Bezirksmatch</a></li>
+              <li><a href="ressorts.html#jugend">Jugend / Nachwuchs</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="dienste.html">Dienste</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="dienste.html#reglemente">Reglemente &amp; Vorschriften</a></li>
+              <li><a href="dienste.html#medien">Medien</a></li>
+              <li><a href="dienste.html#waffengesetz">Waffengesetz &amp; Formulare</a></li>
+              <li><a href="dienste.html#kontakte">Wichtige Kontakte</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="archiv.html">Archiv</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
+              <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
+              <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
+            </ul>
+          </li>
+          <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="#aktuelles">Aktuelles</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <button type="button" class="btn ghost theme-toggle desktop-only" data-theme-toggle aria-pressed="false">🌙</button>
-        <a class="btn ghost desktop-only" href="#login">Anmelden</a>
-        <a class="btn primary desktop-only" href="#register">Mitglied werden</a>
+        <a class="btn ghost desktop-only" href="login.html" data-auth="login">Anmelden</a>
         <button type="button" class="btn ghost nav-toggle" aria-expanded="false" aria-controls="mobile-nav-list">
           ☰
         </button>
@@ -40,34 +75,57 @@
     </div>
     <nav class="mobile-nav" aria-label="Mobile Navigation">
       <ul id="mobile-nav-list">
-        <li><a href="verband.html">Verband</a></li>
-        <li><a href="ressorts.html">Ressorts</a></li>
-        <li><a href="dienste.html">Dienste</a></li>
-        <li><a href="archiv.html">Archiv</a></li>
-        <li><a href="#kalender">Kalender</a></li>
-        <li><a href="#resultate">Resultate</a></li>
-        <li><a href="#news">News</a></li>
+        <li class="nav-dropdown">
+            <a href="verband.html">Verband</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="verband.html#portrait">Portrait</a></li>
+              <li><a href="verband.html#vorstand">Vorstand</a></li>
+              <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+              <li><a href="verband.html#pflichtenhefte">Pflichtenhefte</a></li>
+              <li><a href="verband.html#jobs">Offene Stellen</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="ressorts.html">Ressorts</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="ressorts.html#feldschiessen">Feldschiessen</a></li>
+              <li><a href="ressorts.html#feldstich">Feldstich</a></li>
+              <li><a href="ressorts.html#lupi">Lupi Bezirks-Einzelmatch</a></li>
+              <li><a href="ressorts.html#bezirksverbandsschiessen">Bezirksverbandsschiessen</a></li>
+              <li><a href="ressorts.html#bezirkskonkurrenz">Bezirkskonkurrenz</a></li>
+              <li><a href="ressorts.html#bezirksmatch">Bezirksmatch</a></li>
+              <li><a href="ressorts.html#jugend">Jugend / Nachwuchs</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="dienste.html">Dienste</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="dienste.html#reglemente">Reglemente &amp; Vorschriften</a></li>
+              <li><a href="dienste.html#medien">Medien</a></li>
+              <li><a href="dienste.html#waffengesetz">Waffengesetz &amp; Formulare</a></li>
+              <li><a href="dienste.html#kontakte">Wichtige Kontakte</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="archiv.html">Archiv</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
+              <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
+              <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
+            </ul>
+          </li>
+        <li><a href="kalender.html">Kalender</a></li>
+        <li><a href="#aktuelles">Aktuelles</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
         <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
-        <a class="btn ghost" href="#login">Anmelden</a>
-        <a class="btn primary" href="#register">Mitglied werden</a>
+        <a class="btn ghost" href="login.html" data-auth="login">Anmelden</a>
       </div>
     </nav>
   </header>
 
-  <section class="hero">
-    <svg class="hero-skyline" viewBox="0 0 1200 260" preserveAspectRatio="none" aria-hidden="true">
-      <path fill="#05070c" d="M0,260 L0,180 L40,180 L40,150 L60,150 L60,180 L100,180 L100,120 L120,120 L120,90 L140,120 L140,180 L180,180 L180,140 L200,140 L200,180 L240,180
-        L240,60 L255,60 L255,30 L265,10 L275,30 L275,60 L290,60 L290,180
-        L330,180 L330,150 L350,150 L350,180 L390,180 L390,100 L410,100 L410,70 L420,50 L430,70 L430,100 L450,100 L450,180
-        L500,180 L500,140 L520,140 L520,180 L560,180 L560,110 L580,110 L580,60 L590,40 L600,60 L600,110 L620,110 L620,180
-        L670,180 L670,150 L690,150 L690,180 L730,180 L730,90 L745,90 L745,20 L755,0 L765,20 L765,90 L780,90 L780,180
-        L820,180 L820,140 L840,140 L840,180 L880,180 L880,100 L900,100 L900,70 L910,50 L920,70 L920,100 L940,100 L940,180
-        L980,180 L980,150 L1000,150 L1000,180 L1040,180 L1040,120 L1060,120 L1060,90 L1070,70 L1080,90 L1080,120 L1100,120 L1100,180
-        L1140,180 L1140,150 L1160,150 L1160,180 L1200,180 L1200,260 Z" />
-    </svg>
+  <section class="hero home-hero">
     <div class="hero-inner">
       <span class="badge"><span class="dot" aria-hidden="true"></span> Seit 1855 aktiv</span>
       <h1>
@@ -79,90 +137,74 @@
         Vereint in Präzision, Kameradschaft und Schweizer Tradition.
       </p>
       <div class="hero-actions">
-        <a class="btn primary" href="#resultate">🏆 Aktuelle Resultate</a>
-        <a class="btn on-hero" href="#kalender">📅 Veranstaltungen</a>
+        <a class="btn primary" href="resultate.html">🏆 Aktuelle Resultate</a>
+        <a class="btn on-hero" href="kalender.html">📅 Veranstaltungen</a>
       </div>
     </div>
   </section>
 
   <main id="main-content">
-    <section aria-labelledby="resultate-heading" id="resultate">
+    <section aria-labelledby="hub-heading">
       <div class="section-title">
-        <h2 id="resultate-heading">Aktuelle Schiessresultate (Beispiel)</h2>
+        <h2 id="hub-heading">Was möchten Sie tun?</h2>
       </div>
-      <div class="table-wrap">
-        <table class="results-table">
-          <caption>Bezirksmatch 2026 – Rangliste (Platzhalter-Daten)</caption>
-          <thead>
-            <tr>
-              <th scope="col">Rang</th>
-              <th scope="col">Name</th>
-              <th scope="col">Verein</th>
-              <th scope="col">Punkte</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>Muster Anna</td><td>SV Beispieldorf</td><td>97</td></tr>
-            <tr><td>2</td><td>Muster Beat</td><td>SV Musterhausen</td><td>95</td></tr>
-            <tr><td>3</td><td>Muster Carla</td><td>SV Beispieldorf</td><td>94</td></tr>
-          </tbody>
-        </table>
+      <div class="hub-grid">
+        <a class="card hub-tile" href="verband.html">
+          <span class="tile-icon" aria-hidden="true">🛡️</span>
+          <h3>Verband</h3>
+          <p class="meta">Portrait, Vorstand, Mitgliedervereine</p>
+        </a>
+        <a class="card hub-tile" href="ressorts.html">
+          <span class="tile-icon" aria-hidden="true">🎯</span>
+          <h3>Ressorts</h3>
+          <p class="meta">Feldschiessen, Bezirksmatch u.v.m.</p>
+        </a>
+        <a class="card hub-tile" href="dienste.html">
+          <span class="tile-icon" aria-hidden="true">🧾</span>
+          <h3>Dienste</h3>
+          <p class="meta">Reglemente, Formulare, Kontakte</p>
+        </a>
+        <a class="card hub-tile" href="archiv.html">
+          <span class="tile-icon" aria-hidden="true">🗄️</span>
+          <h3>Archiv</h3>
+          <p class="meta">Jahresberichte, DV-Protokolle, alte Ranglisten</p>
+        </a>
+        <a class="card hub-tile" href="resultate.html">
+          <span class="tile-icon" aria-hidden="true">🏆</span>
+          <h3>Resultate</h3>
+          <p class="meta">Ranglisten und Resultate als PDF ansehen</p>
+        </a>
+        <a class="card hub-tile" href="kalender.html">
+          <span class="tile-icon" aria-hidden="true">📅</span>
+          <h3>Kalender</h3>
+          <p class="meta">Anlässe und Termine</p>
+        </a>
+        <a class="card hub-tile" href="anmeldung.html">
+          <span class="tile-icon" aria-hidden="true">📝</span>
+          <h3>Anmeldung</h3>
+          <p class="meta">Online zu Wettkämpfen anmelden</p>
+        </a>
       </div>
     </section>
 
-    <section aria-labelledby="ressorts-heading" id="ressorts">
+    <section aria-labelledby="aktuelles-heading" id="aktuelles">
       <div class="section-title">
-        <h2 id="ressorts-heading">Ressorts</h2>
+        <h2 id="aktuelles-heading">Aktuelles</h2>
+        <a class="btn ghost" href="kalender.html">Alle Termine →</a>
       </div>
-      <div class="card-grid">
-        <a class="card" href="ressorts.html#feldschiessen">
-          <span class="tag">Wettkampf</span>
-          <h3>Feldschiessen</h3>
-          <p class="meta">Formulare, Schiessdaten und Resultate.</p>
-        </a>
-        <a class="card" href="ressorts.html#bezirksmatch">
-          <span class="tag">Wettkampf</span>
-          <h3>Bezirksmatch</h3>
-          <p class="meta">Formulare, Schiessdaten und Resultate.</p>
-        </a>
-        <a class="card" href="ressorts.html#bezirkskonkurrenz">
-          <span class="tag">Wettkampf</span>
-          <h3>Bezirkskonkurrenz</h3>
-          <p class="meta">Formulare, Schiessdaten und Resultate.</p>
-        </a>
-        <a class="card" href="ressorts.html#jugend">
-          <span class="tag">Nachwuchs</span>
-          <h3>Jugend / Nachwuchs</h3>
-          <p class="meta">Ranglisten, Kurse, Fotos, De Goldig Züri-Träffer.</p>
-        </a>
-      </div>
-      <p class="meta" style="margin-top:1.25rem;">
-        <a href="ressorts.html">Alle Ressorts ansehen (inkl. Feldstich, Lupi Bezirks-Einzelmatch, Bezirksverbandsschiessen) →</a>
-      </p>
+      <div id="aktuelles-list" class="aktuelles-list"><p class="meta">Lade Termine…</p></div>
     </section>
 
-    <section aria-labelledby="dienste-heading" id="dienste">
-      <div class="section-title">
-        <h2 id="dienste-heading">Dienste</h2>
-      </div>
-      <div class="card-grid">
-        <article class="card"><h3>Links</h3><p class="meta">Bezirke, Verbände, Sportämter, Partnerfirmen.</p></article>
-        <a class="card" href="dienste.html#reglemente"><h3>Reglemente &amp; Vorschriften</h3><p class="meta">Offizielle Dokumente zum Nachlesen.</p></a>
-        <a class="card" href="dienste.html#waffengesetz"><h3>Waffengesetz &amp; Formulare</h3><p class="meta">Aktuelle Formulare zum Download.</p></a>
-        <a class="card" href="dienste.html#kontakte"><h3>Wichtige Kontakte</h3><p class="meta">Ansprechpersonen im Verband.</p></a>
-      </div>
-    </section>
-
-    <section aria-labelledby="cta-heading" id="mitglied-werden">
+    <section aria-labelledby="cta-heading" id="ueber-uns">
       <div class="cta">
-        <h2 id="cta-heading">Werden Sie Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
+        <h2 id="cta-heading">Teil unserer <span class="accent-line">Gemeinschaft</span></h2>
         <p>
-          Ob Anfänger oder erfahrener Schütze – bei uns sind Sie herzlich
-          willkommen. Entdecken Sie die Faszination des Schiesssports im
-          Kreise Gleichgesinnter.
+          Der BSVZ vereint die Schützenvereine der Region Zürich. Ob Anfänger
+          oder erfahrener Schütze – interessierte Vereine und Einzelpersonen
+          sind herzlich willkommen, sich bei uns zu melden.
         </p>
         <div class="cta-actions">
-          <a class="btn primary" href="#register">Jetzt Mitglied werden →</a>
+          <a class="btn primary" href="verband.html#mitgliedervereine">Mitgliedervereine ansehen</a>
           <a class="btn ghost" href="#kontakt">Kontakt aufnehmen</a>
         </div>
       </div>
@@ -173,14 +215,12 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a class="brand" href="index.html">
-          <span class="brand-emblem" aria-hidden="true">B</span>
+          <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
           <span class="brand-text"><strong>BSVZ</strong></span>
         </a>
-        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit 1855.</p>
         <div class="footer-contact">
           <span>✉️ webmaster@bsvz.ch</span>
-          <span>☎️ 0041 79 927 33 27</span>
-          <span>📍 Alte Aescherstrasse 25, 8905 Arni AG</span>
         </div>
       </div>
       <div>
@@ -195,8 +235,9 @@
       <div>
         <h4>Dienste</h4>
         <ul>
-          <li><a href="#kalender">Kalender</a></li>
-          <li><a href="#resultate">Resultate</a></li>
+          <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="anmeldung.html">Anmeldung</a></li>
+          <li><a href="resultate.html">Resultate</a></li>
           <li><a href="archiv.html">Archiv</a></li>
           <li><a href="dienste.html">Downloads</a></li>
         </ul>
@@ -204,20 +245,67 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="#news">News</a></li>
+          <li><a href="#aktuelles">Aktuelles</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
-          <li><a href="#login">Admin</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
+    </div>
+    <div class="partner-badges">
+      <a href="https://www.coolandclean.ch" target="_blank" rel="noopener">
+        <img src="img/badges/cool-and-clean.png" alt="Cool and Clean">
+      </a>
+      <a href="https://www.swissolympic.ch/" target="_blank" rel="noopener">
+        <img src="img/badges/swiss-olympic.png" alt="Swiss Olympic">
+      </a>
+      <a href="https://www.baspo.admin.ch/" target="_blank" rel="noopener">
+        <img src="img/badges/baspo.png" alt="Bundesamt für Sport BASPO">
+      </a>
     </div>
     <div class="footer-bottom">
       <p>© 2026 Bezirksschützenverband Zürich. Alle Rechte vorbehalten.</p>
       <p>Mitglied des Zürcher Kantonalschützenverbands</p>
     </div>
+    <p class="image-credit">
+      Titelbild (hell): „Zürich view Quaibrücke" von
+      <a href="https://commons.wikimedia.org/wiki/File:Z%C3%BCrich_view_Quaibr%C3%BCcke_20200702.jpg" target="_blank" rel="noopener">Daniel Kraft</a>,
+      Lizenz <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>
+      · Titelbild (dunkel): „Zurich after sunset" von
+      <a href="https://commons.wikimedia.org/wiki/File:Zurich_after_sunset.jpg" target="_blank" rel="noopener">Kuhnmi</a>,
+      Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>
+    </p>
   </footer>
 
   <script src="js/theme.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <script>
+    (async function loadAktuelles() {
+      const box = document.getElementById("aktuelles-list");
+      const esc = (t) => { const d = document.createElement("div"); d.textContent = t; return d.innerHTML; };
+      const de = (iso) => iso.split("-").reverse().join(".");
+      const get = async (u) => { try { const r = await fetch(u); return r.ok ? await r.json() : null; } catch (e) { return null; } };
+      const [ev, an] = await Promise.all([get("/api/events?upcoming=1"), get("/api/anmeldungen")]);
+      const events = ((ev && ev.events) || []).slice(0, 4);
+      const open = (an && an.anmeldungen) || [];
+      if (!events.length && !open.length) {
+        box.innerHTML = '<div class="card"><p>Zurzeit sind keine Termine eingetragen. Alle Anlässe finden Sie im <a href="kalender.html">Kalender</a>.</p></div>';
+        return;
+      }
+      let html = "";
+      open.forEach((a) => {
+        html += '<div class="card anmeldung-hinweis"><span><strong>Anmeldung offen:</strong> ' + esc(a.title) + ' – bis ' + de(a.deadline) + '</span>' +
+          '<a class="btn primary" href="anmeldung.html#a-' + a.id + '">Jetzt anmelden</a></div>';
+      });
+      if (events.length) {
+        html += '<div class="card"><h3 style="margin-top:0">Nächste Termine</h3><ul class="doc-list">' +
+          events.map((e) => '<li><span><strong>' + de(e.start_date) + (e.end_date ? '–' + de(e.end_date) : '') + '</strong> · ' + esc(e.title) + (e.location ? ' <span class="meta">(' + esc(e.location) + ')</span>' : '') + '</span></li>').join("") +
+          '</ul></div>';
+      }
+      box.innerHTML = html;
+    })();
+  </script>
 </body>
 </html>

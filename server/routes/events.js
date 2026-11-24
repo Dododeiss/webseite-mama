@@ -1,0 +1,157 @@
+const express = require("express");
+const db = require("../db");
+const { requireAuth, requireAdmin } = require("../auth");
+
+const router = express.Router();
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+function todayZurich() {
+  return new Date().toLocaleDateString("sv-SE", { timeZone: "Europe/Zurich" });
+}
+
+router.get("/", (req, res) => {
+  const { upcoming } = req.query;
+  let sql = `
+    SELECT events.*, users.name AS created_by_name, a.deadline AS anmeldung_deadline,
+           (SELECT COUNT(*) FROM anmeldung_teilnehmer t WHERE t.anmeldung_id = events.anmeldung_id) AS anmeldung_anzahl
+    FROM events
+    JOIN users ON users.id = events.created_by
+    LEFT JOIN anmeldungen a ON a.id = events.anmeldung_id
+  `;
+  const params = [];
+  if (upcoming) {
+    sql += " WHERE date(events.start_date) >= date('now')";
+  }
+  sql += " ORDER BY events.start_date ASC";
+
+  const rows = db.prepare(sql).all(...params);
+  const today = todayZurich();
+  rows.forEach((r) => {
+    r.anmeldung_open = !!r.anmeldung_id && !!r.anmeldung_deadline && r.anmeldung_deadline >= today;
+  });
+
+  res.json({ events: rows });
+});
+
+function icsEscape(str) {
+  return String(str || "")
+    .replace(/\\/g, "\\\\")
+    .replace(/;/g, "\\;")
+    .replace(/,/g, "\\,")
+    .replace(/\n/g, "\\n");
+}
+
+function isoDateToIcs(iso) {
+  return iso.replace(/-/g, "");
+}
+
+function addOneDay(iso) {
+  const d = new Date(iso + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10).replace(/-/g, "");
+}
+
+router.get("/calendar.ics", (req, res) => {
+  const rows = db
+    .prepare("SELECT * FROM events ORDER BY start_date ASC")
+    .all();
+
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//BSVZ//Kalender//DE",
+    "CALSCALE:GREGORIAN",
+  ];
+
+  for (const e of rows) {
+    lines.push("BEGIN:VEVENT");
+    lines.push("UID:bsvz-event-" + e.id + "@bsvzuerich.ch");
+    lines.push("DTSTAMP:" + new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z");
+    lines.push("DTSTART;VALUE=DATE:" + isoDateToIcs(e.start_date));
+    lines.push("DTEND;VALUE=DATE:" + addOneDay(e.end_date || e.start_date));
+    lines.push("SUMMARY:" + icsEscape(e.title));
+    if (e.location) lines.push("LOCATION:" + icsEscape(e.location));
+    const descParts = [];
+    if (e.category) descParts.push(e.category);
+    if (e.description) descParts.push(e.description);
+    if (e.link) descParts.push("Anmeldung: " + e.link);
+    if (descParts.length) lines.push("DESCRIPTION:" + icsEscape(descParts.join(" – ")));
+    if (e.link) lines.push("URL:" + e.link);
+    lines.push("END:VEVENT");
+  }
+
+  lines.push("END:VCALENDAR");
+
+  res.setHeader("Content-Type", "text/calendar; charset=utf-8");
+  res.setHeader("Content-Disposition", 'attachment; filename="bsvz-kalender.ics"');
+  res.send(lines.join("\r\n"));
+});
+
+router.post("/", requireAuth, requireAdmin, (req, res) => {
+  const { title, category, location, start_date, end_date, description, link } =
+    req.body || {};
+  let anmeldungId = null;
+  if (req.body && req.body.anmeldung_id) {
+    anmeldungId = Number(req.body.anmeldung_id);
+    const exists = Number.isInteger(anmeldungId)
+      ? db.prepare("SELECT id FROM anmeldungen WHERE id = ?").get(anmeldungId)
+      : null;
+    if (!exists) {
+      return res.status(400).json({ error: "Die gewählte Online-Anmeldung gibt es nicht." });
+    }
+  }
+
+  if (!title || !String(title).trim()) {
+    return res.status(400).json({ error: "Bitte einen Titel angeben." });
+  }
+  const linkValue = link ? String(link).trim() : "";
+  if (linkValue && !/^https?:\/\/[^\s"'<>]+$/i.test(linkValue)) {
+    return res.status(400).json({
+      error: "Der Anmelde-Link muss mit http:// oder https:// beginnen.",
+    });
+  }
+  if (!start_date || !DATE_RE.test(start_date)) {
+    return res
+      .status(400)
+      .json({ error: "Bitte ein gültiges Datum (JJJJ-MM-TT) angeben." });
+  }
+  if (end_date && !DATE_RE.test(end_date)) {
+    return res
+      .status(400)
+      .json({ error: "Enddatum muss im Format JJJJ-MM-TT sein." });
+  }
+
+  const info = db
+    .prepare(
+      `INSERT INTO events (title, category, location, start_date, end_date, description, link, anmeldung_id, created_by)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    )
+    .run(
+      String(title).trim(),
+      category ? String(category).trim() : null,
+      location ? String(location).trim() : null,
+      start_date,
+      end_date || null,
+      description ? String(description).trim() : null,
+      linkValue || null,
+      anmeldungId,
+      req.session.userId
+    );
+
+  const created = db
+    .prepare("SELECT * FROM events WHERE id = ?")
+    .get(info.lastInsertRowid);
+  res.status(201).json({ event: created });
+});
+
+router.delete("/:id", requireAuth, requireAdmin, (req, res) => {
+  const event = db.prepare("SELECT * FROM events WHERE id = ?").get(req.params.id);
+  if (!event) {
+    return res.status(404).json({ error: "Termin nicht gefunden." });
+  }
+  db.prepare("DELETE FROM events WHERE id = ?").run(req.params.id);
+  res.json({ ok: true });
+});
+
+module.exports = router;

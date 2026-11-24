@@ -43,9 +43,33 @@
   var navToggle = document.querySelector(".nav-toggle");
   var mobileNav = document.querySelector(".mobile-nav");
   if (navToggle && mobileNav) {
-    navToggle.addEventListener("click", function () {
-      var isOpen = mobileNav.classList.toggle("open");
+    function setNavOpen(isOpen) {
+      mobileNav.classList.toggle("open", isOpen);
+      document.body.classList.toggle("nav-open", isOpen);
       navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+    navToggle.addEventListener("click", function () {
+      setNavOpen(!mobileNav.classList.contains("open"));
+    });
+    mobileNav.querySelectorAll(".nav-dropdown").forEach(function (li) {
+      var link = li.querySelector(":scope > a");
+      if (!link) return;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "sub-toggle";
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", link.textContent.trim() + ": Untermenü öffnen oder schliessen");
+      btn.addEventListener("click", function () {
+        var open = li.classList.toggle("sub-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      link.insertAdjacentElement("afterend", btn);
+    });
+    mobileNav.addEventListener("click", function (event) {
+      if (event.target.closest("a")) setNavOpen(false);
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 1180) setNavOpen(false);
     });
   }
 })();

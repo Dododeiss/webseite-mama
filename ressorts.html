@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ressorts – Bezirksschützenverband Zürich (BSVZ)</title>
+  <meta name="description" content="Übersicht der BSVZ-Ressorts: Feldschiessen, Feldstich, Lupi, Bezirksverbandsschiessen, Bezirkskonkurrenz, Bezirksmatch und Jugendförderung.">
+  <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -12,27 +14,60 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <span class="brand-emblem" aria-hidden="true">B</span>
+        <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
         <span class="brand-text"><strong>BSVZ</strong></span>
       </a>
 
       <nav class="desktop-nav" aria-label="Hauptnavigation">
         <ul>
-          <li><a href="verband.html">Verband</a></li>
-          <li><a href="ressorts.html">Ressorts</a></li>
-          <li><a href="dienste.html">Dienste</a></li>
-          <li><a href="archiv.html">Archiv</a></li>
-          <li><a href="index.html#kalender">Kalender</a></li>
-          <li><a href="index.html#resultate">Resultate</a></li>
-          <li><a href="index.html#news">News</a></li>
+          <li class="nav-dropdown">
+            <a href="verband.html">Verband</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="verband.html#portrait">Portrait</a></li>
+              <li><a href="verband.html#vorstand">Vorstand</a></li>
+              <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+              <li><a href="verband.html#pflichtenhefte">Pflichtenhefte</a></li>
+              <li><a href="verband.html#jobs">Offene Stellen</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="ressorts.html">Ressorts</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="ressorts.html#feldschiessen">Feldschiessen</a></li>
+              <li><a href="ressorts.html#feldstich">Feldstich</a></li>
+              <li><a href="ressorts.html#lupi">Lupi Bezirks-Einzelmatch</a></li>
+              <li><a href="ressorts.html#bezirksverbandsschiessen">Bezirksverbandsschiessen</a></li>
+              <li><a href="ressorts.html#bezirkskonkurrenz">Bezirkskonkurrenz</a></li>
+              <li><a href="ressorts.html#bezirksmatch">Bezirksmatch</a></li>
+              <li><a href="ressorts.html#jugend">Jugend / Nachwuchs</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="dienste.html">Dienste</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="dienste.html#reglemente">Reglemente &amp; Vorschriften</a></li>
+              <li><a href="dienste.html#medien">Medien</a></li>
+              <li><a href="dienste.html#waffengesetz">Waffengesetz &amp; Formulare</a></li>
+              <li><a href="dienste.html#kontakte">Wichtige Kontakte</a></li>
+            </ul>
+          </li>
+          <li class="nav-dropdown">
+            <a href="archiv.html">Archiv</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
+              <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
+              <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
+            </ul>
+          </li>
+          <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
           <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <button type="button" class="btn ghost theme-toggle desktop-only" data-theme-toggle aria-pressed="false">🌙</button>
-        <a class="btn ghost desktop-only" href="index.html#login">Anmelden</a>
-        <a class="btn primary desktop-only" href="index.html#register">Mitglied werden</a>
+        <a class="btn ghost desktop-only" href="login.html" data-auth="login">Anmelden</a>
         <button type="button" class="btn ghost nav-toggle" aria-expanded="false" aria-controls="mobile-nav-list">
           ☰
         </button>
@@ -40,19 +75,52 @@
     </div>
     <nav class="mobile-nav" aria-label="Mobile Navigation">
       <ul id="mobile-nav-list">
-        <li><a href="verband.html">Verband</a></li>
-        <li><a href="ressorts.html">Ressorts</a></li>
-        <li><a href="dienste.html">Dienste</a></li>
-        <li><a href="archiv.html">Archiv</a></li>
-        <li><a href="index.html#kalender">Kalender</a></li>
-        <li><a href="index.html#resultate">Resultate</a></li>
-        <li><a href="index.html#news">News</a></li>
+        <li class="nav-dropdown">
+            <a href="verband.html">Verband</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="verband.html#portrait">Portrait</a></li>
+              <li><a href="verband.html#vorstand">Vorstand</a></li>
+              <li><a href="verband.html#mitgliedervereine">Mitgliedervereine</a></li>
+              <li><a href="verband.html#pflichtenhefte">Pflichtenhefte</a></li>
+              <li><a href="verband.html#jobs">Offene Stellen</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="ressorts.html">Ressorts</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="ressorts.html#feldschiessen">Feldschiessen</a></li>
+              <li><a href="ressorts.html#feldstich">Feldstich</a></li>
+              <li><a href="ressorts.html#lupi">Lupi Bezirks-Einzelmatch</a></li>
+              <li><a href="ressorts.html#bezirksverbandsschiessen">Bezirksverbandsschiessen</a></li>
+              <li><a href="ressorts.html#bezirkskonkurrenz">Bezirkskonkurrenz</a></li>
+              <li><a href="ressorts.html#bezirksmatch">Bezirksmatch</a></li>
+              <li><a href="ressorts.html#jugend">Jugend / Nachwuchs</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="dienste.html">Dienste</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="dienste.html#reglemente">Reglemente &amp; Vorschriften</a></li>
+              <li><a href="dienste.html#medien">Medien</a></li>
+              <li><a href="dienste.html#waffengesetz">Waffengesetz &amp; Formulare</a></li>
+              <li><a href="dienste.html#kontakte">Wichtige Kontakte</a></li>
+            </ul>
+          </li>
+        <li class="nav-dropdown">
+            <a href="archiv.html">Archiv</a>
+            <ul class="nav-dropdown-menu">
+              <li><a href="archiv.html#jahresberichte">Jahresberichte</a></li>
+              <li><a href="archiv.html#dv-protokolle">DV-Protokolle</a></li>
+              <li><a href="archiv.html#ranglisten-schiessplaene">Ranglisten &amp; Schiesspläne</a></li>
+            </ul>
+          </li>
+        <li><a href="kalender.html">Kalender</a></li>
+        <li><a href="index.html#aktuelles">Aktuelles</a></li>
         <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
         <button type="button" class="btn ghost theme-toggle" data-theme-toggle aria-pressed="false">🌙</button>
-        <a class="btn ghost" href="index.html#login">Anmelden</a>
-        <a class="btn primary" href="index.html#register">Mitglied werden</a>
+        <a class="btn ghost" href="login.html" data-auth="login">Anmelden</a>
       </div>
     </nav>
   </header>
@@ -84,8 +152,6 @@
       <div class="discipline-block">
         <p class="meta">
           Schiessdaten: aktuell sind auf der alten Webseite keine Termine publiziert.
-          Fotogalerien der Feldschiessen-Anlässe: siehe
-          <a href="https://www.bsvz.ch/Archiv/Foto-Videogalerien" target="_blank" rel="noopener">alte Webseite ↗</a>.
         </p>
         <div class="doc-groups">
           <div class="card">
@@ -98,7 +164,6 @@
           <div class="card">
             <h4>Gottfried-Keller-Medaille</h4>
             <ul class="doc-list">
-          <li><a href="assets/ressorts/feldschiessen/gottfried-keller-medaille/7-Abrechnungsformular-Feldschiessen-Auszeichnungen-leer.doc" target="_blank" rel="noopener">Abrechnungsformular Feldschiessen Auszeichnungen (leer)</a> <span class="doc-ext">DOC</span></li>
           <li><a href="assets/ressorts/feldschiessen/gottfried-keller-medaille/Alle-Gewinner-der-Gottfried-Keller-Plakette.pdf" target="_blank" rel="noopener">Alle Gewinner der Gottfried Keller-Plakette</a> <span class="doc-ext">PDF</span></li>
           <li><a href="assets/ressorts/feldschiessen/gottfried-keller-medaille/Reglement-der-Gottfriedkellerplakatte.pdf" target="_blank" rel="noopener">Reglement der Gottfried-Keller-Plakette</a> <span class="doc-ext">PDF</span></li>
             </ul>
@@ -118,41 +183,8 @@
           <li><a href="assets/ressorts/feldschiessen/2025/Vereinsrangliste-300m-Feldschiessen-2025.pdf" target="_blank" rel="noopener">Vereinsrangliste 300m Feldschiessen 2025</a> <span class="doc-ext">PDF</span></li>
             </ul>
           </div>
-          <div class="card">
-            <h4>2024</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/feldschiessen/2024/Einzelrangliste-25-50m-2024.pdf" target="_blank" rel="noopener">Einzelrangliste 25-50m 2024</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2024/Einzelrangliste-25m-Hasenrain-2024.pdf" target="_blank" rel="noopener">Einzelrangliste 25m Hasenrain 2024</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2024/Einzelrangliste-300m-2024.pdf" target="_blank" rel="noopener">Einzelrangliste 300m 2024</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2024/Einzelrangliste-300m-Hasenrain-2024.pdf" target="_blank" rel="noopener">Einzelrangliste 300m Hasenrain 2024</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2024/Vereinsrangliste-25-50m-2024.pdf" target="_blank" rel="noopener">Vereinsrangliste 25-50m 2024</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2024/Vereinsrangliste-300m-2024.pdf" target="_blank" rel="noopener">Vereinsrangliste 300m 2024</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2023</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/feldschiessen/2023/Einzelrangliste-25m-und-50m.pdf" target="_blank" rel="noopener">Einzelrangliste 25m und 50m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2023/Einzelrangliste-300m-2023-provisorisch-.pdf" target="_blank" rel="noopener">Einzelrangliste 300m 2023 (provisorisch)</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2023/Vereinsrangliste-25-50m-2023-provisorisch-.pdf" target="_blank" rel="noopener">Vereinsrangliste 25-50m 2023 (provisorisch)</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2023/Vereinsrangliste-300m-2023-provisorisch-.pdf" target="_blank" rel="noopener">Vereinsrangliste 300m 2023 (provisorisch)</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2022</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/feldschiessen/2022/Bezirk-25-und-50m.pdf" target="_blank" rel="noopener">Bezirk 25 und 50m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Bezirk-300m.pdf" target="_blank" rel="noopener">Bezirk 300m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Einzelrangliste-25-50m.pdf" target="_blank" rel="noopener">Einzelrangliste 25-50m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Einzelrangliste-300m.pdf" target="_blank" rel="noopener">Einzelrangliste 300m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Einzelranglisten-FS-Gewehr-2022.pdf" target="_blank" rel="noopener">Einzelranglisten FS-Gewehr 2022</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Einzelranglisten-FS-Pistole-2022.pdf" target="_blank" rel="noopener">Einzelranglisten FS-Pistole 2022</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Vereinsrangliste-FF-Pistole-2022.pdf" target="_blank" rel="noopener">Vereinsrangliste FF Pistole 2022</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/feldschiessen/2022/Vereinsrangliste-FS-Gewehr-2022.pdf" target="_blank" rel="noopener">Vereinsrangliste FS Gewehr 2022</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
         </div>
-        <p class="meta">Ältere Ranglisten (2017–2021): siehe <a href="archiv.html#rsp-feldschiessen">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
+        <p class="meta">Ältere Ranglisten: siehe <a href="archiv.html#rsp-feldschiessen">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
       </div>
     </section>
 
@@ -193,24 +225,8 @@
           <li><a href="assets/ressorts/lupi/2025/2025-Lupi-Probstei-Match-40-Schuss-Rangliste.pdf" target="_blank" rel="noopener">2025 Lupi-Probstei-Match 40 Schuss Rangliste</a> <span class="doc-ext">PDF</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>2024</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/lupi/2024/2024-Einzelrangliste-Auflage-30-Schuss.pdf" target="_blank" rel="noopener">2024 Einzelrangliste Auflage 30 Schuss</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/lupi/2024/2024-Klappscheiben-20-Schuss.pdf" target="_blank" rel="noopener">2024 Klappscheiben 20 Schuss</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/lupi/2024/2024-Rangliste-ISSF-Wettkampf-40-Schuss.pdf" target="_blank" rel="noopener">2024 Rangliste ISSF Wettkampf 40 Schuss</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2023</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/lupi/2023/2023-Einzelranglisrte-40-Schuss.pdf" target="_blank" rel="noopener">2023 Einzelrangliste 40 Schuss</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/lupi/2023/2023-Einzelrangliste-40-Schuss-nach-Kat.pdf" target="_blank" rel="noopener">2023 Einzelrangliste 40 Schuss nach Kat.</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/lupi/2023/2023-Einzelrangliste-Auflage-Stich-30-Schuss-nach-Kat.pdf" target="_blank" rel="noopener">2023 Einzelrangliste Auflagestich 30 Schuss nach Kat.</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/lupi/2023/2023-Einzelrangliste-Auftage-Stich-30-Schuss.pdf" target="_blank" rel="noopener">2023 Einzelrangliste Auflagestich 30 Schuss</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
       </div>
+      <p class="meta" style="margin-top:1.25rem;">Ältere Ranglisten: siehe <a href="archiv.html#rsp-lupi">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
     </section>
 
     <section aria-labelledby="bvs-heading" id="bezirksverbandsschiessen">
@@ -218,6 +234,12 @@
         <h2 id="bvs-heading">Bezirksverbandsschiessen</h2>
       </div>
       <div class="doc-groups">
+        <div class="card">
+          <h4>2026</h4>
+          <ul class="doc-list">
+            <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/2026-BSVZ-Bezirksverbandsschiessen-Schiessplan.pdf" target="_blank" rel="noopener">Schiessplan 2026</a> <span class="doc-ext">PDF</span></li>
+          </ul>
+        </div>
         <div class="card">
           <h4>2025</h4>
           <ul class="doc-list">
@@ -230,42 +252,8 @@
           <li><a href="assets/ressorts/bezirksverbandsschiessen/2025/Verein-Rangliste-Bezirksverbandsschiessen-50m.pdf" target="_blank" rel="noopener">Vereinsrangliste 50m</a> <span class="doc-ext">PDF</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>2024 (inkl. Reglement &amp; Schiessplan 2026)</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/2024-Bezirksverbandsschiessen-Reglement.pdf" target="_blank" rel="noopener">Reglement 2024</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/2026-BSVZ-Bezirksverbandsschiessen-Schiessplan.pdf" target="_blank" rel="noopener">Schiessplan 2026</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Rangliste-Bezirksverbandsschiessen-25m.pdf" target="_blank" rel="noopener">Rangliste 25m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Rangliste-Bezirksverbandsschiessen-300m.pdf" target="_blank" rel="noopener">Rangliste 300m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Rangliste-Bezirksverbandsschiessen-300m-Auszahler.pdf" target="_blank" rel="noopener">Rangliste 300m Auszahler</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Rangliste-Bezirksverbandsschiessen-50m.pdf" target="_blank" rel="noopener">Rangliste 50m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Vereinsrangliste-Bezirksverbandsschiessen-25m.pdf" target="_blank" rel="noopener">Vereinsrangliste 25m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Vereinsrangliste-Bezirksverbandsschiessen-300m.pdf" target="_blank" rel="noopener">Vereinsrangliste 300m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2024/Vereinsrangliste-Bezirksverbandsschiessen-50m.pdf" target="_blank" rel="noopener">Vereinsrangliste 50m</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2023</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2023/Rangliste-Bezirksverbandsschiessen-25m.pdf" target="_blank" rel="noopener">Rangliste 25m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2023/Rangliste-Bezirksverbandsschiessen-300m.pdf" target="_blank" rel="noopener">Rangliste 300m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2023/Rangliste-Bezirksverbandsschiessen-300m-Auszahler.pdf" target="_blank" rel="noopener">Rangliste 300m Auszahler</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2023/Rangliste-Bezirksverbandsschiessen-50m.pdf" target="_blank" rel="noopener">Rangliste 50m</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2022</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-300m-Ausz.pdf" target="_blank" rel="noopener">300m Auszahler</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-25meter-Einzel.pdf" target="_blank" rel="noopener">25m Einzel</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-25meter-V.pdf" target="_blank" rel="noopener">25m Verein</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-300m-E.pdf" target="_blank" rel="noopener">300m Einzel</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-300m-V.pdf" target="_blank" rel="noopener">300m Verein</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-50meter-Einzel.pdf" target="_blank" rel="noopener">50m Einzel</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksverbandsschiessen/2022/BSVZ-2022-50meter-V.pdf" target="_blank" rel="noopener">50m Verein</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
       </div>
+      <p class="meta" style="margin-top:1.25rem;">Ältere Ranglisten: siehe <a href="archiv.html#rsp-bezirksverband">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
     </section>
 
     <section aria-labelledby="bk-heading" id="bezirkskonkurrenz">
@@ -291,32 +279,8 @@
           <li><a href="assets/ressorts/bezirkskonkurrenz/2025/2025-Bezirkskonkurrenz-Kat-C-Rangliste.pdf" target="_blank" rel="noopener">Rangliste Kat. C</a> <span class="doc-ext">PDF</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>2024</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2024/2024-Bezirkskonkurren-KAT-A-Rangliste.pdf" target="_blank" rel="noopener">Rangliste Kat. A</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2024/2024-Bezirkskonkurren-KAT-B-Rangliste.pdf" target="_blank" rel="noopener">Rangliste Kat. B</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2024/2024-Bezirkskonkurren-KAT-C-Rangliste.pdf" target="_blank" rel="noopener">Rangliste Kat. C</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2023</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2023/2023-Bezirkskonkurrenz-Kat-A-Rangliste-def.pdf" target="_blank" rel="noopener">Rangliste Kat. A</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2023/2023-Bezirkskonkurrenz-Kat-B-Rangliste-def.pdf" target="_blank" rel="noopener">Rangliste Kat. B</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2023/2023-Bezirkskonkurrenz-Kat-C-Rangliste-def.pdf" target="_blank" rel="noopener">Rangliste Kat. C</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2022</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2022/2022-Bezirkskonkurrenz-Kat-A-Rangliste-def.pdf" target="_blank" rel="noopener">Rangliste Kat. A</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2022/2022-Bezirkskonkurrenz-Kat-B-Rangliste-def.pdf" target="_blank" rel="noopener">Rangliste Kat. B</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirkskonkurrenz/2022/2022-Bezirkskonkurrenz-Kat-C-Rangliste-def.pdf" target="_blank" rel="noopener">Rangliste Kat. C</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
       </div>
-      <p class="meta">Ranglisten 2017–2019: siehe <a href="archiv.html#rsp-bezirkskonkurrenz">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
+      <p class="meta">Ältere Ranglisten: siehe <a href="archiv.html#rsp-bezirkskonkurrenz">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
     </section>
 
     <section aria-labelledby="bm-heading" id="bezirksmatch">
@@ -342,43 +306,8 @@
           <li><a href="assets/ressorts/bezirksmatch/2025/2025-Rangliste-Bezirskmatch-300m-Kat-E.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. E</a> <span class="doc-ext">PDF</span></li>
           </ul>
         </div>
-        <div class="card">
-          <h4>2024</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirksmatch/2024/2024-Rangliste-Bezirskmatch-20er.pdf" target="_blank" rel="noopener">Rangliste 20er</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2024/2024-Rangliste-Bezirskmatch-25m.pdf" target="_blank" rel="noopener">Rangliste 25m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2024/2024-Rangliste-Bezirskmatch-300m-Kat-A.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. A</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2024/2024-Rangliste-Bezirskmatch-300m-Kat-D.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. D</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2024/2024-Rangliste-Bezirskmatch-300m-Kat-E.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. E</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2024/2024-Rangliste-Bezirskmatch-50m.pdf" target="_blank" rel="noopener">Rangliste 50m</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2023</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirksmatch/2023/2023-Rangliste-Bezirkssmatch-20er.pdf" target="_blank" rel="noopener">Rangliste 20er</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/2023-Rangliste-Bezirkssmatch-25m.pdf" target="_blank" rel="noopener">Rangliste 25m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/2023-Rangliste-Bezirkssmatch-50m.pdf" target="_blank" rel="noopener">Rangliste 50m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/2023-Rangliste-Bezirkssmatch-Kat-A-300m.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. A</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/2023-Rangliste-Bezirkssmatch-Kat-D-300m.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. D</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/2023-Rangliste-Bezirkssmatch-Kat-E-300m.pdf" target="_blank" rel="noopener">Rangliste 300m Kat. E</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/Vereinsrangliste-25m-BSVZ-BVS.pdf" target="_blank" rel="noopener">Vereinsrangliste 25m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/Vereinsrangliste-300m-BSVZ-BVS.pdf" target="_blank" rel="noopener">Vereinsrangliste 300m</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2023/Vereinsrangliste-50m-BSVZ-BVS.pdf" target="_blank" rel="noopener">Vereinsrangliste 50m</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
-        <div class="card">
-          <h4>2022</h4>
-          <ul class="doc-list">
-          <li><a href="assets/ressorts/bezirksmatch/2022/2022-Rangliste-Bezirskmatch-20er-Noetli.pdf" target="_blank" rel="noopener">Rangliste 20er-Nötli</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2022/2022-Rangliste-Bezirskmatch-Kat-A.pdf" target="_blank" rel="noopener">Rangliste Kat. A</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2022/2022-Rangliste-Bezirskmatch-Kat-D.pdf" target="_blank" rel="noopener">Rangliste Kat. D</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2022/2022-Rangliste-Bezirskmatch-Kat-E.pdf" target="_blank" rel="noopener">Rangliste Kat. E</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/bezirksmatch/2022/2022-Rangliste-Bezirskmatch-Pistole.pdf" target="_blank" rel="noopener">Rangliste Pistole</a> <span class="doc-ext">PDF</span></li>
-          </ul>
-        </div>
       </div>
-      <p class="meta">Ranglisten 2017–2019: siehe <a href="archiv.html#rsp-bezirksmatch">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
+      <p class="meta">Ältere Ranglisten: siehe <a href="archiv.html#rsp-bezirksmatch">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
     </section>
 
     <section aria-labelledby="jugend-heading" id="jugend">
@@ -396,124 +325,23 @@
             Wettschiessen durch. Anmeldung direkt beim Schützenverein in der Nähe; bei Fragen hilft der
             Bezirksjungschützenchef gerne weiter.
           </p>
+          <h4>Diese Vereine bieten Kurse an</h4>
+          <ul class="doc-list">
+            <li><span>Schützengesellschaft der Stadt Zürich</span></li>
+            <li><span>Schiessverein Wollishofen</span></li>
+            <li><span>Schützengesellschaft Seebach</span></li>
+            <li><span>Infanterieschiessverein Hirslanden-Riesbach</span></li>
+            <li><span>Feldschützenverein Oberengstringen</span></li>
+            <li><span>Schützengesellschaft Unterengstringen</span></li>
+            <li><span>Schiessverein Dietikon</span></li>
+            <li><span>Feldschützenverein Aesch</span></li>
+          </ul>
           <p class="meta">
-            Ausführliche Kursbeschreibung und Liste der anbietenden Vereine: siehe
-            <a href="https://www.bsvz.ch/Ressorts/Jugend-Nachwuchs/-Gewehr-300m/Wo-finde-ich-Kurse" target="_blank" rel="noopener">alte Webseite ↗</a>.
+            Wählen Sie den Verein in Ihrer Nähe und melden Sie sich beim zuständigen Leiter oder beim Präsidenten an.
+            Die Vereine mit Ort finden Sie unter <a href="verband.html#mitgliedervereine">Mitgliedervereine</a>.
           </p>
         </div>
-
-        <div class="doc-groups" style="margin-top:1.25rem;">
-          <div class="card">
-            <h4>Ranglisten 2024 (aktuellster Stand)</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2024/JSK-Einzelrangliste.pdf" target="_blank" rel="noopener">JSK Einzelrangliste</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2024/JSK-Gruppenrangliste.pdf" target="_blank" rel="noopener">JSK Gruppenrangliste</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2024/LeiterInnen-Einzelrangliste.pdf" target="_blank" rel="noopener">LeiterInnen Einzelrangliste</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2024/U15-Einzelrangliste.pdf" target="_blank" rel="noopener">U15 Einzelrangliste</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2024/U15-Gruppenrangliste.pdf" target="_blank" rel="noopener">U15 Gruppenrangliste</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="meta" style="margin-top:1.25rem;">Archiv Ranglisten Gewehr 300m nach Jahr:</p>
-        <div class="doc-groups">
-          <div class="card">
-            <h4>2022</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2022/Einzelrangliste-Jungschuetzen-2022.pdf" target="_blank" rel="noopener">Einzelrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2022/Gruppenrangliste-Jugendschuetzen-2022.pdf" target="_blank" rel="noopener">Gruppenrangliste Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2022/Gruppenrangliste-Jungschuetzen-2022.pdf" target="_blank" rel="noopener">Gruppenrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2022/Kurzbericht-Wettschiessen-2022.pdf" target="_blank" rel="noopener">Kurzbericht Wettschiessen</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2021</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/BSVZ-JWK-2021-Jugendliche.pdf" target="_blank" rel="noopener">JWK Jugendliche</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/BSVZ-JWK-2021-Jungschuetzen.pdf" target="_blank" rel="noopener">JWK Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/Bericht-Wettschiessen-2021.pdf" target="_blank" rel="noopener">Bericht Wettschiessen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/Einzelrangliste-Jugendschuetzen-2021.pdf" target="_blank" rel="noopener">Einzelrangliste Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/Einzelrangliste-Jungschuetzen-2021.pdf" target="_blank" rel="noopener">Einzelrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/Einzelrangliste-Kursleiter-2021.pdf" target="_blank" rel="noopener">Einzelrangliste Kursleiter</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/Gruppenrangliste-Jugendschuetzen-2021.pdf" target="_blank" rel="noopener">Gruppenrangliste Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2021/Gruppenrangliste-Jungschuetzen-2021.pdf" target="_blank" rel="noopener">Gruppenrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2020</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2020/Einzelrangliste-Jugendsch-tzen1-2020.pdf" target="_blank" rel="noopener">Einzelrangliste Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2020/Einzelrangliste-Jungsch-tzen-2020.pdf" target="_blank" rel="noopener">Einzelrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2020/Einzelrangliste-Kursleiter-2020.pdf" target="_blank" rel="noopener">Einzelrangliste Kursleiter</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2020/Gruppenrangliste-Jugendsch-tzen.pdf" target="_blank" rel="noopener">Gruppenrangliste Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2020/Gruppenrangliste-Jungsch-tzen-2020.pdf" target="_blank" rel="noopener">Gruppenrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2019</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Einzelrangliste-JJ.pdf" target="_blank" rel="noopener">Einzelrangliste JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Einzelrangliste-JS.pdf" target="_blank" rel="noopener">Einzelrangliste JS</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Einzelrangliste-Kursleiter.pdf" target="_blank" rel="noopener">Einzelrangliste Kursleiter</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Gruppenrangliste-JJ.pdf" target="_blank" rel="noopener">Gruppenrangliste JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Gruppenrangliste-JS.pdf" target="_blank" rel="noopener">Gruppenrangliste JS</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Jahreswettkampf-2019-Jugendsch-tzen.pdf" target="_blank" rel="noopener">Jahreswettkampf Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2019/Jahreswettkampf-2019-Jungsch-tzen.pdf" target="_blank" rel="noopener">Jahreswettkampf Jungschützen</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2018</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Gruppenrangliste-Jugend.pdf" target="_blank" rel="noopener">Gruppenrangliste Jugend</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Gruppenrangliste-Jungsch-tzen.pdf" target="_blank" rel="noopener">Gruppenrangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Jahreswettkampf-Jugendliche-2018.pdf" target="_blank" rel="noopener">Jahreswettkampf Jugendliche</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Jahreswettkampf-Jungsch-tzen-2018.pdf" target="_blank" rel="noopener">Jahreswettkampf Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Rangliste-Jugendsch-tzen.pdf" target="_blank" rel="noopener">Rangliste Jugendschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Rangliste-Jungsch-tzen.pdf" target="_blank" rel="noopener">Rangliste Jungschützen</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2018/Rangliste-Leiter.pdf" target="_blank" rel="noopener">Rangliste Leiter</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2017</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Einzel-JSK-2017.pdf" target="_blank" rel="noopener">Einzel JSK</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Einzel-Rangliste-JJ-2017.pdf" target="_blank" rel="noopener">Einzel Rangliste JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Einzel-Rangliste-Kursleiter-2017.pdf" target="_blank" rel="noopener">Einzel Rangliste Kursleiter</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Gruppe-Rangliste-JJ-2017.pdf" target="_blank" rel="noopener">Gruppe Rangliste JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Gruppe-Rangliste-JSK-2017.pdf" target="_blank" rel="noopener">Gruppe Rangliste JSK</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Jahreswettkampf-JJ-2017.pdf" target="_blank" rel="noopener">Jahreswettkampf JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2017/Jahreswettkampf-JS-2017.pdf" target="_blank" rel="noopener">Jahreswettkampf JS</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2016</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Jahreswettkampf-JJ-2016.pdf" target="_blank" rel="noopener">Jahreswettkampf JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Jahreswettkampf-JS-2016.pdf" target="_blank" rel="noopener">Jahreswettkampf JS</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Kursabschlussschiessen-Gruppen-JJ-2016.pdf" target="_blank" rel="noopener">Kursabschlussschiessen Gruppen JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Kursabschlussschiessen-JJ-Einzel-2016.pdf" target="_blank" rel="noopener">Kursabschlussschiessen JJ Einzel</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Wettschiessen-Gruppen-JS-2016.pdf" target="_blank" rel="noopener">Wettschiessen Gruppen JS</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Wettschiessen-JS-Einzel-2016.pdf" target="_blank" rel="noopener">Wettschiessen JS Einzel</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2016/Wettschiessen-KL-Einzel-2016.pdf" target="_blank" rel="noopener">Wettschiessen KL Einzel</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>2015</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Jahreswettkampf-JJ-2015.pdf" target="_blank" rel="noopener">Jahreswettkampf JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Jahreswettkampf-JS-2015.pdf" target="_blank" rel="noopener">Jahreswettkampf JS</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Kursabschlussschiessen-Einzel-JJ1-2015.pdf" target="_blank" rel="noopener">Kursabschlussschiessen Einzel JJ1</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Kursabschlussschiessen-Gruppen-JJ-2015.pdf" target="_blank" rel="noopener">Kursabschlussschiessen Gruppen JJ</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Wettschiessen-Einzel-JS-2015.pdf" target="_blank" rel="noopener">Wettschiessen Einzel JS</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Wettschiessen-Einzel-KL-2015.pdf" target="_blank" rel="noopener">Wettschiessen Einzel KL</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/jugend-gewehr300/2015/Wettschiessen-Gruppen-JS-2015.pdf" target="_blank" rel="noopener">Wettschiessen Gruppen JS</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-        </div>
-        <p class="meta">
-          Fotos der Jugendanlässe: siehe
-          <a href="https://www.bsvz.ch/Ressorts/Jugend-Nachwuchs/-Gewehr-300m/Fotos/Wettschiessen-2022" target="_blank" rel="noopener">alte Webseite ↗</a>.
-        </p>
+        <p class="meta" style="margin-top:1.25rem;">Ältere Ranglisten: siehe <a href="archiv.html#rsp-jugend-gewehr">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
       </div>
 
       <div class="discipline-block">
@@ -526,10 +354,6 @@
             läuft jeweils während des Zürcher Knabenschiessens. Jugendliche aus der Stadt Zürich sind vom Startgeld
             befreit und für Stadt- wie Kantonalfinal startberechtigt, auswärtige Jugendliche nehmen am Kantonalfinal
             des ZHSV teil.
-          </p>
-          <p class="meta">
-            Ausführliche Entstehungsgeschichte: siehe
-            <a href="https://www.bsvz.ch/Ressorts/Jugend-Nachwuchs/-De-Goldig-Z%C3%BCri-Tr%C3%A4ffer/Entstehungsgeschichte" target="_blank" rel="noopener">alte Webseite ↗</a>.
           </p>
         </div>
 
@@ -562,36 +386,8 @@
           <li><a href="assets/ressorts/gzt/2025/P10-8-12-Jaehrige.pdf" target="_blank" rel="noopener">P10 8–12-Jährige</a> <span class="doc-ext">PDF</span></li>
             </ul>
           </div>
-          <div class="card">
-            <h4>Rangliste 2023</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/gzt/2023/Ranglisten-De-goldig-Zueri-Traeffer-2023.pdf" target="_blank" rel="noopener">Rangliste De goldig Züri Träffer 2023</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>Rangliste 2022</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/gzt/2022/Rangliste-De-goldig-Zueri-Traeffer-2022.pdf" target="_blank" rel="noopener">Rangliste De goldig Züri Träffer 2022</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>Archiv 2019</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/gzt/archiv-2019/2019-Programm.pdf" target="_blank" rel="noopener">Programm 2019</a> <span class="doc-ext">PDF</span></li>
-          <li><a href="assets/ressorts/gzt/archiv-2019/Tangliste-2019.pdf" target="_blank" rel="noopener">Rangliste 2019</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
-          <div class="card">
-            <h4>Archiv 2017</h4>
-            <ul class="doc-list">
-          <li><a href="assets/ressorts/gzt/archiv-2017/2017-Ranglisten-Stadtfinal-gzt.pdf" target="_blank" rel="noopener">Rangliste Stadtfinal 2017</a> <span class="doc-ext">PDF</span></li>
-            </ul>
-          </div>
         </div>
-        <p class="meta">
-          Fotos der GZT-Anlässe: siehe
-          <a href="https://www.bsvz.ch/Ressorts/Jugend-Nachwuchs/-De-Goldig-Z%C3%BCri-Tr%C3%A4ffer/Fotos/30-Stadtfinal-2022" target="_blank" rel="noopener">alte Webseite ↗</a>.
-        </p>
+        <p class="meta" style="margin-top:1.25rem;">Ältere Ranglisten: siehe <a href="archiv.html#rsp-jugend-gzt">Archiv – Ranglisten &amp; Schiesspläne</a>.</p>
       </div>
     </section>
   </main>
@@ -600,14 +396,12 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <a class="brand" href="index.html">
-          <span class="brand-emblem" aria-hidden="true">B</span>
+          <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
           <span class="brand-text"><strong>BSVZ</strong></span>
         </a>
-        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit 1855.</p>
         <div class="footer-contact">
           <span>✉️ webmaster@bsvz.ch</span>
-          <span>☎️ 0041 79 927 33 27</span>
-          <span>📍 Alte Aescherstrasse 25, 8905 Arni AG</span>
         </div>
       </div>
       <div>
@@ -622,8 +416,9 @@
       <div>
         <h4>Dienste</h4>
         <ul>
-          <li><a href="index.html#kalender">Kalender</a></li>
-          <li><a href="index.html#resultate">Resultate</a></li>
+          <li><a href="kalender.html">Kalender</a></li>
+          <li><a href="anmeldung.html">Anmeldung</a></li>
+          <li><a href="resultate.html">Resultate</a></li>
           <li><a href="archiv.html">Archiv</a></li>
           <li><a href="dienste.html">Downloads</a></li>
         </ul>
@@ -631,11 +426,11 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
           <li><a href="index.html#kontakt">Kontakt</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
-          <li><a href="index.html#login">Admin</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
     </div>
@@ -646,5 +441,43 @@
   </footer>
 
   <script src="js/theme.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/auth-ui.js"></script>
+  <script src="js/tabs.js"></script>
+  <script src="js/results-ui.js"></script>
+  <script>
+    ResultsUI.initRessorts({
+      feldschiessen: "Feldschiessen",
+      feldstich: "Feldstich",
+      lupi: "Lupi Bezirks-Einzelmatch",
+      bezirksverbandsschiessen: "Bezirksverbandsschiessen",
+      bezirkskonkurrenz: "Bezirkskonkurrenz",
+      bezirksmatch: "Bezirksmatch",
+      jugend: "Jugend / Nachwuchs"
+    });
+  </script>
+  <script>
+    (async function showOpenRegistrations() {
+      const target = { pistole: "bezirksmatch", "bk-a": "bezirkskonkurrenz", "bk-b": "bezirkskonkurrenz", "bk-c": "bezirkskonkurrenz" };
+      let items = [];
+      try {
+        items = (await (await fetch("/api/anmeldungen")).json()).anmeldungen || [];
+      } catch (e) {
+        return;
+      }
+      const esc = (s) => { const d = document.createElement("div"); d.textContent = s; return d.innerHTML; };
+      items.slice().reverse().forEach((a) => {
+        const section = document.getElementById(target[a.typ]);
+        const title = section && section.querySelector(".section-title");
+        if (!title) return;
+        const date = a.deadline.split("-").reverse().join(".");
+        const box = document.createElement("div");
+        box.className = "card anmeldung-hinweis";
+        box.innerHTML = '<span><strong>Anmeldung offen:</strong> ' + esc(a.title) + ' – bis ' + date + '</span>' +
+          '<a class="btn primary" href="anmeldung.html#a-' + a.id + '">Jetzt online anmelden</a>';
+        title.insertAdjacentElement("afterend", box);
+      });
+    })();
+  </script>
 </body>
 </html>
