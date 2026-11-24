@@ -36,7 +36,10 @@
     });
     if (scroll) {
       const target = document.getElementById(targetId);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (target) {
+        const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+      }
     }
   }
 

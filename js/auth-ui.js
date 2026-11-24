@@ -52,10 +52,18 @@
     const menu = document.createElement("div");
     menu.className = "profile-dropdown-menu";
     menu.hidden = true;
+    const isAdmin = user.role === "admin";
+    const pending = isAdmin && user.pending_users ? Number(user.pending_users) : 0;
     menu.innerHTML = `
+      <div class="profile-menu-head"><span>${escapeHtml(user.name)}</span>${isAdmin ? '<span class="role-chip">Admin</span>' : ""}</div>
       <a href="profil.html">👤 Profil</a>
+      ${isAdmin ? `<a href="benutzer.html">👥 Benutzer${pending ? `<span class="menu-count" title="Konten warten auf Freigabe">${pending}</span>` : ""}</a>` : ""}
       <button type="button" class="profile-logout">↪ Abmelden</button>
     `;
+    if (pending) {
+      btn.setAttribute("aria-label", `Profilmenü – ${pending} Konto/Konten warten auf Freigabe`);
+      avatar.classList.add("has-alert");
+    }
 
     function closeMenu() {
       menu.hidden = true;

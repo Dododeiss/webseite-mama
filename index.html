@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bezirksschützenverband Zürich (BSVZ) – Prototyp</title>
+  <title>Bezirksschützenverband Zürich (BSVZ)</title>
   <meta name="description" content="Der Bezirksschützenverband Zürich (BSVZ) vereint Schützenvereine aus Stadt Zürich, Dietikon, Schlieren und dem Limmattal. Kalender, Resultate, Vorstand und mehr.">
   <link rel="icon" href="img/bsvz-logo.png">
   <link rel="stylesheet" href="css/style.css">
@@ -60,7 +60,7 @@
             </ul>
           </li>
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="#news">News</a></li>
+          <li><a href="#aktuelles">Aktuelles</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </nav>
@@ -115,7 +115,7 @@
             </ul>
           </li>
         <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="#news">News</a></li>
+        <li><a href="#aktuelles">Aktuelles</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
@@ -187,11 +187,12 @@
       </div>
     </section>
 
-    <section aria-labelledby="news-heading" id="news">
+    <section aria-labelledby="aktuelles-heading" id="aktuelles">
       <div class="section-title">
-        <h2 id="news-heading">News</h2>
+        <h2 id="aktuelles-heading">Aktuelles</h2>
+        <a class="btn ghost" href="kalender.html">Alle Termine →</a>
       </div>
-      <p>Diese Seite ist noch im Aufbau.</p>
+      <div id="aktuelles-list" class="aktuelles-list"><p class="meta">Lade Termine…</p></div>
     </section>
 
     <section aria-labelledby="cta-heading" id="ueber-uns">
@@ -217,7 +218,7 @@
           <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
           <span class="brand-text"><strong>BSVZ</strong></span>
         </a>
-        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit 1855.</p>
         <div class="footer-contact">
           <span>✉️ webmaster@bsvz.ch</span>
         </div>
@@ -244,10 +245,10 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="#news">News</a></li>
+          <li><a href="#aktuelles">Aktuelles</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
           <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
@@ -280,5 +281,31 @@
   <script src="js/theme.js"></script>
   <script src="js/search.js"></script>
   <script src="js/auth-ui.js"></script>
+  <script>
+    (async function loadAktuelles() {
+      const box = document.getElementById("aktuelles-list");
+      const esc = (t) => { const d = document.createElement("div"); d.textContent = t; return d.innerHTML; };
+      const de = (iso) => iso.split("-").reverse().join(".");
+      const get = async (u) => { try { const r = await fetch(u); return r.ok ? await r.json() : null; } catch (e) { return null; } };
+      const [ev, an] = await Promise.all([get("/api/events?upcoming=1"), get("/api/anmeldungen")]);
+      const events = ((ev && ev.events) || []).slice(0, 4);
+      const open = (an && an.anmeldungen) || [];
+      if (!events.length && !open.length) {
+        box.innerHTML = '<div class="card"><p>Zurzeit sind keine Termine eingetragen. Alle Anlässe finden Sie im <a href="kalender.html">Kalender</a>.</p></div>';
+        return;
+      }
+      let html = "";
+      open.forEach((a) => {
+        html += '<div class="card anmeldung-hinweis"><span><strong>Anmeldung offen:</strong> ' + esc(a.title) + ' – bis ' + de(a.deadline) + '</span>' +
+          '<a class="btn primary" href="anmeldung.html#a-' + a.id + '">Jetzt anmelden</a></div>';
+      });
+      if (events.length) {
+        html += '<div class="card"><h3 style="margin-top:0">Nächste Termine</h3><ul class="doc-list">' +
+          events.map((e) => '<li><span><strong>' + de(e.start_date) + (e.end_date ? '–' + de(e.end_date) : '') + '</strong> · ' + esc(e.title) + (e.location ? ' <span class="meta">(' + esc(e.location) + ')</span>' : '') + '</span></li>').join("") +
+          '</ul></div>';
+      }
+      box.innerHTML = html;
+    })();
+  </script>
 </body>
 </html>

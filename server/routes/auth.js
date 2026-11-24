@@ -39,6 +39,7 @@ const uploadAvatar = multer({
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 10,
+  skipSuccessfulRequests: true,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Zu viele Anmeldeversuche. Bitte in 15 Minuten erneut versuchen." },
@@ -86,18 +87,15 @@ router.post("/register", registerLimiter, (req, res) => {
   const passwordHash = bcrypt.hashSync(password, 10);
   const info = db
     .prepare(
-      "INSERT INTO users (name, email, password_hash, verein) VALUES (?, ?, ?, ?)"
+      "INSERT INTO users (name, email, password_hash, verein, approved) VALUES (?, ?, ?, ?, 0)"
     )
     .run(name.trim(), email.toLowerCase().trim(), passwordHash, verein.trim());
 
-  req.session.userId = info.lastInsertRowid;
-  req.session.role = "member";
+  // Neue Konten müssen zuerst von einem Admin freigegeben werden.
   res.status(201).json({
+    pending: true,
     id: info.lastInsertRowid,
     name: name.trim(),
-    email: email.toLowerCase().trim(),
-    verein: verein.trim(),
-    role: "member",
   });
 });
 
@@ -113,6 +111,11 @@ router.post("/login", loginLimiter, (req, res) => {
 
   if (!user || !bcrypt.compareSync(password, user.password_hash)) {
     return res.status(401).json({ error: "E-Mail oder Passwort ist falsch." });
+  }
+  if (!user.approved) {
+    return res.status(403).json({
+      error: "Ihr Konto wartet noch auf die Freigabe durch den Vorstand oder wurde gesperrt.",
+    });
   }
 
   req.session.userId = user.id;
@@ -139,10 +142,19 @@ router.get("/me", (req, res) => {
   }
   const user = db
     .prepare(
-      "SELECT id, name, email, verein, role, avatar_filename FROM users WHERE id = ?"
+      "SELECT id, name, email, verein, role, avatar_filename, approved FROM users WHERE id = ?"
     )
     .get(req.session.userId);
-  res.json({ user: user || null });
+  if (!user || !user.approved) {
+    return req.session.destroy(() => res.json({ user: null }));
+  }
+  delete user.approved;
+  if (user.role === "admin") {
+    user.pending_users = db
+      .prepare("SELECT COUNT(*) AS c FROM users WHERE approved = 0")
+      .get().c;
+  }
+  res.json({ user });
 });
 
 router.post("/change-password", requireAuth, (req, res) => {

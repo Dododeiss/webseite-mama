@@ -60,7 +60,7 @@
             </ul>
           </li>
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
           <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
@@ -115,7 +115,7 @@
             </ul>
           </li>
         <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#aktuelles">Aktuelles</a></li>
         <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
@@ -149,7 +149,7 @@
           <div class="form-field">
             <label for="email">E-Mail</label>
             <input type="email" id="email" name="email" autocomplete="email" required>
-            <p class="hint">Nur mit @bsvzuerich.ch-Adresse möglich.</p>
+            <p class="hint">Nur mit @bsvzuerich.ch-Adresse möglich. Neue Konten werden von einem Admin freigeschaltet.</p>
           </div>
           <div class="form-field">
             <label for="password">Passwort</label>
@@ -172,7 +172,7 @@
           <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
           <span class="brand-text"><strong>BSVZ</strong></span>
         </a>
-        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit 1855.</p>
         <div class="footer-contact">
           <span>✉️ webmaster@bsvz.ch</span>
         </div>
@@ -199,10 +199,10 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
           <li><a href="index.html#kontakt">Kontakt</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
           <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
@@ -243,11 +243,14 @@
           messageEl.textContent = data.error || "Registrierung fehlgeschlagen.";
           return;
         }
-        window.location.href = "profil.html";
+        event.target.hidden = true;
+        messageEl.className = "form-message success";
+        messageEl.textContent =
+          "Vielen Dank! Ihre Registrierung ist eingegangen. Ein Admin schaltet Ihr Konto frei – danach können Sie sich anmelden.";
       } catch (e) {
         messageEl.className = "form-message error";
         messageEl.textContent =
-          "Server nicht erreichbar. Läuft die Seite über 'npm start'?";
+          "Server nicht erreichbar. Bitte später erneut versuchen.";
       }
     });
   </script>

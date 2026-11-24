@@ -114,6 +114,11 @@ if (!userColumns.some((c) => c.name === "avatar_filename")) {
   db.exec("ALTER TABLE users ADD COLUMN avatar_filename TEXT");
 }
 
+// One-off migration: new accounts wait for admin approval (existing accounts stay approved).
+if (!db.prepare("PRAGMA table_info(users)").all().some((c) => c.name === "approved")) {
+  db.exec("ALTER TABLE users ADD COLUMN approved INTEGER NOT NULL DEFAULT 1");
+}
+
 // One-off migration: optional sign-up link per calendar event.
 const eventColumns = db.prepare("PRAGMA table_info(events)").all();
 if (!eventColumns.some((c) => c.name === "link")) {

@@ -31,8 +31,8 @@ function isRealDate(iso) {
 
 function currentIsAdmin(req) {
   if (!req.session.userId) return false;
-  const user = db.prepare("SELECT role FROM users WHERE id = ?").get(req.session.userId);
-  return !!user && user.role === "admin";
+  const user = db.prepare("SELECT role, approved FROM users WHERE id = ?").get(req.session.userId);
+  return !!user && !!user.approved && user.role === "admin";
 }
 
 function text(value, max) {

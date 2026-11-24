@@ -132,7 +132,7 @@
         <div class="hp-field" aria-hidden="true">
           <label>Bitte leer lassen <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
         </div>
-        <p class="hint">Ihre Angaben werden nur für die Durchführung des Wettkampfs gespeichert und an die verantwortliche Person des BSVZ weitergegeben.</p>
+        <p class="hint">Ihre Angaben werden nur für die Durchführung des Wettkampfs gespeichert und an die verantwortliche Person des BSVZ weitergegeben. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
         <button type="submit" class="btn primary">Anmeldung absenden</button>
       </form>`;
   }
@@ -282,6 +282,7 @@
           <button type="button" class="btn ghost" data-act="show">Anmeldungen ansehen</button>
           <a class="btn primary" href="/api/anmeldungen/${a.id}/export">Liste herunterladen (${a.typ === "pistole" ? "Word" : "Excel"})</a>
           <button type="button" class="btn ghost" data-act="copy">Link kopieren</button>
+          <button type="button" class="btn ghost" data-act="clone">Als Vorlage kopieren</button>
           <button type="button" class="icon-btn" data-act="delete">Löschen</button>
         </div>
         <div class="admin-teilnehmer" hidden></div>
@@ -318,6 +319,22 @@
           } catch (e) {
             prompt("Link zum Kopieren:", url);
           }
+        } else if (act.dataset.act === "clone") {
+          const form = document.getElementById("create-form");
+          form.elements.typ.value = a.typ;
+          form.elements.typ.dispatchEvent(new Event("change"));
+          form.elements.title.value = a.title.replace(/\b(?:19|20)\d{2}\b/, (y) => String(Number(y) + 1));
+          form.elements.info.value = a.info || "";
+          form.elements.contact_name.value = a.contact_name || "";
+          form.elements.contact_email.value = a.contact_email || "";
+          form.dataset.contactAuto = "0";
+          form.elements.slots.value = (a.slots || []).join("\n");
+          form.elements.deadline.value = "";
+          const m = document.getElementById("create-message");
+          m.className = "form-message success";
+          m.textContent = "Angaben kopiert. Bitte jetzt Anmeldeschluss (und ggf. Zeitfenster) für das neue Jahr anpassen.";
+          form.scrollIntoView({ behavior: "smooth", block: "start" });
+          form.elements.deadline.focus({ preventScroll: true });
         } else if (act.dataset.act === "delete") {
           if (!confirm(`„${a.title}“ mit allen ${a.anzahl} Anmeldungen wirklich löschen? Das lässt sich nicht rückgängig machen.`)) return;
           await api("DELETE", `/api/anmeldungen/${a.id}`);

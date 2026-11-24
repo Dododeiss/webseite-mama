@@ -8,9 +8,31 @@ const resultsRoutes = require("./routes/results");
 const eventsRoutes = require("./routes/events");
 const internalRoutes = require("./routes/internal");
 const anmeldungenRoutes = require("./routes/anmeldungen");
+const usersRoutes = require("./routes/users");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Hinter dem Infomaniak-Proxy: echte Besucher-Adresse und HTTPS erkennen (für Login-Sperre und Cookie).
+app.set("trust proxy", 1);
+app.disable("x-powered-by");
+
+app.use((req, res, next) => {
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  res.setHeader(
+    "Content-Security-Policy",
+    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; " +
+      "img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; " +
+      "base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+  );
+  if (req.secure) {
+    res.setHeader("Strict-Transport-Security", "max-age=15552000");
+  }
+  next();
+});
 
 if (!process.env.SESSION_SECRET) {
   console.warn(
@@ -29,7 +51,7 @@ app.use(
     cookie: {
       httpOnly: true,
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production" && process.env.FORCE_HTTPS === "1",
+      secure: "auto",
       maxAge: 1000 * 60 * 60 * 24 * 7,
     },
   })
@@ -40,6 +62,8 @@ app.use("/api/results", resultsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/internal", internalRoutes);
 app.use("/api/anmeldungen", anmeldungenRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api", (req, res) => res.status(404).json({ error: "Nicht gefunden." }));
 
 app.use(
   "/avatars",
@@ -70,7 +94,19 @@ app.get("/:file?", (req, res, next) => {
 });
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "..", "index.html"));
+  res.status(404).sendFile(path.join(siteRoot, "404.html"), (err) => {
+    if (err && !res.headersSent) res.status(404).type("text").send("Seite nicht gefunden.");
+  });
+});
+
+// Fehler nie mit Details nach aussen geben.
+app.use((err, req, res, next) => {
+  if (res.headersSent) return next(err);
+  const status = err.status >= 400 && err.status < 500 ? err.status : 500;
+  if (status === 500) console.error(err);
+  res.status(status).json({
+    error: status === 500 ? "Interner Serverfehler." : "Ungültige Anfrage.",
+  });
 });
 
 app.listen(PORT, () => {

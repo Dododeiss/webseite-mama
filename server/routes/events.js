@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
   const { upcoming } = req.query;
   let sql = `
     SELECT events.*, users.name AS created_by_name, a.deadline AS anmeldung_deadline,
-           (SELECT COUNT(*) FROM event_registrations er WHERE er.event_id = events.id) AS registration_count
+           (SELECT COUNT(*) FROM anmeldung_teilnehmer t WHERE t.anmeldung_id = events.anmeldung_id) AS anmeldung_anzahl
     FROM events
     JOIN users ON users.id = events.created_by
     LEFT JOIN anmeldungen a ON a.id = events.anmeldung_id
@@ -30,18 +30,6 @@ router.get("/", (req, res) => {
   rows.forEach((r) => {
     r.anmeldung_open = !!r.anmeldung_id && !!r.anmeldung_deadline && r.anmeldung_deadline >= today;
   });
-
-  if (req.session.userId) {
-    const mine = new Set(
-      db
-        .prepare("SELECT event_id FROM event_registrations WHERE user_id = ?")
-        .all(req.session.userId)
-        .map((r) => r.event_id)
-    );
-    rows.forEach((r) => {
-      r.is_registered = mine.has(r.id);
-    });
-  }
 
   res.json({ events: rows });
 });
@@ -155,47 +143,6 @@ router.post("/", requireAuth, requireAdmin, (req, res) => {
     .prepare("SELECT * FROM events WHERE id = ?")
     .get(info.lastInsertRowid);
   res.status(201).json({ event: created });
-});
-
-router.post("/:id/register", requireAuth, (req, res) => {
-  const event = db.prepare("SELECT id FROM events WHERE id = ?").get(req.params.id);
-  if (!event) {
-    return res.status(404).json({ error: "Termin nicht gefunden." });
-  }
-  try {
-    db.prepare(
-      "INSERT INTO event_registrations (event_id, user_id) VALUES (?, ?)"
-    ).run(req.params.id, req.session.userId);
-  } catch (e) {
-    // Unique constraint -> already registered, treat as success (idempotent).
-  }
-  const count = db
-    .prepare("SELECT COUNT(*) AS c FROM event_registrations WHERE event_id = ?")
-    .get(req.params.id).c;
-  res.status(201).json({ ok: true, registration_count: count });
-});
-
-router.delete("/:id/register", requireAuth, (req, res) => {
-  db.prepare(
-    "DELETE FROM event_registrations WHERE event_id = ? AND user_id = ?"
-  ).run(req.params.id, req.session.userId);
-  const count = db
-    .prepare("SELECT COUNT(*) AS c FROM event_registrations WHERE event_id = ?")
-    .get(req.params.id).c;
-  res.json({ ok: true, registration_count: count });
-});
-
-router.get("/:id/registrations", requireAuth, requireAdmin, (req, res) => {
-  const rows = db
-    .prepare(
-      `SELECT users.name, users.verein, event_registrations.created_at
-       FROM event_registrations
-       JOIN users ON users.id = event_registrations.user_id
-       WHERE event_registrations.event_id = ?
-       ORDER BY event_registrations.created_at ASC`
-    )
-    .all(req.params.id);
-  res.json({ registrations: rows });
 });
 
 router.delete("/:id", requireAuth, requireAdmin, (req, res) => {

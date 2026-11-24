@@ -60,7 +60,7 @@
             </ul>
           </li>
           <li><a href="kalender.html">Kalender</a></li>
-          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
           <li><a href="index.html#kontakt">Kontakt</a></li>
         </ul>
       </nav>
@@ -115,7 +115,7 @@
             </ul>
           </li>
         <li><a href="kalender.html">Kalender</a></li>
-        <li><a href="index.html#news">News</a></li>
+        <li><a href="index.html#aktuelles">Aktuelles</a></li>
         <li><a href="index.html#kontakt">Kontakt</a></li>
       </ul>
       <div class="mobile-nav-actions">
@@ -134,11 +134,10 @@
   </section>
 
   <main id="main-content">
-    <section aria-labelledby="admin-add-heading" id="admin-add" style="display:none;">
-      <div class="section-title">
-        <h2 id="admin-add-heading">Termin erfassen</h2>
-      </div>
-      <div class="form-card" style="max-width:640px;">
+    <section aria-label="Termin erfassen" id="admin-add" style="display:none;">
+      <details class="upload-box" id="add-details">
+        <summary class="btn ghost">＋ Neuen Termin erfassen</summary>
+      <div class="form-card" style="max-width:640px; margin:0;">
         <div id="form-message" class="form-message" role="alert"></div>
         <form id="event-form" novalidate>
           <div class="form-field">
@@ -169,11 +168,14 @@
             <label for="description">Beschreibung (optional)</label>
             <input type="text" id="description" name="description">
           </div>
-          <div class="form-field">
-            <label for="link">Anmelde-Link, z. B. Excel-Tabelle (optional)</label>
-            <input type="url" id="link" name="link" placeholder="https://…">
-            <p class="hint">Wer sich anmelden möchte, gelangt über diesen Link zur Tabelle.</p>
-          </div>
+          <details class="punkte-details">
+            <summary>Externen Anmelde-Link hinzufügen (selten nötig)</summary>
+            <div class="form-field">
+              <label for="link">Anmelde-Link, z. B. Excel-Tabelle</label>
+              <input type="url" id="link" name="link" placeholder="https://…">
+              <p class="hint">Nur nötig, wenn die Anmeldung nicht über die Seite «Anmeldung» läuft.</p>
+            </div>
+          </details>
           <div class="form-field">
             <label for="anmeldung_id">Online-Anmeldung verknüpfen (optional)</label>
             <select id="anmeldung_id" name="anmeldung_id">
@@ -184,6 +186,7 @@
           <button type="submit" class="btn primary" style="width:100%;justify-content:center;">Termin speichern</button>
         </form>
       </div>
+      </details>
     </section>
 
     <section aria-labelledby="calendar-heading">
@@ -193,10 +196,8 @@
       <div class="calendar-nav">
         <button type="button" class="btn ghost" id="cal-prev" aria-label="Vorheriger Monat">←</button>
         <h3 id="cal-month-label">—</h3>
-        <div style="display:flex; gap:0.5rem;">
-          <button type="button" class="btn ghost" id="cal-today">Heute</button>
-          <button type="button" class="btn ghost" id="cal-next" aria-label="Nächster Monat">→</button>
-        </div>
+        <button type="button" class="btn ghost" id="cal-next" aria-label="Nächster Monat">→</button>
+        <button type="button" class="btn ghost" id="cal-today">Heute</button>
       </div>
       <div class="calendar-grid" id="calendar-grid" aria-labelledby="cal-month-label"></div>
     </section>
@@ -215,7 +216,7 @@
               <th scope="col">Titel</th>
               <th scope="col">Kategorie</th>
               <th scope="col">Ort</th>
-              <th scope="col">Teilnehmer</th>
+              <th scope="col">Anmeldung</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -234,7 +235,7 @@
           <img class="brand-emblem" src="img/bsvz-logo.png" alt="" aria-hidden="true">
           <span class="brand-text"><strong>BSVZ</strong></span>
         </a>
-        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit über 160 Jahren.</p>
+        <p>Bezirksschützenverband Zürich – Tradition, Präzision und Kameradschaft seit 1855.</p>
         <div class="footer-contact">
           <span>✉️ webmaster@bsvz.ch</span>
         </div>
@@ -261,10 +262,10 @@
       <div>
         <h4>Info</h4>
         <ul>
-          <li><a href="index.html#news">News</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
           <li><a href="index.html#kontakt">Kontakt</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Datenschutz</a></li>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
           <li><a href="internes.html">Internes</a></li>
         </ul>
       </div>
@@ -292,7 +293,6 @@
 
     const eventsBody = document.getElementById("events-body");
     let isAdmin = false;
-    let isLoggedIn = false;
     let allEvents = [];
     const today = new Date();
     let calYear = today.getFullYear();
@@ -384,24 +384,20 @@ function isRecent(createdAt) {
             ? `<button type="button" class="icon-btn" data-delete="${e.id}">Löschen</button>`
             : "";
 
-          let participantsCell;
-          if (isLoggedIn) {
-            const label = e.is_registered ? "Abmelden" : "Ich nehme teil";
-            const cls = e.is_registered ? "btn ghost" : "btn primary";
-            participantsCell = `
-              <span class="meta">${e.registration_count}&nbsp;angemeldet</span>
-              <button type="button" class="${cls}" style="margin-top:0.35rem;" data-toggle-register="${e.id}" data-registered="${e.is_registered ? 1 : 0}">${label}</button>`;
-          } else {
-            participantsCell = `<span class="meta">${e.registration_count} angemeldet</span>`;
-          }
-          if (isAdmin) {
-            participantsCell += `<br><button type="button" class="icon-btn" data-show-participants="${e.id}" style="color:var(--accent);">Liste anzeigen</button>`;
+          let participantsCell = "–";
+          const count = `<span class="meta">${e.anmeldung_anzahl} ${e.anmeldung_anzahl === 1 ? "Anmeldung" : "Anmeldungen"}</span>`;
+          if (e.anmeldung_open) {
+            participantsCell = `<a class="btn primary" href="anmeldung.html#a-${e.anmeldung_id}">Online anmelden</a><br>${count}`;
+          } else if (e.anmeldung_id) {
+            participantsCell = `<span class="meta">Anmeldeschluss abgelaufen</span><br>${count}`;
+          } else if (e.link) {
+            participantsCell = `<a class="event-link" href="${escapeHtml(e.link).replace(/"/g, "&quot;")}" target="_blank" rel="noopener">Zur Anmeldung ↗</a>`;
           }
 
           return `
           <tr>
             <td>${dateLabel}</td>
-            <td>${escapeHtml(e.title)}${isRecent(e.created_at) ? '<span class="badge-new">Neu</span>' : ""}${e.anmeldung_open ? `<br><a class="event-link" href="anmeldung.html#a-${e.anmeldung_id}">Online anmelden →</a>` : e.anmeldung_id ? '<br><span class="meta">Anmeldeschluss abgelaufen</span>' : ""}${e.link ? `<br><a class="event-link" href="${escapeHtml(e.link).replace(/"/g, "&quot;")}" target="_blank" rel="noopener">Zur Anmeldung ↗</a>` : ""}</td>
+            <td>${escapeHtml(e.title)}${isRecent(e.created_at) ? '<span class="badge-new">Neu</span>' : ""}</td>
             <td>${e.category ? escapeHtml(e.category) : "–"}</td>
             <td>${e.location ? escapeHtml(e.location) : "–"}</td>
             <td>${participantsCell}</td>
@@ -442,31 +438,6 @@ function isRecent(createdAt) {
         return;
       }
 
-      const regBtn = event.target.closest("[data-toggle-register]");
-      if (regBtn) {
-        const id = regBtn.getAttribute("data-toggle-register");
-        const alreadyRegistered = regBtn.getAttribute("data-registered") === "1";
-        await fetch("/api/events/" + id + "/register", {
-          method: alreadyRegistered ? "DELETE" : "POST",
-        });
-        loadEvents();
-        return;
-      }
-
-      const listBtn = event.target.closest("[data-show-participants]");
-      if (listBtn) {
-        const id = listBtn.getAttribute("data-show-participants");
-        const res = await fetch("/api/events/" + id + "/registrations");
-        const data = await res.json();
-        if (!data.registrations.length) {
-          alert("Noch keine Anmeldungen für diesen Termin.");
-        } else {
-          alert(
-            "Angemeldet:\n" +
-              data.registrations.map((r) => "- " + r.name + " (" + r.verein + ")").join("\n")
-          );
-        }
-      }
     });
 
     const eventForm = document.getElementById("event-form");
@@ -508,7 +479,6 @@ function isRecent(createdAt) {
       const res = await fetch("/api/auth/me");
       const data = await res.json();
       if (data.user) {
-        isLoggedIn = true;
         if (data.user.role === "admin") {
           isAdmin = true;
           document.getElementById("admin-add").style.display = "";

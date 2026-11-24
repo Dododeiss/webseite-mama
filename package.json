@@ -6,7 +6,8 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "dev": "node server/index.js"
+    "dev": "node server/index.js",
+    "search-index": "node server/scripts/build-search-index.js"
   },
   "engines": {
     "node": ">=22.5.0"
